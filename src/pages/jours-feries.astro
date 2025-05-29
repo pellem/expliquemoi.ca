@@ -1,0 +1,433 @@
+---
+// src/pages/jours-feries.astro
+import Layout from '../layouts/Default.astro';
+
+const title = "📅 Jours Fériés Canada vs France 2025 | Calendrier par Province";
+const description = "Découvre tous les jours fériés canadiens par province comparés à la France. Calendrier 2025 complet : Québec, Ontario, Alberta. Guide pratique pour Français expatriés.";
+---
+
+<Layout title={title} description={description}>
+ <div class="max-w-6xl mx-auto">
+   <!-- Header -->
+   <div class="text-center mb-8">
+     <h1 class="text-4xl font-bold text-blue-700 mb-4">📅 Jours Fériés Canada vs France 2025</h1>
+     <p class="text-lg text-gray-600 mb-6">Tous les congés par province + comparaison avec la France</p>
+     
+     <!-- Sélecteur de province -->
+     <div class="bg-white rounded-xl shadow-md p-4 inline-block">
+       <label class="text-blue-700 font-medium mr-3">Choisis ta province :</label>
+       <select id="province_selector" class="border border-blue-300 p-2 rounded-lg">
+         <option value="all">🍁 Toutes les provinces</option>
+         <option value="QC">🍁 Québec</option>
+         <option value="ON">🏢 Ontario</option>
+         <option value="BC">🏔️ Colombie-Britannique</option>
+         <option value="AB">🛢️ Alberta</option>
+         <option value="MB">🌾 Manitoba</option>
+         <option value="SK">🌻 Saskatchewan</option>
+         <option value="NB">🦞 Nouveau-Brunswick</option>
+         <option value="NS">⛵ Nouvelle-Écosse</option>
+         <option value="PE">🦐 Île-du-Prince-Édouard</option>
+         <option value="NL">🐧 Terre-Neuve-et-Labrador</option>
+         <option value="YT">❄️ Yukon</option>
+         <option value="NT">🐻 Territoires du Nord-Ouest</option>
+         <option value="NU">🏔️ Nunavut</option>
+       </select>
+     </div>
+   </div>
+
+   <!-- Comparaison rapide France vs Canada -->
+   <section class="card bg-gradient-to-r from-blue-50 to-red-50 rounded-xl shadow-lg p-6 mb-8 border border-blue-200">
+     <h2 class="text-2xl font-semibold text-blue-700 mb-4">🇫🇷 vs 🇨🇦 En bref</h2>
+     
+     <div class="grid md:grid-cols-2 gap-6">
+       <div class="bg-white rounded-lg p-4 border-l-4 border-blue-500">
+         <h3 class="font-semibold text-blue-600 mb-3">🇫🇷 France (11 jours fériés fixes)</h3>
+         <ul class="text-sm text-gray-700 space-y-1">
+           <li>• Jour de l'An, Lundi de Pâques, Fête du Travail</li>
+           <li>• Victoire 1945, Ascension, Lundi de Pentecôte</li>
+           <li>• Fête Nationale, Assomption, Toussaint</li>
+           <li>• Armistice 1918, Noël</li>
+           <li class="text-blue-600 font-medium mt-2">+ Alsace-Moselle : Vendredi Saint, Saint-Étienne</li>
+         </ul>
+       </div>
+       
+       <div class="bg-white rounded-lg p-4 border-l-4 border-red-500">
+         <h3 class="font-semibold text-red-600 mb-3">🇨🇦 Canada (varie selon province)</h3>
+         <ul class="text-sm text-gray-700 space-y-1">
+           <li>• <strong>Fédéraux :</strong> 5 jours partout</li>
+           <li>• <strong>Provinciaux :</strong> 3-8 jours selon province</li>
+           <li>• <strong>Total :</strong> 8-13 jours selon où tu vis</li>
+           <li>• <strong>Particularité :</strong> Lundi remplacent souvent week-end</li>
+           <li class="text-red-600 font-medium mt-2">Québec = le plus généreux (11 jours) !</li>
+         </ul>
+       </div>
+     </div>
+   </section>
+
+   <!-- Calendrier 2025 par mois -->
+   <section class="mb-8">
+     <h2 class="text-2xl font-semibold text-gray-800 mb-6">🗓️ Calendrier 2025 des jours fériés</h2>
+     
+     <div id="calendar_grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+       <!-- Généré par JavaScript -->
+     </div>
+   </section>
+
+   <!-- Tableau détaillé par province -->
+   <section class="card bg-white rounded-xl shadow-lg p-6 mb-8">
+     <h2 class="text-2xl font-semibold text-gray-800 mb-6">📊 Tableau complet par province</h2>
+     
+     <div class="overflow-x-auto">
+       <table class="min-w-full text-sm">
+         <thead class="bg-gray-50">
+           <tr>
+             <th class="px-4 py-3 text-left font-medium text-gray-700">Date 2025</th>
+             <th class="px-4 py-3 text-left font-medium text-gray-700">Jour férié</th>
+             <th class="px-4 py-3 text-center font-medium text-gray-700">🇫🇷</th>
+             <th class="px-4 py-3 text-center font-medium text-gray-700">🍁 QC</th>
+             <th class="px-4 py-3 text-center font-medium text-gray-700">🏢 ON</th>
+             <th class="px-4 py-3 text-center font-medium text-gray-700">🏔️ BC</th>
+             <th class="px-4 py-3 text-center font-medium text-gray-700">🛢️ AB</th>
+             <th class="px-4 py-3 text-center font-medium text-gray-700">Autres</th>
+           </tr>
+         </thead>
+         <tbody id="holidays_table" class="divide-y divide-gray-200">
+           <!-- Généré par JavaScript -->
+         </tbody>
+       </table>
+     </div>
+     
+     <div class="mt-4 text-xs text-gray-600">
+       <p><strong>Légende :</strong> ✅ = Jour férié officiel • 🟡 = Jour férié partiel/optionnel • ❌ = Pas de congé</p>
+     </div>
+   </section>
+
+   <!-- Spécificités par province -->
+   <section class="grid lg:grid-cols-2 gap-6 mb-8">
+     <!-- Accordéon spécificités -->
+     <div class="space-y-4">
+       <h2 class="text-2xl font-semibold text-gray-800 mb-4">🎯 Spécificités par province</h2>
+       
+       <!-- Québec -->
+       <div class="card bg-white rounded-lg shadow p-4">
+         <button 
+           class="w-full flex justify-between items-center text-left"
+           data-accordion-toggle
+           data-accordion-target="specifics-qc"
+           data-accordion-chevron="chevron-qc"
+         >
+           <h3 class="font-semibold text-blue-600">🍁 Québec (11 jours - Champions !)</h3>
+           <span id="chevron-qc" class="text-blue-600 font-bold">▼</span>
+         </button>
+         
+         <div id="specifics-qc" class="mt-4 text-sm text-gray-700 space-y-2">
+           <p><strong>Uniques au Québec :</strong></p>
+           <ul class="ml-4 space-y-1">
+             <li>• <strong>Fête nationale (24 juin) :</strong> La Saint-Jean-Baptiste, HUGE !</li>
+             <li>• <strong>Lundi de Pâques :</strong> Comme en France !</li>
+             <li>• <strong>Pas de Civic Holiday</strong> en août (contrairement au ROC)</li>
+           </ul>
+           <p class="text-blue-600 font-medium">💡 Le Québec a gardé ses racines françaises !</p>
+         </div>
+       </div>
+
+       <!-- Ontario -->
+       <div class="card bg-white rounded-lg shadow p-4">
+         <button 
+           class="w-full flex justify-between items-center text-left"
+           data-accordion-toggle
+           data-accordion-target="specifics-on"
+           data-accordion-chevron="chevron-on"
+         >
+           <h3 class="font-semibold text-orange-600">🏢 Ontario (9 jours)</h3>
+           <span id="chevron-on" class="text-orange-600 font-bold">▼</span>
+         </button>
+         
+         <div id="specifics-on" class="hidden mt-4 text-sm text-gray-700 space-y-2">
+           <p><strong>Spécial Ontario :</strong></p>
+           <ul class="ml-4 space-y-1">
+             <li>• <strong>Family Day :</strong> 3e lundi de février (depuis 2008)</li>
+             <li>• <strong>Civic Holiday :</strong> 1er lundi d'août (pas partout)</li>
+             <li>• <strong>Pas de Boxing Day férié</strong> si tombe le week-end</li>
+           </ul>
+         </div>
+       </div>
+
+       <!-- Colombie-Britannique -->
+       <div class="card bg-white rounded-lg shadow p-4">
+         <button 
+           class="w-full flex justify-between items-center text-left"
+           data-accordion-toggle
+           data-accordion-target="specifics-bc"
+           data-accordion-chevron="chevron-bc"
+         >
+           <h3 class="font-semibold text-green-600">🏔️ Colombie-Britannique (10 jours)</h3>
+           <span id="chevron-bc" class="text-green-600 font-bold">▼</span>
+         </button>
+         
+         <div id="specifics-bc" class="hidden mt-4 text-sm text-gray-700 space-y-2">
+           <p><strong>Spécial BC :</strong></p>
+           <ul class="ml-4 space-y-1">
+             <li>• <strong>Family Day :</strong> 2e lundi de février</li>
+             <li>• <strong>BC Day :</strong> 1er lundi d'août</li>
+             <li>• <strong>Truth and Reconciliation Day :</strong> 30 septembre (nouveau !)</li>
+           </ul>
+         </div>
+       </div>
+
+       <!-- Alberta -->
+       <div class="card bg-white rounded-lg shadow p-4">
+         <button 
+           class="w-full flex justify-between items-center text-left"
+           data-accordion-toggle
+           data-accordion-target="specifics-ab"
+           data-accordion-chevron="chevron-ab"
+         >
+           <h3 class="font-semibold text-red-600">🛢️ Alberta (9 jours)</h3>
+           <span id="chevron-ab" class="text-red-600 font-bold">▼</span>
+         </button>
+         
+         <div id="specifics-ab" class="hidden mt-4 text-sm text-gray-700 space-y-2">
+           <p><strong>Spécial Alberta :</strong></p>
+           <ul class="ml-4 space-y-1">
+             <li>• <strong>Family Day :</strong> 3e lundi de février</li>
+             <li>• <strong>Heritage Day :</strong> 1er lundi d'août</li>
+             <li>• <strong>Conservateur :</strong> Moins de jours fériés que les autres</li>
+           </ul>
+         </div>
+       </div>
+     </div>
+
+     <!-- Tips pour nouveaux arrivants -->
+     <div class="card bg-gradient-to-br from-yellow-50 to-orange-50 rounded-xl shadow-lg p-6 border border-yellow-200">
+       <h2 class="text-xl font-semibold text-orange-700 mb-4">💡 Tips pour nouveaux arrivants</h2>
+       
+       <div class="space-y-4 text-sm text-gray-700">
+         <div class="bg-white rounded p-3 border-l-4 border-orange-400">
+           <h3 class="font-semibold text-orange-600 mb-1">🏪 Magasins et services</h3>
+           <p>La plupart des commerces ferment les jours fériés. Prévois tes courses à l'avance !</p>
+         </div>
+         
+         <div class="bg-white rounded p-3 border-l-4 border-blue-400">
+           <h3 class="font-semibold text-blue-600 mb-1">🚌 Transport public</h3>
+           <p>Horaires de dimanche/réduits les jours fériés. Vérifie avant de sortir !</p>
+         </div>
+         
+         <div class="bg-white rounded p-3 border-l-4 border-green-400">
+           <h3 class="font-semibold text-green-600 mb-1">💼 Travail</h3>
+           <p>Si tu bosses un jour férié, c'est souvent payé double ou 1.5x selon ta convention.</p>
+         </div>
+         
+         <div class="bg-white rounded p-3 border-l-4 border-purple-400">
+           <h3 class="font-semibold text-purple-600 mb-1">🎉 Événements</h3>
+           <p>Canada Day (1er juillet) = comme le 14 juillet français. Feux d'artifice, barbecues, bière !</p>
+         </div>
+         
+         <div class="bg-white rounded p-3 border-l-4 border-red-400">
+           <h3 class="font-semibold text-red-600 mb-1">📱 Banques</h3>
+           <p>Toutes fermées les jours fériés. Pas de virement possible = prévois ton cash !</p>
+         </div>
+       </div>
+     </div>
+   </section>
+
+   <!-- Comparaison avec d'autres pays -->
+   <section class="card bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl shadow-lg p-6 border border-indigo-200">
+     <h2 class="text-2xl font-semibold text-indigo-700 mb-6">🌍 Canada vs Autres pays</h2>
+     
+     <div class="grid md:grid-cols-4 gap-4 text-center">
+       <div class="bg-white rounded-lg p-4 shadow">
+         <div class="text-2xl mb-2">🇫🇷</div>
+         <div class="font-bold text-lg text-gray-800">11 jours</div>
+         <div class="text-sm text-gray-600">France</div>
+       </div>
+       
+       <div class="bg-white rounded-lg p-4 shadow border-2 border-indigo-300">
+         <div class="text-2xl mb-2">🇨🇦</div>
+         <div class="font-bold text-lg text-indigo-600">8-11 jours</div>
+         <div class="text-sm text-gray-600">Canada (selon province)</div>
+       </div>
+       
+       <div class="bg-white rounded-lg p-4 shadow">
+         <div class="text-2xl mb-2">🇺🇸</div>
+         <div class="font-bold text-lg text-gray-800">0 jours</div>
+         <div class="text-sm text-gray-600">USA (fédéral)</div>
+       </div>
+       
+       <div class="bg-white rounded-lg p-4 shadow">
+         <div class="text-2xl mb-2">🇩🇪</div>
+         <div class="font-bold text-lg text-gray-800">9-13 jours</div>
+         <div class="text-sm text-gray-600">Allemagne</div>
+       </div>
+     </div>
+     
+     <p class="text-center text-sm text-indigo-600 mt-4 font-medium">
+       🏆 Le Canada se débrouille plutôt bien comparé aux USA !
+     </p>
+   </section>
+ </div>
+
+ <!-- Script pour les accordéons et le calendrier -->
+ <script is:inline>
+   // Données des jours fériés 2025
+   const holidays2025 = [
+     { date: "2025-01-01", name: "Jour de l'An", fr: true, provinces: ["ALL"] },
+     { date: "2025-02-10", name: "Family Day (BC)", fr: false, provinces: ["BC"] },
+     { date: "2025-02-17", name: "Family Day (AB, ON, SK)", fr: false, provinces: ["AB", "ON", "SK"] },
+     { date: "2025-02-17", name: "Islander Day", fr: false, provinces: ["PE"] },
+     { date: "2025-02-17", name: "Heritage Day", fr: false, provinces: ["NS", "YT"] },
+     { date: "2025-02-17", name: "Louis Riel Day", fr: false, provinces: ["MB"] },
+     { date: "2025-03-17", name: "St. Patrick's Day", fr: false, provinces: ["NL"] },
+     { date: "2025-04-18", name: "Vendredi Saint", fr: false, provinces: ["ALL"] },
+     { date: "2025-04-21", name: "Lundi de Pâques", fr: true, provinces: ["QC"] },
+     { date: "2025-04-25", name: "St. George's Day", fr: false, provinces: ["NL"] },
+     { date: "2025-05-01", name: "Fête du Travail", fr: true, provinces: [] },
+     { date: "2025-05-19", name: "Fête de la Reine", fr: false, provinces: ["ALL", "!QC"] },
+     { date: "2025-05-19", name: "Journée nationale des Patriotes", fr: false, provinces: ["QC"] },
+     { date: "2025-06-21", name: "Journée nationale des peuples autochtones", fr: false, provinces: ["NT", "YT"] },
+     { date: "2025-06-24", name: "Fête nationale du Québec", fr: false, provinces: ["QC"] },
+     { date: "2025-07-01", name: "Fête du Canada", fr: false, provinces: ["ALL"] },
+     { date: "2025-07-15", name: "Orangemen's Day", fr: false, provinces: ["NL"] },
+     { date: "2025-08-01", name: "BC Day", fr: false, provinces: ["BC"] },
+     { date: "2025-08-04", name: "Civic Holiday", fr: false, provinces: ["ON", "AB", "SK", "MB", "NS", "PE", "NT", "NU"] },
+     { date: "2025-08-15", name: "Assomption", fr: true, provinces: [] },
+     { date: "2025-08-18", name: "Discovery Day", fr: false, provinces: ["YT"] },
+     { date: "2025-09-01", name: "Labour Day", fr: false, provinces: ["ALL"] },
+     { date: "2025-09-30", name: "Truth and Reconciliation Day", fr: false, provinces: ["BC", "PE", "NT", "NU", "YT"] },
+     { date: "2025-10-13", name: "Action de grâce", fr: false, provinces: ["ALL", "!QC", "!NB", "!NS", "!PE", "!NL"] },
+     { date: "2025-11-01", name: "Toussaint", fr: true, provinces: [] },
+     { date: "2025-11-11", name: "Jour du Souvenir", fr: false, provinces: ["ALL", "!ON", "!QC", "!NS", "!MB"] },
+     { date: "2025-12-25", name: "Noël", fr: true, provinces: ["ALL"] },
+     { date: "2025-12-26", name: "Boxing Day", fr: false, provinces: ["ON", "AB", "BC", "SK", "MB", "NB", "NL", "NT", "NU", "YT"] }
+   ];
+
+   const months = [
+     "Janvier", "Février", "Mars", "Avril", "Mai", "Juin",
+     "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"
+   ];
+
+   function isHolidayInProvince(holiday, province) {
+     if (province === "all") return true;
+     if (holiday.provinces.includes("ALL")) {
+       // Vérifier les exclusions
+       const exclusions = holiday.provinces.filter(p => p.startsWith("!"));
+       return !exclusions.includes(`!${province}`);
+     }
+     return holiday.provinces.includes(province);
+   }
+
+   function generateCalendar() {
+     const selectedProvince = document.getElementById('province_selector').value;
+     const calendarGrid = document.getElementById('calendar_grid');
+     
+     calendarGrid.innerHTML = '';
+     
+     // Grouper par mois
+     const holidaysByMonth = {};
+     holidays2025.forEach(holiday => {
+       if (selectedProvince === "all" || isHolidayInProvince(holiday, selectedProvince)) {
+         const month = parseInt(holiday.date.split('-')[1]) - 1;
+         if (!holidaysByMonth[month]) holidaysByMonth[month] = [];
+         holidaysByMonth[month].push(holiday);
+       }
+     });
+     
+     // Créer les cartes par mois
+     for (let month = 0; month < 12; month++) {
+       const monthHolidays = holidaysByMonth[month] || [];
+       
+       const monthCard = document.createElement('div');
+       monthCard.className = 'bg-white rounded-lg shadow p-4 border-l-4 border-blue-400';
+       
+       monthCard.innerHTML = `
+         <h3 class="font-semibold text-blue-600 mb-3">${months[month]} 2025</h3>
+         ${monthHolidays.length === 0 
+           ? '<p class="text-gray-500 text-sm">Aucun jour férié</p>'
+           : monthHolidays.map(holiday => {
+               const date = new Date(holiday.date);
+               const day = date.getDate();
+               const dayName = date.toLocaleDateString('fr-FR', { weekday: 'short' });
+               return `
+                 <div class="flex justify-between items-center mb-2 p-2 rounded ${holiday.fr ? 'bg-blue-50' : 'bg-gray-50'}">
+                   <span class="text-sm font-medium">${day} ${dayName}</span>
+                   <span class="text-xs text-gray-600">${holiday.name}</span>
+                   ${holiday.fr ? '<span class="text-xs bg-blue-200 text-blue-800 px-2 py-1 rounded">🇫🇷</span>' : ''}
+                 </div>
+               `;
+             }).join('')
+         }
+       `;
+       
+       calendarGrid.appendChild(monthCard);
+     }
+   }
+
+   function generateTable() {
+     const tableBody = document.getElementById('holidays_table');
+     tableBody.innerHTML = '';
+     
+     holidays2025.forEach(holiday => {
+       const date = new Date(holiday.date);
+       const formattedDate = date.toLocaleDateString('fr-FR', { 
+         day: 'numeric', 
+         month: 'short' 
+       });
+       const dayName = date.toLocaleDateString('fr-FR', { weekday: 'short' });
+       
+       const row = document.createElement('tr');
+       row.innerHTML = `
+         <td class="px-4 py-3">
+           <div class="font-medium">${formattedDate}</div>
+           <div class="text-xs text-gray-500">${dayName}</div>
+         </td>
+         <td class="px-4 py-3">
+           <div class="font-medium">${holiday.name}</div>
+         </td>
+         <td class="px-4 py-3 text-center">${holiday.fr ? '✅' : '❌'}</td>
+         <td class="px-4 py-3 text-center">${isHolidayInProvince(holiday, 'QC') ? '✅' : '❌'}</td>
+         <td class="px-4 py-3 text-center">${isHolidayInProvince(holiday, 'ON') ? '✅' : '❌'}</td>
+         <td class="px-4 py-3 text-center">${isHolidayInProvince(holiday, 'BC') ? '✅' : '❌'}</td>
+         <td class="px-4 py-3 text-center">${isHolidayInProvince(holiday, 'AB') ? '✅' : '❌'}</td>
+         <td class="px-4 py-3 text-center text-xs text-gray-500">Voir détails</td>
+       `;
+       
+       tableBody.appendChild(row);
+     });
+   }
+
+   // Event listeners
+   document.addEventListener('DOMContentLoaded', function() {
+     // Accordéons
+     document.querySelectorAll("[data-accordion-toggle]").forEach(button => {
+       button.addEventListener("click", function() {
+         const targetId = this.getAttribute("data-accordion-target");
+         const content = document.getElementById(targetId);
+         const chevronId = this.getAttribute("data-accordion-chevron");
+         const chevron = document.getElementById(chevronId);
+         
+         if (content) {
+           const style = window.getComputedStyle(content);
+           const isVisible = style.display !== 'none' && !content.classList.contains("hidden");
+           
+           if (isVisible) {
+             content.style.display = 'none';
+             content.classList.add('hidden');
+             if (chevron) chevron.textContent = "▼";
+           } else {
+             content.classList.remove('hidden');
+             content.style.display = 'block';
+             if (chevron) chevron.textContent = "▲";
+           }
+         }
+       });
+     });
+
+     // Sélecteur de province
+     document.getElementById('province_selector').addEventListener('change', generateCalendar);
+     
+     // Initialisation
+     generateCalendar();
+     generateTable();
+   });
+ </script>
+</Layout>

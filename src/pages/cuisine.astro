@@ -1,0 +1,422 @@
+---
+// src/pages/cuisine.astro
+import Layout from '../layouts/Default.astro';
+
+const title = "🍳 Convertisseur Cuisine France-Canada | Cups, Grammes & Portions";
+const description = "Le convertisseur cuisine ultime pour Français au Canada : cups ⇄ grammes, calculateur de portions, températures °F/°C. Cuisine comme un chef avec des mesures nordaméricaines !";
+---
+
+<Layout title={title} description={description}>
+ <div class="max-w-4xl mx-auto">
+   <h1 class="text-4xl font-bold text-red-700 mb-4 text-center">🍁 Convertisseur Cuisine FR ⇄ CA</h1>
+   <p class="text-lg text-gray-600 text-center mb-8">Cuisine comme un chef, même avec des cups et des °F !</p>
+
+   <!-- Calculateur de portions -->
+   <section class="card bg-gradient-to-r from-red-50 to-orange-50 rounded-xl shadow-lg p-6 mb-8 border border-red-200">
+     <h2 class="text-2xl font-semibold text-red-700 mb-4 flex items-center">
+       🧮 Calculateur de portions magique
+     </h2>
+     <p class="text-gray-700 mb-6">Ta recette est pour 4 mais vous êtes 7 ? Pas de panique, on ajuste tout automatiquement !</p>
+     
+     <div class="grid md:grid-cols-3 gap-4 mb-6">
+       <div class="space-y-2">
+         <label class="text-red-700 font-medium">Portions originales</label>
+         <input type="number" id="original_portions" class="border border-red-300 p-3 rounded-lg w-full" placeholder="4" value="4" />
+       </div>
+       <div class="space-y-2">
+         <label class="text-red-700 font-medium">Portions souhaitées</label>
+         <input type="number" id="desired_portions" class="border border-red-300 p-3 rounded-lg w-full" placeholder="6" />
+       </div>
+       <div class="space-y-2">
+         <label class="text-red-700 font-medium">Facteur de multiplication</label>
+         <input type="text" id="portion_factor" class="border border-red-300 p-3 rounded-lg w-full bg-gray-50" readonly />
+       </div>
+     </div>
+     
+     <div class="bg-white rounded-lg p-4 border border-red-200">
+       <p class="text-sm text-gray-600 mb-2">💡 <strong>Astuce :</strong> Utilise ce facteur pour ajuster toutes tes quantités !</p>
+       <div id="portion_examples" class="text-sm text-gray-700"></div>
+     </div>
+   </section>
+
+   <!-- Accordéon Mesures sèches -->
+   <section class="card bg-white rounded-xl shadow-lg p-6 mb-6 border border-gray-200">
+     <button 
+       class="w-full flex justify-between items-center text-left"
+       data-accordion-toggle
+       data-accordion-target="dry-measures"
+       data-accordion-chevron="chevron-dry"
+     >
+       <h2 class="text-xl font-semibold text-red-600">🥄 Mesures sèches (farine, sucre, épices...)</h2>
+       <span id="chevron-dry" class="text-red-600 font-bold">▼</span>
+     </button>
+     
+     <div id="dry-measures" class="mt-6 space-y-6">
+       <div class="grid md:grid-cols-4 gap-4">
+         <div class="space-y-2">
+           <label class="text-red-700 font-medium">Ingrédient</label>
+           <select id="dry_ingredient" class="border border-red-300 p-3 rounded-lg w-full">
+             <option value="farine">🌾 Farine tout usage</option>
+             <option value="sucre">🍚 Sucre blanc</option>
+             <option value="sucre_brun">🟤 Cassonade</option>
+             <option value="sucre_glace">❄️ Sucre glace</option>
+             <option value="cacao">🍫 Cacao en poudre</option>
+             <option value="amande_poudre">🌰 Poudre d'amande</option>
+             <option value="avoine">🌾 Flocons d'avoine</option>
+             <option value="chapelure">🍞 Chapelure</option>
+             <option value="parmesan">🧀 Parmesan râpé</option>
+             <option value="sel">🧂 Sel</option>
+           </select>
+         </div>
+         <div class="space-y-2">
+           <label class="text-red-700 font-medium">Cups</label>
+           <input type="number" id="dry_cups" class="border border-red-300 p-3 rounded-lg w-full" placeholder="1" step="0.125" />
+         </div>
+         <div class="space-y-2">
+           <label class="text-red-700 font-medium">Grammes</label>
+           <input type="number" id="dry_grams" class="border border-red-300 p-3 rounded-lg w-full" placeholder="125" />
+         </div>
+         <div class="space-y-2">
+           <label class="text-red-700 font-medium">Équivalent visuel</label>
+           <input type="text" id="dry_visual" class="border border-red-300 p-3 rounded-lg w-full bg-gray-50" readonly />
+         </div>
+       </div>
+       
+       <div class="bg-red-50 rounded-lg p-4">
+         <h3 class="font-semibold text-red-700 mb-2">📏 Fractions courantes :</h3>
+         <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm">
+           <button class="fraction-btn bg-white border border-red-200 rounded px-3 py-1 hover:bg-red-100" data-fraction="0.125">1/8 cup</button>
+           <button class="fraction-btn bg-white border border-red-200 rounded px-3 py-1 hover:bg-red-100" data-fraction="0.25">1/4 cup</button>
+           <button class="fraction-btn bg-white border border-red-200 rounded px-3 py-1 hover:bg-red-100" data-fraction="0.333">1/3 cup</button>
+           <button class="fraction-btn bg-white border border-red-200 rounded px-3 py-1 hover:bg-red-100" data-fraction="0.5">1/2 cup</button>
+           <button class="fraction-btn bg-white border border-red-200 rounded px-3 py-1 hover:bg-red-100" data-fraction="0.667">2/3 cup</button>
+           <button class="fraction-btn bg-white border border-red-200 rounded px-3 py-1 hover:bg-red-100" data-fraction="0.75">3/4 cup</button>
+           <button class="fraction-btn bg-white border border-red-200 rounded px-3 py-1 hover:bg-red-100" data-fraction="1">1 cup</button>
+           <button class="fraction-btn bg-white border border-red-200 rounded px-3 py-1 hover:bg-red-100" data-fraction="1.5">1½ cups</button>
+         </div>
+       </div>
+     </div>
+   </section>
+
+   <!-- Accordéon Mesures liquides -->
+   <section class="card bg-white rounded-xl shadow-lg p-6 mb-6 border border-gray-200">
+     <button 
+       class="w-full flex justify-between items-center text-left"
+       data-accordion-toggle
+       data-accordion-target="liquid-measures"
+       data-accordion-chevron="chevron-liquid"
+     >
+       <h2 class="text-xl font-semibold text-red-600">🥛 Mesures liquides (lait, huile, miel...)</h2>
+       <span id="chevron-liquid" class="text-red-600 font-bold">▼</span>
+     </button>
+     
+     <div id="liquid-measures" class="hidden mt-6 space-y-6">
+       <div class="grid md:grid-cols-4 gap-4">
+         <div class="space-y-2">
+           <label class="text-red-700 font-medium">Liquide</label>
+           <select id="liquid_ingredient" class="border border-red-300 p-3 rounded-lg w-full">
+             <option value="lait">🥛 Lait</option>
+             <option value="eau">💧 Eau</option>
+             <option value="huile">🫒 Huile</option>
+             <option value="miel">🍯 Miel</option>
+             <option value="sirop_erable">🍁 Sirop d'érable</option>
+             <option value="creme">🥛 Crème 35%</option>
+             <option value="beurre_fondu">🧈 Beurre fondu</option>
+             <option value="jus_citron">🍋 Jus de citron</option>
+           </select>
+         </div>
+         <div class="space-y-2">
+           <label class="text-red-700 font-medium">Cups</label>
+           <input type="number" id="liquid_cups" class="border border-red-300 p-3 rounded-lg w-full" placeholder="1" step="0.125" />
+         </div>
+         <div class="space-y-2">
+           <label class="text-red-700 font-medium">Millilitres</label>
+           <input type="number" id="liquid_ml" class="border border-red-300 p-3 rounded-lg w-full" placeholder="250" />
+         </div>
+         <div class="space-y-2">
+           <label class="text-red-700 font-medium">Équivalent visuel</label>
+           <input type="text" id="liquid_visual" class="border border-red-300 p-3 rounded-lg w-full bg-gray-50" readonly />
+         </div>
+       </div>
+     </div>
+   </section>
+
+   <!-- Accordéon Températures -->
+   <section class="card bg-white rounded-xl shadow-lg p-6 mb-6 border border-gray-200">
+     <button 
+       class="w-full flex justify-between items-center text-left"
+       data-accordion-toggle
+       data-accordion-target="temperature-measures"
+       data-accordion-chevron="chevron-temp"
+     >
+       <h2 class="text-xl font-semibold text-red-600">🌡️ Températures de cuisson</h2>
+       <span id="chevron-temp" class="text-red-600 font-bold">▼</span>
+     </button>
+     
+     <div id="temperature-measures" class="hidden mt-6 space-y-6">
+       <div class="grid md:grid-cols-2 gap-6">
+         <div class="space-y-2">
+           <label class="text-red-700 font-medium">🇫🇷 Celsius (°C)</label>
+           <input type="number" id="temp_c" class="border border-red-300 p-3 rounded-lg w-full" placeholder="180" />
+         </div>
+         <div class="space-y-2">
+           <label class="text-red-700 font-medium">🇨🇦 Fahrenheit (°F)</label>
+           <input type="number" id="temp_f" class="border border-red-300 p-3 rounded-lg w-full" placeholder="350" />
+         </div>
+       </div>
+       
+       <div class="bg-orange-50 rounded-lg p-4">
+         <h3 class="font-semibold text-orange-700 mb-3">🔥 Températures courantes :</h3>
+         <div class="grid grid-cols-2 md:grid-cols-3 gap-2 text-sm">
+           <button class="temp-btn bg-white border border-orange-200 rounded px-3 py-1 hover:bg-orange-100" data-temp="150">150°C (300°F) - Doux</button>
+           <button class="temp-btn bg-white border border-orange-200 rounded px-3 py-1 hover:bg-orange-100" data-temp="180">180°C (350°F) - Moyen</button>
+           <button class="temp-btn bg-white border border-orange-200 rounded px-3 py-1 hover:bg-orange-100" data-temp="200">200°C (400°F) - Chaud</button>
+           <button class="temp-btn bg-white border border-orange-200 rounded px-3 py-1 hover:bg-orange-100" data-temp="220">220°C (425°F) - Très chaud</button>
+           <button class="temp-btn bg-white border border-orange-200 rounded px-3 py-1 hover:bg-orange-100" data-temp="240">240°C (465°F) - Pizza</button>
+           <button class="temp-btn bg-white border border-orange-200 rounded px-3 py-1 hover:bg-orange-100" data-temp="160">160°C (320°F) - Meringue</button>
+         </div>
+       </div>
+     </div>
+   </section>
+
+   <!-- Accordéon Guide des équivalences -->
+   <section class="card bg-white rounded-xl shadow-lg p-6 mb-6 border border-gray-200">
+     <button 
+       class="w-full flex justify-between items-center text-left"
+       data-accordion-toggle
+       data-accordion-target="equivalences-guide"
+       data-accordion-chevron="chevron-equiv"
+     >
+       <h2 class="text-xl font-semibold text-red-600">📋 Guide des équivalences FR ⇄ CA</h2>
+       <span id="chevron-equiv" class="text-red-600 font-bold">▼</span>
+     </button>
+     
+     <div id="equivalences-guide" class="hidden mt-6">
+       <div class="grid md:grid-cols-2 gap-6">
+         <div>
+           <h3 class="font-semibold text-red-700 mb-3">🥄 Mesures courantes</h3>
+           <ul class="space-y-2 text-sm text-gray-700">
+             <li><strong>1 tablespoon (tbsp)</strong> = 15 ml = 1 c. à soupe</li>
+             <li><strong>1 teaspoon (tsp)</strong> = 5 ml = 1 c. à café</li>
+             <li><strong>1 cup</strong> = 250 ml = 1 tasse</li>
+             <li><strong>1 pint</strong> = 500 ml = 2 tasses</li>
+             <li><strong>1 quart</strong> = 1 litre = 4 tasses</li>
+           </ul>
+         </div>
+         
+         <div>
+           <h3 class="font-semibold text-red-700 mb-3">🥘 Ingrédients spéciaux</h3>
+           <ul class="space-y-2 text-sm text-gray-700">
+             <li><strong>All-purpose flour</strong> = Farine T45/T55</li>
+             <li><strong>Baking soda</strong> = Bicarbonate de soude</li>
+             <li><strong>Baking powder</strong> = Levure chimique</li>
+             <li><strong>Heavy cream</strong> = Crème entière 35%</li>
+             <li><strong>Confectioner's sugar</strong> = Sucre glace</li>
+           </ul>
+         </div>
+       </div>
+     </div>
+   </section>
+
+   <!-- Tips et astuces -->
+   <section class="card bg-gradient-to-r from-green-50 to-blue-50 rounded-xl shadow-lg p-6 border border-green-200">
+     <h2 class="text-xl font-semibold text-green-700 mb-4">💡 Tips de chef pour les Français au Canada</h2>
+     <div class="grid md:grid-cols-2 gap-4 text-sm text-gray-700">
+       <div>
+         <p class="mb-2"><strong>🎯 Astuce précision :</strong> Pèse plutôt que mesurer avec des cups pour la pâtisserie !</p>
+         <p class="mb-2"><strong>🥄 Repère visuel :</strong> 1 cup = un gros mug de café</p>
+       </div>
+       <div>
+         <p class="mb-2"><strong>🌡️ Four convection :</strong> Réduis de 25°F (15°C) par rapport aux recettes classiques</p>
+         <p><strong>⏱️ Timing :</strong> Les fours canadiens chauffent souvent plus vite !</p>
+       </div>
+     </div>
+   </section>
+ </div>
+
+ <!-- Scripts -->
+ <script is:inline>
+   // Variables globales
+   let portionFactor = 1;
+   
+   // Données des ingrédients
+   const dryIngredients = {
+     farine: { factor: 125, visual: "📏 ~½ tasse de thé" },
+     sucre: { factor: 200, visual: "🥤 ~¾ canette" },
+     sucre_brun: { factor: 220, visual: "🥤 ~1 canette" },
+     sucre_glace: { factor: 120, visual: "📏 ~½ tasse de thé" },
+     cacao: { factor: 85, visual: "☕ ~1 expresso" },
+     amande_poudre: { factor: 95, visual: "🥜 ~poignée généreuse" },
+     avoine: { factor: 80, visual: "🥣 ~1 bol petit-déj" },
+     chapelure: { factor: 110, visual: "🍞 ~2 tranches émiettées" },
+     parmesan: { factor: 90, visual: "🧀 ~3 c. à soupe" },
+     sel: { factor: 300, visual: "🧂 ~1 c. à soupe" }
+   };
+   
+   const liquidIngredients = {
+     lait: { factor: 240, visual: "🥛 ~1 verre" },
+     eau: { factor: 240, visual: "💧 ~1 verre" },
+     huile: { factor: 220, visual: "🫒 ~¾ verre" },
+     miel: { factor: 340, visual: "🍯 ~⅔ verre" },
+     sirop_erable: { factor: 320, visual: "🍁 ~⅔ verre" },
+     creme: { factor: 240, visual: "🥛 ~1 verre" },
+     beurre_fondu: { factor: 225, visual: "🧈 ~⅞ verre" },
+     jus_citron: { factor: 240, visual: "🍋 ~1 verre" }
+   };
+
+   // Calculateur de portions
+   function updatePortionCalculator() {
+     const original = parseFloat(document.getElementById('original_portions').value) || 1;
+     const desired = parseFloat(document.getElementById('desired_portions').value) || 1;
+     
+     portionFactor = desired / original;
+     document.getElementById('portion_factor').value = portionFactor.toFixed(2) + 'x';
+     
+     // Exemples d'ajustement
+     const examples = document.getElementById('portion_examples');
+     if (portionFactor !== 1) {
+       examples.innerHTML = `
+         <strong>Exemples d'ajustement :</strong><br>
+         • 1 cup → ${(1 * portionFactor).toFixed(2)} cups<br>
+         • 250g → ${Math.round(250 * portionFactor)}g<br>
+         • 2 œufs → ${Math.round(2 * portionFactor)} œufs
+       `;
+     } else {
+       examples.innerHTML = '';
+     }
+   }
+
+   // Convertisseur mesures sèches
+   function convertDryMeasures(fromCups = true) {
+     const ingredient = document.getElementById('dry_ingredient').value;
+     const cupsInput = document.getElementById('dry_cups');
+     const gramsInput = document.getElementById('dry_grams');
+     const visualInput = document.getElementById('dry_visual');
+     
+     const data = dryIngredients[ingredient];
+     if (!data) return;
+     
+     if (fromCups) {
+       const cups = parseFloat(cupsInput.value) || 0;
+       const grams = cups * data.factor * portionFactor;
+       gramsInput.value = grams > 0 ? Math.round(grams) : '';
+     } else {
+       const grams = parseFloat(gramsInput.value) || 0;
+       const cups = grams / (data.factor * portionFactor);
+       cupsInput.value = cups > 0 ? cups.toFixed(3) : '';
+     }
+     
+     visualInput.value = data.visual;
+   }
+
+   // Convertisseur mesures liquides
+   function convertLiquidMeasures(fromCups = true) {
+     const ingredient = document.getElementById('liquid_ingredient').value;
+     const cupsInput = document.getElementById('liquid_cups');
+     const mlInput = document.getElementById('liquid_ml');
+     const visualInput = document.getElementById('liquid_visual');
+     
+     const data = liquidIngredients[ingredient];
+     if (!data) return;
+     
+     if (fromCups) {
+       const cups = parseFloat(cupsInput.value) || 0;
+       const ml = cups * data.factor * portionFactor;
+       mlInput.value = ml > 0 ? Math.round(ml) : '';
+     } else {
+       const ml = parseFloat(mlInput.value) || 0;
+       const cups = ml / (data.factor * portionFactor);
+       cupsInput.value = cups > 0 ? cups.toFixed(3) : '';
+     }
+     
+     visualInput.value = data.visual;
+   }
+
+   // Convertisseur températures
+   let tempLock = false;
+   function convertTemp(fromC = true) {
+     if (tempLock) return;
+     tempLock = true;
+     
+     const tempC = document.getElementById('temp_c');
+     const tempF = document.getElementById('temp_f');
+     
+     if (fromC) {
+       const c = parseFloat(tempC.value);
+       tempF.value = !isNaN(c) ? Math.round((c * 9/5) + 32) : '';
+     } else {
+       const f = parseFloat(tempF.value);
+       tempC.value = !isNaN(f) ? Math.round((f - 32) * 5/9) : '';
+     }
+     
+     tempLock = false;
+   }
+
+   // Event listeners
+   document.addEventListener('DOMContentLoaded', function() {
+     // Accordéons
+     document.querySelectorAll("[data-accordion-toggle]").forEach(button => {
+       button.addEventListener("click", function() {
+         const targetId = this.getAttribute("data-accordion-target");
+         const content = document.getElementById(targetId);
+         const chevronId = this.getAttribute("data-accordion-chevron");
+         const chevron = document.getElementById(chevronId);
+         
+         if (content) {
+           const style = window.getComputedStyle(content);
+           const isVisible = style.display !== 'none' && !content.classList.contains("hidden");
+           
+           if (isVisible) {
+             content.style.display = 'none';
+             content.classList.add('hidden');
+             if (chevron) chevron.textContent = "▼";
+           } else {
+             content.classList.remove('hidden');
+             content.style.display = 'block';
+             if (chevron) chevron.textContent = "▲";
+           }
+         }
+       });
+     });
+
+     // Calculateur de portions
+     document.getElementById('original_portions').addEventListener('input', updatePortionCalculator);
+     document.getElementById('desired_portions').addEventListener('input', updatePortionCalculator);
+
+     // Mesures sèches
+     document.getElementById('dry_cups').addEventListener('input', () => convertDryMeasures(true));
+     document.getElementById('dry_grams').addEventListener('input', () => convertDryMeasures(false));
+     document.getElementById('dry_ingredient').addEventListener('change', () => convertDryMeasures(true));
+
+     // Mesures liquides
+     document.getElementById('liquid_cups').addEventListener('input', () => convertLiquidMeasures(true));
+     document.getElementById('liquid_ml').addEventListener('input', () => convertLiquidMeasures(false));
+     document.getElementById('liquid_ingredient').addEventListener('change', () => convertLiquidMeasures(true));
+
+     // Températures
+     document.getElementById('temp_c').addEventListener('input', () => convertTemp(true));
+     document.getElementById('temp_f').addEventListener('input', () => convertTemp(false));
+
+     // Boutons fractions
+     document.querySelectorAll('.fraction-btn').forEach(btn => {
+       btn.addEventListener('click', function() {
+         document.getElementById('dry_cups').value = this.dataset.fraction;
+         convertDryMeasures(true);
+       });
+     });
+
+     // Boutons températures
+     document.querySelectorAll('.temp-btn').forEach(btn => {
+       btn.addEventListener('click', function() {
+         document.getElementById('temp_c').value = this.dataset.temp;
+         convertTemp(true);
+       });
+     });
+
+     // Initialisation
+     updatePortionCalculator();
+     convertDryMeasures(true);
+     convertLiquidMeasures(true);
+   });
+ </script>
+</Layout>

@@ -1,0 +1,309 @@
+---
+// src/pages/salaire.astro
+import Layout from '../layouts/Default.astro';
+
+const title = "💰 Calculateur Salaire Net Canada | Impôts Québec & Fédéral 2025";
+const description = "Calcule ton salaire net après impôts au Québec et Canada. Simulateur précis incluant RRQ, RQAP, assurance-emploi. Idéal pour Français expatriés et nouveaux arrivants.";
+---
+
+<Layout title={title} description={description}>
+ <div class="max-w-4xl mx-auto">
+   <!-- Header principal -->
+   <div class="text-center mb-8">
+     <h1 class="text-4xl font-bold text-green-700 mb-4">💰 Calculateur Salaire Net Canada</h1>
+     <p class="text-lg text-gray-600 mb-6">Découvre ton vrai salaire après impôts au Québec !</p>
+     
+     <!-- CTA principal vers ton site -->
+     <div class="bg-gradient-to-r from-green-500 to-blue-500 rounded-xl p-6 text-white mb-8">
+       <h2 class="text-2xl font-bold mb-3">🚀 Calculateur Complet & Gratuit</h2>
+       <p class="mb-4 text-green-50">Calcule précisément ton salaire net avec toutes les déductions 2025 :</p>
+       <ul class="text-left text-green-50 mb-6 max-w-2xl mx-auto">
+         <li class="mb-1">✅ <strong>Impôts fédéral & provincial</strong> (taux 2025)</li>
+         <li class="mb-1">✅ <strong>RRQ, RQAP, assurance-emploi</strong></li>
+         <li class="mb-1">✅ <strong>Comparaison par ville</strong> (Montréal, Québec, Toronto...)</li>
+         <li class="mb-1">✅ <strong>Simulation bonus, heures sup, freelance</strong></li>
+       </ul>
+       
+       <a 
+         href="https://salairenet.ca" 
+         target="_blank"
+         rel="noopener"
+         class="inline-flex items-center bg-white text-green-600 font-bold px-8 py-4 rounded-lg hover:shadow-lg transition-all duration-300 text-lg"
+       >
+         🧮 Calculer mon salaire net
+         <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+         </svg>
+       </a>
+     </div>
+   </div>
+
+   <!-- Aperçu rapide intégré -->
+   <section class="card bg-white rounded-xl shadow-lg p-6 mb-8 border border-gray-200">
+     <h2 class="text-2xl font-semibold text-green-700 mb-4">⚡ Aperçu rapide</h2>
+     <p class="text-gray-600 mb-6">Estimation basique pour te donner une idée (calcul détaillé sur SalaireNet.ca)</p>
+     
+     <div class="grid md:grid-cols-3 gap-6">
+       <div class="space-y-2">
+         <label class="text-green-700 font-medium">Salaire brut annuel</label>
+         <input type="number" id="gross_salary" class="border border-green-300 p-3 rounded-lg w-full" placeholder="65000" />
+         <small class="text-gray-500">Ex: 65 000$ pour développeur junior</small>
+       </div>
+       
+       <div class="space-y-2">
+         <label class="text-green-700 font-medium">Province</label>
+         <select id="province" class="border border-green-300 p-3 rounded-lg w-full">
+           <option value="QC">🍁 Québec</option>
+           <option value="ON">🏢 Ontario</option>
+           <option value="BC">🏔️ Colombie-Britannique</option>
+           <option value="AB">🛢️ Alberta</option>
+         </select>
+       </div>
+       
+       <div class="space-y-2">
+         <label class="text-green-700 font-medium">Estimation salaire net</label>
+         <div class="border border-green-300 p-3 rounded-lg bg-green-50">
+           <div id="net_result" class="font-bold text-green-700 text-lg">-</div>
+           <small class="text-green-600">par année</small>
+         </div>
+       </div>
+     </div>
+     
+     <div id="breakdown" class="mt-6 p-4 bg-gray-50 rounded-lg hidden">
+       <h3 class="font-semibold text-gray-700 mb-2">📊 Répartition approximative :</h3>
+       <div id="breakdown_content" class="text-sm text-gray-600 space-y-1"></div>
+       <p class="text-xs text-gray-500 mt-3">💡 <strong>Calcul précis avec toutes les déductions disponible sur <a href="https://salairenet.ca" class="text-green-600 underline">SalaireNet.ca</a></strong></p>
+     </div>
+   </section>
+
+   <!-- Grilles d'exemples -->
+   <section class="grid md:grid-cols-2 gap-6 mb-8">
+     <!-- Exemples salaires tech -->
+     <div class="card bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl shadow-lg p-6 border border-blue-200">
+       <h3 class="text-xl font-semibold text-blue-700 mb-4">💻 Salaires Tech au Québec</h3>
+       <div class="space-y-3 text-sm">
+         <div class="flex justify-between bg-white rounded p-2">
+           <span>Développeur Junior</span>
+           <span class="font-semibold">45-65k$ → <span class="text-green-600">~38-50k$ net</span></span>
+         </div>
+         <div class="flex justify-between bg-white rounded p-2">
+           <span>Développeur Senior</span>
+           <span class="font-semibold">75-95k$ → <span class="text-green-600">~55-70k$ net</span></span>
+         </div>
+         <div class="flex justify-between bg-white rounded p-2">
+           <span>Lead/Architect</span>
+           <span class="font-semibold">95-120k$ → <span class="text-green-600">~68-85k$ net</span></span>
+         </div>
+         <div class="flex justify-between bg-white rounded p-2">
+           <span>Manager Tech</span>
+           <span class="font-semibold">100-140k$ → <span class="text-green-600">~70-95k$ net</span></span>
+         </div>
+       </div>
+     </div>
+
+     <!-- Comparaison provinces -->
+     <div class="card bg-gradient-to-br from-orange-50 to-red-50 rounded-xl shadow-lg p-6 border border-orange-200">
+       <h3 class="text-xl font-semibold text-orange-700 mb-4">🗺️ Comparaison provinces</h3>
+       <div class="space-y-3 text-sm">
+         <div class="bg-white rounded p-2">
+           <div class="flex justify-between mb-1">
+             <span class="font-medium">🍁 Québec (70k$)</span>
+             <span class="text-green-600 font-semibold">~52k$ net</span>
+           </div>
+           <div class="text-xs text-gray-500">Impôts élevés mais services publics ++</div>
+         </div>
+         <div class="bg-white rounded p-2">
+           <div class="flex justify-between mb-1">
+             <span class="font-medium">🏢 Ontario (70k$)</span>
+             <span class="text-green-600 font-semibold">~54k$ net</span>
+           </div>
+           <div class="text-xs text-gray-500">Moins d'impôts, coût de la vie plus élevé</div>
+         </div>
+         <div class="bg-white rounded p-2">
+           <div class="flex justify-between mb-1">
+             <span class="font-medium">🛢️ Alberta (70k$)</span>
+             <span class="text-green-600 font-semibold">~56k$ net</span>
+           </div>
+           <div class="text-xs text-gray-500">Pas de taxe provinciale, pétrole king</div>
+         </div>
+         <div class="bg-white rounded p-2">
+           <div class="flex justify-between mb-1">
+             <span class="font-medium">🏔️ BC (70k$)</span>
+             <span class="text-green-600 font-semibold">~54k$ net</span>
+           </div>
+           <div class="text-xs text-gray-500">Météo ++, logement très cher</div>
+         </div>
+       </div>
+     </div>
+   </section>
+
+   <!-- Guide pour nouveaux arrivants -->
+   <section class="card bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl shadow-lg p-6 mb-8 border border-purple-200">
+     <h2 class="text-2xl font-semibold text-purple-700 mb-4">🆕 Guide spécial nouveaux arrivants</h2>
+     
+     <div class="grid md:grid-cols-2 gap-6">
+       <div>
+         <h3 class="font-semibold text-purple-600 mb-3">💡 À savoir sur les impôts canadiens :</h3>
+         <ul class="space-y-2 text-sm text-gray-700">
+           <li class="flex items-start">
+             <span class="text-purple-500 mr-2">•</span>
+             <span><strong>Double taxation :</strong> Fédéral + Provincial</span>
+           </li>
+           <li class="flex items-start">
+             <span class="text-purple-500 mr-2">•</span>
+             <span><strong>Déductions automatiques :</strong> RRQ (retraite), RQAP (congés parentaux), AE (chômage)</span>
+           </li>
+           <li class="flex items-start">
+             <span class="text-purple-500 mr-2">•</span>
+             <span><strong>Retour d'impôts :</strong> Souvent un bonus au printemps !</span>
+           </li>
+           <li class="flex items-start">
+             <span class="text-purple-500 mr-2">•</span>
+             <span><strong>Crédits disponibles :</strong> Transport, garde d'enfants, dons</span>
+           </li>
+         </ul>
+       </div>
+       
+       <div>
+         <h3 class="font-semibold text-purple-600 mb-3">🎯 Négociation de salaire :</h3>
+         <ul class="space-y-2 text-sm text-gray-700">
+           <li class="flex items-start">
+             <span class="text-purple-500 mr-2">•</span>
+             <span><strong>Toujours négocier :</strong> Les employeurs s'y attendent</span>
+           </li>
+           <li class="flex items-start">
+             <span class="text-purple-500 mr-2">•</span>
+             <span><strong>Avantages non-fiscaux :</strong> REER, assurances, télétravail</span>
+           </li>
+           <li class="flex items-start">
+             <span class="text-purple-500 mr-2">•</span>
+             <span><strong>Bonus performance :</strong> Souvent 10-20% en tech</span>
+           </li>
+           <li class="flex items-start">
+             <span class="text-purple-500 mr-2">•</span>
+             <span><strong>Stock options :</strong> Très courantes dans les startups</span>
+           </li>
+         </ul>
+       </div>
+     </div>
+   </section>
+
+   <!-- CTA final vers ton site -->
+   <section class="card bg-gradient-to-r from-green-600 to-teal-600 rounded-xl shadow-xl p-8 text-white text-center">
+     <h2 class="text-3xl font-bold mb-4">🎯 Prêt(e) à calculer précisément ?</h2>
+     <p class="text-xl text-green-100 mb-6">
+       Utilise le calculateur complet avec tous les scénarios possibles
+     </p>
+     
+     <div class="flex flex-wrap justify-center gap-4 mb-6">
+       <span class="bg-white/20 rounded-full px-4 py-2 text-sm">Bonus & primes</span>
+       <span class="bg-white/20 rounded-full px-4 py-2 text-sm">Heures supplémentaires</span>
+       <span class="bg-white/20 rounded-full px-4 py-2 text-sm">Freelance & contrats</span>
+       <span class="bg-white/20 rounded-full px-4 py-2 text-sm">REER & épargne</span>
+     </div>
+     
+     <a 
+       href="https://salairenet.ca" 
+       target="_blank"
+       rel="noopener"
+       class="inline-flex items-center bg-white text-green-600 font-bold px-8 py-4 rounded-lg hover:shadow-2xl transition-all duration-300 text-xl"
+     >
+       🚀 Calculer sur SalaireNet.ca
+       <svg class="w-6 h-6 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+       </svg>
+     </a>
+     
+     <p class="text-green-100 text-sm mt-4">100% gratuit • Calculs officiels 2025 • Aucune inscription</p>
+   </section>
+
+   <!-- FAQ rapide -->
+   <section class="mt-8">
+     <h2 class="text-2xl font-semibold text-gray-800 mb-6 text-center">❓ Questions fréquentes</h2>
+     
+     <div class="grid md:grid-cols-2 gap-4 text-sm">
+       <div class="bg-white rounded-lg p-4 shadow">
+         <h3 class="font-semibold text-gray-700 mb-2">💰 Pourquoi tant de déductions ?</h3>
+         <p class="text-gray-600">Le système canadien finance les services publics (santé gratuite, assurance-emploi, retraite) via les déductions salariales.</p>
+       </div>
+       
+       <div class="bg-white rounded-lg p-4 shadow">
+         <h3 class="font-semibold text-gray-700 mb-2">🏠 Combien prévoir pour le logement ?</h3>
+         <p class="text-gray-600">Maximum 30% du salaire net. À Montréal : ~1200-1800$/mois pour un 3½. Toronto/Vancouver : beaucoup plus cher !</p>
+       </div>
+       
+       <div class="bg-white rounded-lg p-4 shadow">
+         <h3 class="font-semibold text-gray-700 mb-2">📈 Le salaire augmente vite au Canada ?</h3>
+         <p class="text-gray-600">En tech oui ! 10-20% par an les premières années est courant. Changement d'employeur = meilleure stratégie.</p>
+       </div>
+       
+       <div class="bg-white rounded-lg p-4 shadow">
+         <h3 class="font-semibold text-gray-700 mb-2">🇫🇷 Comparaison avec la France ?</h3>
+         <p class="text-gray-600">Salaires bruts plus élevés, mais attention aux coûts (logement, transport, bouffe). Net-net souvent avantageux en tech.</p>
+       </div>
+     </div>
+   </section>
+ </div>
+
+ <!-- Script pour l'aperçu rapide -->
+ <script is:inline>
+   // Taux approximatifs simplifiés (pour l'aperçu seulement)
+   const taxRates = {
+     QC: { federal: 0.15, provincial: 0.16, other: 0.055 }, // RRQ, RQAP, AE
+     ON: { federal: 0.15, provincial: 0.095, other: 0.055 },
+     BC: { federal: 0.15, provincial: 0.0506, other: 0.055 },
+     AB: { federal: 0.15, provincial: 0.10, other: 0.055 }
+   };
+
+   function calculateQuickEstimate() {
+     const grossSalary = parseFloat(document.getElementById('gross_salary').value) || 0;
+     const province = document.getElementById('province').value;
+     
+     if (grossSalary <= 0) {
+       document.getElementById('net_result').textContent = '-';
+       document.getElementById('breakdown').classList.add('hidden');
+       return;
+     }
+     
+     const rates = taxRates[province];
+     const federalTax = grossSalary * rates.federal;
+     const provincialTax = grossSalary * rates.provincial;
+     const otherDeductions = grossSalary * rates.other;
+     
+     const totalDeductions = federalTax + provincialTax + otherDeductions;
+     const netSalary = grossSalary - totalDeductions;
+     
+     // Affichage
+     document.getElementById('net_result').textContent = 
+       new Intl.NumberFormat('fr-CA', { 
+         style: 'currency', 
+         currency: 'CAD',
+         maximumFractionDigits: 0 
+       }).format(netSalary);
+     
+     // Breakdown
+     const breakdownContent = document.getElementById('breakdown_content');
+     breakdownContent.innerHTML = `
+       <div class="flex justify-between"><span>Salaire brut :</span><span class="font-medium">${new Intl.NumberFormat('fr-CA', { style: 'currency', currency: 'CAD', maximumFractionDigits: 0 }).format(grossSalary)}</span></div>
+       <div class="flex justify-between"><span>- Impôt fédéral (~${(rates.federal*100).toFixed(1)}%) :</span><span class="text-red-600">-${new Intl.NumberFormat('fr-CA', { style: 'currency', currency: 'CAD', maximumFractionDigits: 0 }).format(federalTax)}</span></div>
+       <div class="flex justify-between"><span>- Impôt provincial (~${(rates.provincial*100).toFixed(1)}%) :</span><span class="text-red-600">-${new Intl.NumberFormat('fr-CA', { style: 'currency', currency: 'CAD', maximumFractionDigits: 0 }).format(provincialTax)}</span></div>
+       <div class="flex justify-between"><span>- RRQ/RQAP/AE (~${(rates.other*100).toFixed(1)}%) :</span><span class="text-red-600">-${new Intl.NumberFormat('fr-CA', { style: 'currency', currency: 'CAD', maximumFractionDigits: 0 }).format(otherDeductions)}</span></div>
+       <hr class="my-2">
+       <div class="flex justify-between font-semibold"><span>Net annuel :</span><span class="text-green-600">${new Intl.NumberFormat('fr-CA', { style: 'currency', currency: 'CAD', maximumFractionDigits: 0 }).format(netSalary)}</span></div>
+       <div class="flex justify-between text-xs"><span>Net mensuel :</span><span class="text-green-600">${new Intl.NumberFormat('fr-CA', { style: 'currency', currency: 'CAD', maximumFractionDigits: 0 }).format(netSalary/12)}</span></div>
+     `;
+     
+     document.getElementById('breakdown').classList.remove('hidden');
+   }
+
+   // Event listeners
+   document.addEventListener('DOMContentLoaded', function() {
+     document.getElementById('gross_salary').addEventListener('input', calculateQuickEstimate);
+     document.getElementById('province').addEventListener('change', calculateQuickEstimate);
+     
+     // Exemple par défaut
+     document.getElementById('gross_salary').value = '65000';
+     calculateQuickEstimate();
+   });
+ </script>
+</Layout>

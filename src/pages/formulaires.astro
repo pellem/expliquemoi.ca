@@ -1,0 +1,675 @@
+---
+// src/pages/formulaires.astro
+import Layout from '../layouts/Default.astro';
+
+const title = "📋 Formulaires & Démarches Canada | NAS, RAMQ, Impôts 2025";
+const description = "Guide complet des formulaires officiels canadiens : NAS, RAMQ, permis de conduire, déclaration d'impôts. Liens directs, astuces et procédures pour nouveaux arrivants.";
+---
+
+<Layout title={title} description={description}>
+ <div class="max-w-6xl mx-auto">
+   <!-- Header -->
+   <div class="text-center mb-8">
+     <h1 class="text-4xl font-bold text-purple-700 mb-4">📋 Formulaires & Démarches Canada</h1>
+     <p class="text-lg text-gray-600 mb-6">Tous les liens officiels et astuces pour tes démarches administratives</p>
+     
+     <!-- Alert important -->
+     <div class="bg-red-50 border border-red-200 rounded-lg p-4 max-w-2xl mx-auto">
+       <div class="flex items-center">
+         <span class="text-red-600 text-xl mr-3">⚠️</span>
+         <div class="text-left">
+           <p class="font-semibold text-red-800">Attention aux arnaques !</p>
+           <p class="text-red-700 text-sm">Utilise UNIQUEMENT les liens officiels .gc.ca et .gouv.qc.ca</p>
+         </div>
+       </div>
+     </div>
+   </div>
+
+   <!-- Démarches prioritaires pour nouveaux arrivants -->
+   <section class="card bg-gradient-to-r from-green-50 to-blue-50 rounded-xl shadow-lg p-6 mb-8 border border-green-200">
+     <h2 class="text-2xl font-semibold text-green-700 mb-4">🚀 Priority Queue - Tes premières démarches</h2>
+     <p class="text-gray-700 mb-6">Dans l'ordre chronologique pour éviter les galères :</p>
+     
+     <div class="grid md:grid-cols-3 gap-4">
+       <div class="bg-white rounded-lg p-4 border-l-4 border-green-500">
+         <div class="flex items-center mb-2">
+           <span class="bg-green-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-2">1</span>
+           <h3 class="font-semibold text-green-700">NAS (dès l'arrivée)</h3>
+         </div>
+         <p class="text-sm text-gray-600">Numéro d'assurance sociale = obligatoire pour tout</p>
+       </div>
+       
+       <div class="bg-white rounded-lg p-4 border-l-4 border-blue-500">
+         <div class="flex items-center mb-2">
+           <span class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-2">2</span>
+           <h3 class="font-semibold text-blue-700">RAMQ (1er mois)</h3>
+         </div>
+         <p class="text-sm text-gray-600">Assurance maladie du Québec (si tu vis au QC)</p>
+       </div>
+       
+       <div class="bg-white rounded-lg p-4 border-l-4 border-purple-500">
+         <div class="flex items-center mb-2">
+           <span class="bg-purple-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-2">3</span>
+           <h3 class="font-semibold text-purple-700">Compte bancaire</h3>
+         </div>
+         <p class="text-sm text-gray-600">Avec ton NAS, ouvre un compte rapidement</p>
+       </div>
+     </div>
+     
+     <div class="mt-4 p-4 bg-yellow-50 rounded-lg border border-yellow-200">
+       <p class="text-sm text-yellow-800">
+         <strong>💡 Pro tip :</strong> Prends TOUS tes documents originaux à chaque démarche. Les photocopies, ça marche rarement du premier coup !
+       </p>
+     </div>
+   </section>
+
+   <!-- NAS - Numéro d'assurance sociale -->
+   <section class="card bg-white rounded-xl shadow-lg p-6 mb-6 border border-gray-200">
+     <button 
+       class="w-full flex justify-between items-center text-left"
+       data-accordion-toggle
+       data-accordion-target="nas-section"
+       data-accordion-chevron="chevron-nas"
+     >
+       <h2 class="text-2xl font-semibold text-blue-600">🆔 NAS - Numéro d'Assurance Sociale</h2>
+       <span id="chevron-nas" class="text-blue-600 font-bold">▼</span>
+     </button>
+     
+     <div id="nas-section" class="mt-6 space-y-4">
+       <div class="bg-blue-50 rounded-lg p-4">
+         <h3 class="font-semibold text-blue-700 mb-3">🎯 Essentiel à savoir</h3>
+         <ul class="text-sm text-gray-700 space-y-1">
+           <li>• <strong>Obligatoire</strong> pour travailler, ouvrir un compte bancaire, faire ses impôts</li>
+           <li>• <strong>Gratuit</strong> - méfie-toi des sites qui te font payer !</li>
+           <li>• <strong>En personne uniquement</strong> - pas de demande en ligne possible</li>
+           <li>• <strong>Délai :</strong> Reçu sur place ou par courrier sous 10 jours</li>
+         </ul>
+       </div>
+       
+       <div class="grid md:grid-cols-2 gap-6">
+         <div>
+           <h3 class="font-semibold text-gray-700 mb-3">📄 Documents requis</h3>
+           <ul class="text-sm text-gray-600 space-y-1">
+             <li>• Passeport français (original)</li>
+             <li>• Permis de travail OU résidence permanente</li>
+             <li>• Preuve d'adresse canadienne récente</li>
+             <li>• Formulaire de demande (sur place)</li>
+           </ul>
+         </div>
+         
+         <div>
+           <h3 class="font-semibold text-gray-700 mb-3">📍 Où faire la demande</h3>
+           <ul class="text-sm text-gray-600 space-y-1">
+             <li>• Bureaux Service Canada</li>
+             <li>• Certains centres ServiceOntario (ON)</li>
+             <li>• <strong>Prendre RDV</strong> recommandé</li>
+           </ul>
+         </div>
+       </div>
+       
+       <div class="flex gap-4">
+         <a 
+           href="https://www.canada.ca/fr/emploi-developpement-social/services/numero-assurance-sociale.html" 
+           target="_blank" 
+           rel="noopener"
+           class="inline-flex items-center bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+         >
+           🔗 Info officielle NAS
+           <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+           </svg>
+         </a>
+         
+         <a 
+           href="https://sr-ds.powerappsportals.com/fr/service/" 
+           target="_blank" 
+           rel="noopener"
+           class="inline-flex items-center bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors"
+         >
+           📅 Prendre RDV Service Canada
+           <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+           </svg>
+         </a>
+       </div>
+     </div>
+   </section>
+
+   <!-- RAMQ - Assurance maladie Québec -->
+   <section class="card bg-white rounded-xl shadow-lg p-6 mb-6 border border-gray-200">
+     <button 
+       class="w-full flex justify-between items-center text-left"
+       data-accordion-toggle
+       data-accordion-target="ramq-section"
+       data-accordion-chevron="chevron-ramq"
+     >
+       <h2 class="text-2xl font-semibold text-green-600">🏥 RAMQ - Assurance Maladie Québec</h2>
+       <span id="chevron-ramq" class="text-green-600 font-bold">▼</span>
+     </button>
+     
+     <div id="ramq-section" class="hidden mt-6 space-y-4">
+       <div class="bg-green-50 rounded-lg p-4">
+         <h3 class="font-semibold text-green-700 mb-3">🎯 Info importante</h3>
+         <ul class="text-sm text-gray-700 space-y-1">
+           <li>• <strong>Obligatoire</strong> si tu vis au Québec</li>
+           <li>• <strong>Gratuit</strong> (couvert par tes impôts)</li>
+           <li>• <strong>Délai de carence :</strong> 3 mois si tu viens d'une autre province</li>
+           <li>• <strong>Assurance privée</strong> recommandée en attendant</li>
+         </ul>
+       </div>
+       
+       <div class="grid md:grid-cols-2 gap-6">
+         <div>
+           <h3 class="font-semibold text-gray-700 mb-3">📄 Documents requis</h3>
+           <ul class="text-sm text-gray-600 space-y-1">
+             <li>• Certificat de naissance (acte d'état civil)</li>
+             <li>• Preuve de résidence au Québec</li>
+             <li>• Passeport ou carte d'identité</li>
+             <li>• Permis de travail/résidence permanente</li>
+             <li>• Formulaire de demande d'inscription</li>
+           </ul>
+         </div>
+         
+         <div>
+           <h3 class="font-semibold text-gray-700 mb-3">📍 Où faire la demande</h3>
+           <ul class="text-sm text-gray-600 space-y-1">
+             <li>• Bureaux de Communication-Québec</li>
+             <li>• Centres locaux de services communautaires (CLSC)</li>
+             <li>• Par courrier (certains cas)</li>
+           </ul>
+         </div>
+       </div>
+       
+       <div class="bg-yellow-50 rounded-lg p-4 border border-yellow-200">
+         <p class="text-sm text-yellow-800">
+           <strong>💡 Astuce :</strong> Si tu viens de France, apporte ton attestation de sécurité sociale française. Ça peut réduire le délai de carence !
+         </p>
+       </div>
+       
+       <div class="flex gap-4">
+         <a 
+           href="https://www.ramq.gouv.qc.ca/fr/citoyens/assurance-maladie/inscription" 
+           target="_blank" 
+           rel="noopener"
+           class="inline-flex items-center bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors"
+         >
+           🔗 Inscription RAMQ
+           <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+           </svg>
+         </a>
+         
+         <a 
+           href="https://www.ramq.gouv.qc.ca/SiteCollectionDocuments/citoyens/fr/formulaires/form_demande_admiss_assur_mal.pdf" 
+           target="_blank" 
+           rel="noopener"
+           class="inline-flex items-center bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+         >
+           📋 Formulaire PDF
+           <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+           </svg>
+         </a>
+       </div>
+     </div>
+   </section>
+
+   <!-- Permis de conduire -->
+   <section class="card bg-white rounded-xl shadow-lg p-6 mb-6 border border-gray-200">
+     <button 
+       class="w-full flex justify-between items-center text-left"
+       data-accordion-toggle
+       data-accordion-target="permis-section"
+       data-accordion-chevron="chevron-permis"
+     >
+       <h2 class="text-2xl font-semibold text-orange-600">🚗 Permis de Conduire</h2>
+       <span id="chevron-permis" class="text-orange-600 font-bold">▼</span>
+     </button>
+     
+     <div id="permis-section" class="hidden mt-6 space-y-4">
+       <div class="bg-orange-50 rounded-lg p-4">
+         <h3 class="font-semibold text-orange-700 mb-3">🎯 Règles importantes</h3>
+         <ul class="text-sm text-gray-700 space-y-1">
+           <li>• <strong>Permis français valide 6 mois</strong> avec permis international</li>
+           <li>• <strong>Échange possible</strong> si entente France-Province</li>
+           <li>• <strong>Sinon examen complet</strong> (théorique + pratique)</li>
+           <li>• <strong>Varie par province</strong> - chaque province a ses règles !</li>
+         </ul>
+       </div>
+       
+       <div class="grid md:grid-cols-2 gap-6">
+         <div class="bg-white border border-blue-200 rounded-lg p-4">
+           <h3 class="font-semibold text-blue-600 mb-3">🍁 Québec (SAAQ)</h3>
+           <ul class="text-sm text-gray-600 space-y-1">
+             <li>• <strong>Échange direct</strong> du permis français</li>
+             <li>• Examen de la vue obligatoire</li>
+             <li>• Frais : ~90$</li>
+             <li>• <strong>Plus facile</strong> grâce à l'entente France-Québec</li>
+           </ul>
+           <a 
+             href="https://saaq.gouv.qc.ca/permis-de-conduire/echanger-permis-etranger/" 
+             target="_blank" 
+             rel="noopener"
+             class="inline-block mt-3 text-blue-600 hover:underline text-sm"
+           >
+             🔗 Échange permis SAAQ →
+           </a>
+         </div>
+         
+         <div class="bg-white border border-red-200 rounded-lg p-4">
+           <h3 class="font-semibold text-red-600 mb-3">🏢 Ontario (ServiceOntario)</h3>
+           <ul class="text-sm text-gray-600 space-y-1">
+             <li>• <strong>Pas d'échange direct</strong></li>
+             <li>• Examen théorique (G1)</li>
+             <li>• Puis examen pratique (G2/G)</li>
+             <li>• Frais : ~160$ + cours</li>
+           </ul>
+           <a 
+             href="https://www.ontario.ca/fr/page/permis-de-conduire-pour-nouveaux-residents" 
+             target="_blank" 
+             rel="noopener"
+             class="inline-block mt-3 text-red-600 hover:underline text-sm"
+           >
+             🔗 Permis Ontario →
+           </a>
+         </div>
+       </div>
+       
+       <div class="bg-yellow-50 rounded-lg p-4 border border-yellow-200">
+         <p class="text-sm text-yellow-800">
+           <strong>💡 Pro tip :</strong> Si tu peux choisir ta province, le Québec est clairement plus facile pour le permis. L'Ontario c'est la galère !
+         </p>
+       </div>
+     </div>
+   </section>
+
+   <!-- Impôts -->
+   <section class="card bg-white rounded-xl shadow-lg p-6 mb-6 border border-gray-200">
+     <button 
+       class="w-full flex justify-between items-center text-left"
+       data-accordion-toggle
+       data-accordion-target="impots-section"
+       data-accordion-chevron="chevron-impots"
+     >
+       <h2 class="text-2xl font-semibold text-purple-600">💰 Déclaration d'Impôts</h2>
+       <span id="chevron-impots" class="text-purple-600 font-bold">▼</span>
+     </button>
+     
+     <div id="impots-section" class="hidden mt-6 space-y-4">
+       <div class="bg-purple-50 rounded-lg p-4">
+         <h3 class="font-semibold text-purple-700 mb-3">🎯 Points clés</h3>
+         <ul class="text-sm text-gray-700 space-y-1">
+           <li>• <strong>Double déclaration :</strong> Fédérale + Provinciale</li>
+           <li>• <strong>Deadline :</strong> 30 avril chaque année</li>
+           <li>• <strong>Souvent un remboursement</strong> la première année !</li>
+           <li>• <strong>Logiciels gratuits</strong> disponibles</li>
+         </ul>
+       </div>
+       
+       <div class="grid md:grid-cols-2 gap-6">
+         <div>
+           <h3 class="font-semibold text-gray-700 mb-3">📊 Logiciels recommandés (gratuits)</h3>
+           <ul class="text-sm text-gray-600 space-y-2">
+             <li>
+               <a href="https://www.canada.ca/fr/agence-revenu/services/declarations-electroniques/logiciels-declaration-revenus-certifies-gratuits.html" 
+                  target="_blank" rel="noopener" class="text-purple-600 hover:underline">
+                 • StudioTax (simple et efficace)
+               </a>
+             </li>
+             <li>
+               <a href="https://turbotax.intuit.ca/tax-software/online/free" 
+                  target="_blank" rel="noopener" class="text-purple-600 hover:underline">
+                 • TurboTax (interface moderne)
+               </a>
+             </li>
+             <li>
+               <a href="https://www.genutax.ca/fr/" 
+                  target="_blank" rel="noopener" class="text-purple-600 hover:underline">
+                 • GenuTax (québécois)
+               </a>
+             </li>
+           </ul>
+         </div>
+         
+         <div>
+           <h3 class="font-semibold text-gray-700 mb-3">📄 Documents à rassembler</h3>
+           <ul class="text-sm text-gray-600 space-y-1">
+             <li>• T4 (employeur) / T4A (autres revenus)</li>
+             <li>• Relevé 1 (Québec)</li>
+             <li>• Reçus de cotisations REER</li>
+             <li>• Frais médicaux, garde d'enfants</li>
+             <li>• Reçus de transport en commun</li>
+           </ul>
+         </div>
+       </div>
+       
+       <div class="flex gap-4">
+         <a 
+           href="https://www.canada.ca/fr/agence-revenu/services/impot/particuliers/sujets/tout-votre-declaration-revenus.html" 
+           target="_blank" 
+           rel="noopener"
+           class="inline-flex items-center bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors"
+         >
+           🔗 Guide impôts fédéraux
+           <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+           </svg>
+         </a>
+         
+         <a 
+           href="https://www.revenuquebec.ca/fr/citoyens/declaration-de-revenus/" 
+           target="_blank" 
+           rel="noopener"
+           class="inline-flex items-center bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+         >
+           🔗 Impôts Québec
+           <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002 2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+           </svg>
+         </a>
+       </div>
+     </div>
+   </section>
+
+   <!-- Autres démarches importantes -->
+   <section class="space-y-4 mb-8">
+     <h2 class="text-2xl font-semibold text-gray-800 mb-6">📝 Autres démarches importantes</h2>
+     
+     <div class="grid md:grid-cols-2 gap-6">
+       <!-- Compte bancaire -->
+       <div class="card bg-white rounded-lg shadow p-4 border border-gray-200">
+         <h3 class="font-semibold text-indigo-600 mb-3">🏦 Compte Bancaire</h3>
+         <ul class="text-sm text-gray-600 space-y-1 mb-4">
+           <li>• <strong>Big 5 :</strong> RBC, TD, Scotiabank, BMO, CIBC</li>
+           <li>• <strong>Alternatives :</strong> Tangerine, Simplii (en ligne)</li>
+           <li>• <strong>Frais :</strong> 10-30$/mois selon package</li>
+           <li>• <strong>Documents :</strong> NAS + preuve d'adresse</li>
+         </ul>
+         <a 
+           href="https://www.canada.ca/fr/agence-consommation-finance/services/services-bancaires/ouvrir-compte-bancaire.html" 
+           target="_blank" 
+           rel="noopener"
+           class="text-indigo-600 hover:underline text-sm"
+         >
+           🔗 Guide officiel comptes bancaires →
+         </a>
+       </div>
+
+       <!-- Carte d'identité provinciale -->
+       <div class="card bg-white rounded-lg shadow p-4 border border-gray-200">
+         <h3 class="font-semibold text-teal-600 mb-3">🆔 Carte d'Identité</h3>
+         <ul class="text-sm text-gray-600 space-y-1 mb-4">
+           <li>• <strong>Pas obligatoire</strong> mais très pratique</li>
+           <li>• <strong>Photo ID</strong> acceptée partout</li>
+           <li>• <strong>Moins cher</strong> que le permis de conduire</li>
+           <li>• <strong>Frais :</strong> ~20-40$ selon province</li>
+         </ul>
+         <div class="space-y-1">
+           <a href="https://saaq.gouv.qc.ca/permis-de-conduire/obtenir-permis-probatoire-ou-carte-identite/" 
+              target="_blank" rel="noopener" class="block text-teal-600 hover:underline text-sm">
+             🔗 Carte identité Québec →
+           </a>
+           <a href="https://www.ontario.ca/fr/page/obtenir-une-carte-photo-de-lontario" 
+              target="_blank" rel="noopener" class="block text-teal-600 hover:underline text-sm">
+             🔗 Carte photo Ontario →
+           </a>
+         </div>
+       </div>
+
+       <!-- Assurance -->
+       <div class="card bg-white rounded-lg shadow p-4 border border-gray-200">
+         <h3 class="font-semibold text-red-600 mb-3">🛡️ Assurances</h3>
+         <ul class="text-sm text-gray-600 space-y-1 mb-4">
+           <li>• <strong>Auto :</strong> Obligatoire si tu conduis</li>
+           <li>• <strong>Habitation :</strong> Recommandée</li>
+           <li>• <strong>Santé privée :</strong> Pour ce que la RAMQ couvre pas</li>
+           <li>• <strong>Comparateurs :</strong> Kanetix, LowestRates</li>
+         </ul>
+         <a 
+           href="https://www.canada.ca/fr/services/finance/assurance.html" 
+           target="_blank" 
+           rel="noopener"
+           class="text-red-600 hover:underline text-sm"
+         >
+           🔗 Guide assurances Canada →
+         </a>
+       </div>
+
+       <!-- REER / CELI -->
+       <div class="card bg-white rounded-lg shadow p-4 border border-gray-200">
+         <h3 class="font-semibold text-emerald-600 mb-3">💎 REER / CELI</h3>
+         <ul class="text-sm text-gray-600 space-y-1 mb-4">
+           <li>• <strong>REER :</strong> Comme le PEA français</li>
+           <li>• <strong>CELI :</strong> Épargne libre d'impôt</li>
+           <li>• <strong>Plafonds annuels</strong> à respecter</li>
+           <li>• <strong>Avantages fiscaux</strong> importants</li>
+         </ul>
+         <a 
+           href="https://www.canada.ca/fr/agence-revenu/services/impot/particuliers/sujets/regimes-enregistres-epargne-retraite-reer.html" 
+           target="_blank" 
+           rel="noopener"
+           class="text-emerald-600 hover:underline text-sm"
+         >
+           🔗 Info REER officielle →
+         </a>
+       </div>
+     </div>
+   </section>
+
+   <!-- Timeline récapitulatif -->
+   <section class="card bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl shadow-lg p-6 border border-indigo-200">
+     <h2 class="text-2xl font-semibold text-indigo-700 mb-6">⏰ Timeline des démarches</h2>
+     
+     <div class="space-y-4">
+       <div class="flex items-start">
+         <div class="bg-green-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold mr-4 mt-1">J+1</div>
+         <div>
+           <h3 class="font-semibold text-gray-800">Première semaine</h3>
+           <p class="text-sm text-gray-600">NAS, compte bancaire temporaire, téléphone</p>
+         </div>
+       </div>
+       
+       <div class="flex items-start">
+         <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold mr-4 mt-1">M+1</div>
+         <div>
+           <h3 class="font-semibold text-gray-800">Premier mois</h3>
+<p class="text-sm text-gray-600">RAMQ, permis de conduire, compte bancaire permanent</p>
+         </div>
+       </div>
+       
+       <div class="flex items-start">
+         <div class="bg-purple-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold mr-4 mt-1">M+3</div>
+         <div>
+           <h3 class="font-semibold text-gray-800">Premiers 3 mois</h3>
+           <p class="text-sm text-gray-600">Assurances, REER/CELI, médecin de famille</p>
+         </div>
+       </div>
+       
+       <div class="flex items-start">
+         <div class="bg-orange-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold mr-4 mt-1">A+1</div>
+         <div>
+           <h3 class="font-semibold text-gray-800">Première année</h3>
+           <p class="text-sm text-gray-600">Déclaration d'impôts, demande de citoyenneté (si applicable)</p>
+         </div>
+       </div>
+     </div>
+   </section>
+
+   <!-- Checklist à imprimer -->
+   <section class="card bg-white rounded-xl shadow-lg p-6 mt-8 border border-gray-200">
+     <div class="flex justify-between items-center mb-4">
+       <h2 class="text-2xl font-semibold text-gray-800">📋 Checklist à imprimer</h2>
+       <button 
+         onclick="window.print()" 
+         class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors"
+       >
+         🖨️ Imprimer
+       </button>
+     </div>
+     
+     <div class="print-checklist grid md:grid-cols-2 gap-6">
+       <div>
+         <h3 class="font-semibold text-gray-700 mb-3">📄 Documents à apporter PARTOUT</h3>
+         <ul class="space-y-2 text-sm">
+           <li class="flex items-center">
+             <input type="checkbox" class="mr-2" />
+             <span>Passeport français (original)</span>
+           </li>
+           <li class="flex items-center">
+             <input type="checkbox" class="mr-2" />
+             <span>Permis de travail/RP (original)</span>
+           </li>
+           <li class="flex items-center">
+             <input type="checkbox" class="mr-2" />
+             <span>Preuve d'adresse récente</span>
+           </li>
+           <li class="flex items-center">
+             <input type="checkbox" class="mr-2" />
+             <span>Acte de naissance (traduction certifiée)</span>
+           </li>
+           <li class="flex items-center">
+             <input type="checkbox" class="mr-2" />
+             <span>Photos d'identité (format canadien)</span>
+           </li>
+         </ul>
+       </div>
+       
+       <div>
+         <h3 class="font-semibold text-gray-700 mb-3">✅ Démarches prioritaires</h3>
+         <ul class="space-y-2 text-sm">
+           <li class="flex items-center">
+             <input type="checkbox" class="mr-2" />
+             <span>NAS (Numéro d'assurance sociale)</span>
+           </li>
+           <li class="flex items-center">
+             <input type="checkbox" class="mr-2" />
+             <span>Compte bancaire</span>
+           </li>
+           <li class="flex items-center">
+             <input type="checkbox" class="mr-2" />
+             <span>RAMQ (si Québec)</span>
+           </li>
+           <li class="flex items-center">
+             <input type="checkbox" class="mr-2" />
+             <span>Permis de conduire</span>
+           </li>
+           <li class="flex items-center">
+             <input type="checkbox" class="mr-2" />
+             <span>Téléphone avec forfait</span>
+           </li>
+         </ul>
+       </div>
+     </div>
+   </section>
+
+   <!-- Warning anti-arnaque -->
+   <section class="card bg-red-50 rounded-xl shadow-lg p-6 mt-8 border border-red-200">
+     <h2 class="text-2xl font-semibold text-red-700 mb-4">⚠️ Attention aux arnaques !</h2>
+     
+     <div class="grid md:grid-cols-2 gap-6">
+       <div>
+         <h3 class="font-semibold text-red-600 mb-3">🚫 Sites à éviter</h3>
+         <ul class="text-sm text-gray-700 space-y-1">
+           <li>• Sites qui finissent par .com/.org/.ca (sauf officiels)</li>
+           <li>• Sites qui demandent de payer pour des démarches gratuites</li>
+           <li>• "Services d'aide" qui facturent 100-200$</li>
+           <li>• Publicités Google "sponsorisées"</li>
+         </ul>
+       </div>
+       
+       <div>
+         <h3 class="font-semibold text-green-600 mb-3">✅ Sites officiels seulement</h3>
+         <ul class="text-sm text-gray-700 space-y-1">
+           <li>• <strong>.gc.ca</strong> = Gouvernement du Canada</li>
+           <li>• <strong>.gouv.qc.ca</strong> = Gouvernement du Québec</li>
+           <li>• <strong>.ontario.ca</strong> = Gouvernement de l'Ontario</li>
+           <li>• Si c'est pas officiel, c'est probablement une arnaque !</li>
+         </ul>
+       </div>
+     </div>
+     
+     <div class="mt-4 p-4 bg-white rounded-lg border border-red-200">
+       <p class="text-sm text-red-800">
+         <strong>💡 Règle d'or :</strong> Toutes les démarches gouvernementales de base (NAS, RAMQ, etc.) sont <strong>GRATUITES</strong>. 
+         Si on te demande de payer, c'est une arnaque !
+       </p>
+     </div>
+   </section>
+
+<!-- Contact d'urgence -->
+<section class="card bg-gradient-to-r from-blue-100 to-indigo-100 rounded-xl shadow-lg p-6 mt-8 border border-blue-200">
+ <h2 class="text-2xl font-semibold mb-4 text-gray-800">🆘 Besoin d'aide ?</h2>
+ 
+ <div class="grid md:grid-cols-3 gap-4">
+   <div class="bg-white rounded-lg p-4 border border-gray-200 shadow-sm">
+     <h3 class="font-semibold mb-2 text-gray-800">📞 Service Canada</h3>
+     <p class="text-sm text-gray-600">1-800-O-Canada</p>
+     <p class="text-sm text-gray-600">(1-800-622-6232)</p>
+   </div>
+   
+   <div class="bg-white rounded-lg p-4 border border-gray-200 shadow-sm">
+     <h3 class="font-semibold mb-2 text-gray-800">🏥 RAMQ (Québec)</h3>
+     <p class="text-sm text-gray-600">418 646-4636 (Québec)</p>
+     <p class="text-sm text-gray-600">514 864-3411 (Montréal)</p>
+   </div>
+   
+   <div class="bg-white rounded-lg p-4 border border-gray-200 shadow-sm">
+     <h3 class="font-semibold mb-2 text-gray-800">🇫🇷 Consulat France</h3>
+     <p class="text-sm text-gray-600">En cas de problème</p>
+     <p class="text-sm text-gray-600">avec documents français</p>
+   </div>
+ </div>
+ 
+ <div class="mt-6 text-center">
+   <p class="text-gray-700">
+     💡 <strong class="text-gray-800">Pro tip :</strong> Les agents gouvernementaux sont généralement très patients avec les nouveaux arrivants. 
+     N'hésite pas à dire que tu viens d'arriver !
+   </p>
+ </div>
+</section>
+
+ <!-- Script pour les accordéons -->
+ <script is:inline>
+   document.addEventListener('DOMContentLoaded', function() {
+     // Accordéons
+     document.querySelectorAll("[data-accordion-toggle]").forEach(button => {
+       button.addEventListener("click", function() {
+         const targetId = this.getAttribute("data-accordion-target");
+         const content = document.getElementById(targetId);
+         const chevronId = this.getAttribute("data-accordion-chevron");
+         const chevron = document.getElementById(chevronId);
+         
+         if (content) {
+           const style = window.getComputedStyle(content);
+           const isVisible = style.display !== 'none' && !content.classList.contains("hidden");
+           
+           if (isVisible) {
+             content.style.display = 'none';
+             content.classList.add('hidden');
+             if (chevron) chevron.textContent = "▼";
+           } else {
+             content.classList.remove('hidden');
+             content.style.display = 'block';
+             if (chevron) chevron.textContent = "▲";
+           }
+         }
+       });
+     });
+   });
+ </script>
+
+ <!-- Style pour l'impression -->
+ <style>
+   @media print {
+     .print-checklist {
+       break-inside: avoid;
+     }
+     
+     .print-checklist input[type="checkbox"] {
+       -webkit-appearance: checkbox;
+       appearance: checkbox;
+     }
+   }
+ </style>
+</Layout>
+

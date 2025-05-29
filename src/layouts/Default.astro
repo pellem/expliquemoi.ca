@@ -1,0 +1,332 @@
+---
+const { title, description } = Astro.props;
+import "../styles/global.css";
+---
+
+<!DOCTYPE html>
+<html lang="fr">
+ <head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <meta name="description" content={description || 'Guide ultime pour nouveaux arrivants au Canada. Convertisseurs, salaires, formulaires, jours fériés. Outils pratiques créés par des expatriés francophones.'} />
+   <meta name="robots" content="index, follow" />
+   <meta name="keywords" content="nouveaux arrivants Canada, francophones expatriés, convertisseur mesures, salaire net Canada, immigration Québec, guide expatriation" />
+   <meta name="author" content="NouvelArrivant.ca" />
+   <title>{title || '🍁 NouvelArrivant.ca | Guide Ultime pour Francophones au Canada'}</title>
+   <link rel="canonical" href="https://nouvelarrivant.ca/" />
+   <link rel="icon" type="image/png" href="/favicon.png" />
+   <slot name="head" />
+ </head>
+
+ <body class="font-sans bg-gray-50 text-gray-800 min-h-screen">
+   <!-- Header Mobile First -->
+   <header class="bg-white shadow-sm sticky top-0 z-50 border-b border-gray-200">
+     <div class="px-4 py-3">
+       <!-- Header Mobile -->
+       <div class="flex items-center justify-between md:hidden">
+         <a href="/" class="flex items-center space-x-2">
+           <div class="w-8 h-8 bg-gradient-to-br from-red-500 to-orange-500 rounded-lg flex items-center justify-center text-white text-lg">
+             🍁
+           </div>
+           <span class="font-bold text-lg text-gray-800">NouvelArrivant</span>
+         </a>
+         
+         <button id="mobile-menu-toggle" class="p-2 rounded-lg hover:bg-gray-100 transition-colors">
+           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+           </svg>
+         </button>
+       </div>
+
+       <!-- Header Desktop -->
+       <div class="hidden md:flex items-center justify-between max-w-6xl mx-auto">
+         <a href="/" class="flex items-center space-x-3 group">
+           <div class="w-10 h-10 bg-gradient-to-br from-red-500 to-orange-500 rounded-xl flex items-center justify-center text-white text-xl group-hover:scale-105 transition-transform">
+             🍁
+           </div>
+           <div>
+             <div class="font-bold text-xl text-gray-800 group-hover:text-red-600 transition-colors">
+               NouvelArrivant.ca
+             </div>
+             <div class="text-xs text-gray-500">Guide pour francophones</div>
+           </div>
+         </a>
+
+         <!-- Navigation Desktop avec badges -->
+         <nav class="flex items-center space-x-2">
+           <a href="/mesures" class="nav-item group flex items-center space-x-2 px-3 py-2 rounded-lg hover:bg-blue-50 transition-colors relative">
+             <span class="text-xl">📏</span>
+             <span class="font-medium text-gray-700 group-hover:text-blue-700">Mesures</span>
+           </a>
+           
+           <a href="/cuisine" class="nav-item group flex items-center space-x-2 px-3 py-2 rounded-lg hover:bg-orange-50 transition-colors">
+             <span class="text-xl">🍳</span>
+             <span class="font-medium text-gray-700 group-hover:text-orange-700">Cuisine</span>
+           </a>
+           
+           <a href="/salaire" class="nav-item group flex items-center space-x-2 px-3 py-2 rounded-lg hover:bg-green-50 transition-colors relative">
+             <span class="text-xl">💰</span>
+             <span class="font-medium text-gray-700 group-hover:text-green-700">Salaire</span>
+             <span class="absolute -top-1 -right-1 bg-green-500 text-white text-xs px-1.5 py-0.5 rounded-full font-bold">HOT</span>
+           </a>
+           
+           <a href="/jours-feries" class="nav-item group flex items-center space-x-2 px-3 py-2 rounded-lg hover:bg-purple-50 transition-colors">
+             <span class="text-xl">📅</span>
+             <span class="font-medium text-gray-700 group-hover:text-purple-700">Jours Fériés</span>
+           </a>
+           
+           <a href="/formulaires" class="nav-item group flex items-center space-x-2 px-3 py-2 rounded-lg hover:bg-indigo-50 transition-colors">
+             <span class="text-xl">📋</span>
+             <span class="font-medium text-gray-700 group-hover:text-indigo-700">Formulaires</span>
+           </a>
+
+           <!-- CTA Principal -->
+           <a href="https://salairenet.ca" target="_blank" rel="noopener" class="ml-4 bg-gradient-to-r from-red-500 to-orange-500 text-white px-4 py-2 rounded-lg hover:from-red-600 hover:to-orange-600 transition-all duration-300 font-medium shadow-lg hover:shadow-xl transform hover:scale-105">
+             💰 Salaire Net
+           </a>
+         </nav>
+       </div>
+     </div>
+
+     <!-- Menu Mobile Overlay -->
+     <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+       <div class="px-4 py-4 space-y-1">
+         <!-- Navigation Mobile avec cards visuelles -->
+         <a href="/mesures" class="mobile-nav-card flex items-center space-x-3 p-3 rounded-xl bg-blue-50 border border-blue-100 hover:bg-blue-100 transition-colors">
+           <div class="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center text-white text-lg">📏</div>
+           <div class="flex-1">
+             <div class="font-semibold text-blue-700">Mesures</div>
+             <div class="text-xs text-blue-600">Pieds, livres, °F...</div>
+           </div>
+           <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+           </svg>
+         </a>
+
+         <a href="/cuisine" class="mobile-nav-card flex items-center space-x-3 p-3 rounded-xl bg-orange-50 border border-orange-100 hover:bg-orange-100 transition-colors">
+           <div class="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center text-white text-lg">🍳</div>
+           <div class="flex-1">
+             <div class="font-semibold text-orange-700">Cuisine</div>
+             <div class="text-xs text-orange-600">Cups, températures...</div>
+           </div>
+           <svg class="w-5 h-5 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+           </svg>
+         </a>
+
+         <a href="/salaire" class="mobile-nav-card flex items-center space-x-3 p-3 rounded-xl bg-green-50 border border-green-100 hover:bg-green-100 transition-colors relative">
+           <div class="w-10 h-10 bg-green-500 rounded-lg flex items-center justify-center text-white text-lg">💰</div>
+           <div class="flex-1">
+             <div class="font-semibold text-green-700">Salaire</div>
+             <div class="text-xs text-green-600">Net après impôts</div>
+           </div>
+           <div class="flex items-center space-x-2">
+             <span class="bg-green-500 text-white text-xs px-2 py-1 rounded-full font-bold">HOT</span>
+             <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+             </svg>
+           </div>
+         </a>
+
+         <a href="/jours-feries" class="mobile-nav-card flex items-center space-x-3 p-3 rounded-xl bg-purple-50 border border-purple-100 hover:bg-purple-100 transition-colors">
+           <div class="w-10 h-10 bg-purple-500 rounded-lg flex items-center justify-center text-white text-lg">📅</div>
+           <div class="flex-1">
+             <div class="font-semibold text-purple-700">Jours Fériés</div>
+             <div class="text-xs text-purple-600">Par province</div>
+           </div>
+           <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+           </svg>
+         </a>
+
+         <a href="/formulaires" class="mobile-nav-card flex items-center space-x-3 p-3 rounded-xl bg-indigo-50 border border-indigo-100 hover:bg-indigo-100 transition-colors">
+           <div class="w-10 h-10 bg-indigo-500 rounded-lg flex items-center justify-center text-white text-lg">📋</div>
+           <div class="flex-1">
+             <div class="font-semibold text-indigo-700">Formulaires</div>
+             <div class="text-xs text-indigo-600">NAS, RAMQ, impôts</div>
+           </div>
+           <svg class="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+           </svg>
+         </a>
+
+         <!-- CTA Mobile -->
+         <div class="pt-4 border-t border-gray-200 mt-4">
+           <a href="https://salairenet.ca" target="_blank" rel="noopener" class="flex items-center justify-center space-x-2 w-full bg-gradient-to-r from-red-500 to-orange-500 text-white p-4 rounded-xl hover:from-red-600 hover:to-orange-600 transition-all duration-300 font-semibold shadow-lg">
+             <span class="text-xl">💰</span>
+             <span>Calculer mon Salaire Net</span>
+             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+             </svg>
+           </a>
+         </div>
+       </div>
+     </div>
+   </header>
+
+   <!-- Breadcrumb Mobile/Desktop -->
+   <div id="breadcrumb-container" class="bg-white border-b border-gray-100">
+     <!-- Généré dynamiquement -->
+   </div>
+
+   <!-- Contenu principal -->
+   <main class="flex-1">
+     <slot />
+   </main>
+
+   <!-- Bottom Navigation Mobile (Fixed) -->
+   <nav class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-40">
+     <div class="grid grid-cols-5 h-16">
+       <a href="/" class="bottom-nav-item flex flex-col items-center justify-center space-y-1 hover:bg-gray-50 transition-colors">
+         <span class="text-lg">🏠</span>
+         <span class="text-xs font-medium text-gray-600">Accueil</span>
+       </a>
+       
+       <a href="/mesures" class="bottom-nav-item flex flex-col items-center justify-center space-y-1 hover:bg-blue-50 transition-colors">
+         <span class="text-lg">📏</span>
+         <span class="text-xs font-medium text-gray-600">Mesures</span>
+       </a>
+       
+       <a href="/salaire" class="bottom-nav-item flex flex-col items-center justify-center space-y-1 hover:bg-green-50 transition-colors relative">
+         <div class="absolute -top-1 right-2 w-2 h-2 bg-red-500 rounded-full"></div>
+         <span class="text-lg">💰</span>
+         <span class="text-xs font-medium text-gray-600">Salaire</span>
+       </a>
+       
+       <a href="/cuisine" class="bottom-nav-item flex flex-col items-center justify-center space-y-1 hover:bg-orange-50 transition-colors">
+         <span class="text-lg">🍳</span>
+         <span class="text-xs font-medium text-gray-600">Cuisine</span>
+       </a>
+       
+       <a href="/formulaires" class="bottom-nav-item flex flex-col items-center justify-center space-y-1 hover:bg-indigo-50 transition-colors">
+         <span class="text-lg">📋</span>
+         <span class="text-xs font-medium text-gray-600">Plus</span>
+       </a>
+     </div>
+   </nav>
+
+   <!-- Footer -->
+   <footer class="bg-gray-800 text-white mt-20 mb-16 md:mb-0">
+     <div class="max-w-6xl mx-auto px-4 py-12">
+       <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+         <!-- À propos -->
+         <div class="md:col-span-2">
+           <div class="flex items-center space-x-3 mb-4">
+             <div class="w-10 h-10 bg-gradient-to-br from-red-500 to-orange-500 rounded-xl flex items-center justify-center text-white text-xl">
+               🍁
+             </div>
+             <div>
+               <div class="font-bold text-lg">NouvelArrivant.ca</div>
+               <div class="text-sm text-gray-400">Par des francophones, pour des francophones</div>
+             </div>
+           </div>
+           <p class="text-gray-300 text-sm max-w-md">
+             Le guide ultime pour réussir ton installation au Canada. 
+             Tous les outils pratiques créés par des expatriés qui sont passés par là.
+           </p>
+         </div>
+
+         <!-- Services Partenaires -->
+         <div>
+           <h3 class="font-semibold mb-4 text-orange-400">💼 Services Recommandés</h3>
+           <ul class="space-y-2 text-sm">
+             <li><a href="https://salairenet.ca" target="_blank" rel="noopener" class="text-gray-300 hover:text-white transition-colors flex items-center space-x-2">
+               <span>💰</span><span>Calculateur Salaire Net</span>
+             </a></li>
+             <li><a href="#" class="text-gray-300 hover:text-white transition-colors flex items-center space-x-2">
+               <span>🏦</span><span>Banques (Bientôt)</span>
+             </a></li>
+             <li><a href="#" class="text-gray-300 hover:text-white transition-colors flex items-center space-x-2">
+               <span>📱</span><span>Forfaits Mobile (Bientôt)</span>
+             </a></li>
+           </ul>
+         </div>
+
+         <!-- Contact -->
+         <div>
+           <h3 class="font-semibold mb-4 text-red-400">📧 Contact</h3>
+           <ul class="space-y-2 text-sm text-gray-300">
+             <li>🇨🇦 Créé au Canada</li>
+             <li>❤️ Made with love</li>
+             <li>🌐 Communauté francophone</li>
+           </ul>
+         </div>
+       </div>
+
+       <div class="border-t border-gray-700 mt-8 pt-6 text-center">
+         <p class="text-gray-400 text-sm">
+           © 2025 NouvelArrivant.ca - Fait avec ❤️ par des expatriés francophones
+         </p>
+       </div>
+     </div>
+   </footer>
+
+   <!-- Scripts -->
+   <script is:inline>
+     document.addEventListener('DOMContentLoaded', function() {
+       // Menu mobile toggle
+       const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+       const mobileMenu = document.getElementById('mobile-menu');
+       
+       if (mobileMenuToggle && mobileMenu) {
+         mobileMenuToggle.addEventListener('click', function() {
+           mobileMenu.classList.toggle('hidden');
+         });
+       }
+
+       // Breadcrumb intelligent
+       const breadcrumbContainer = document.getElementById('breadcrumb-container');
+       const currentPath = window.location.pathname;
+       
+       if (currentPath !== '/' && breadcrumbContainer) {
+         const pathSegments = currentPath.split('/').filter(segment => segment);
+         
+         let breadcrumbHTML = '<div class="max-w-6xl mx-auto px-4 py-2">';
+         breadcrumbHTML += '<nav class="flex items-center space-x-2 text-sm">';
+         breadcrumbHTML += '<a href="/" class="text-gray-500 hover:text-gray-700 transition-colors flex items-center space-x-1">';
+         breadcrumbHTML += '<span>🏠</span><span>Accueil</span></a>';
+         
+         pathSegments.forEach((segment, index) => {
+           const isLast = index === pathSegments.length - 1;
+           const url = '/' + pathSegments.slice(0, index + 1).join('/');
+           
+           breadcrumbHTML += '<svg class="w-4 h-4 text-gray-300" fill="currentColor" viewBox="0 0 20 20">';
+           breadcrumbHTML += '<path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>';
+           
+           if (isLast) {
+             breadcrumbHTML += `<span class="text-gray-900 font-medium">${formatSegment(segment)}</span>`;
+           } else {
+             breadcrumbHTML += `<a href="${url}" class="text-gray-500 hover:text-gray-700 transition-colors">${formatSegment(segment)}</a>`;
+           }
+         });
+         
+         breadcrumbHTML += '</nav></div>';
+         breadcrumbContainer.innerHTML = breadcrumbHTML;
+       }
+
+       // Active states pour bottom navigation
+       const bottomNavItems = document.querySelectorAll('.bottom-nav-item');
+       const currentPath = window.location.pathname;
+       
+       bottomNavItems.forEach(item => {
+         const href = item.getAttribute('href');
+         if ((currentPath === '/' && href === '/') || (currentPath !== '/' && href !== '/' && currentPath.startsWith(href))) {
+           item.classList.add('text-red-600');
+           item.classList.remove('text-gray-600');
+         }
+       });
+
+       function formatSegment(segment) {
+         const segmentNames = {
+           'mesures': '📏 Mesures',
+           'cuisine': '🍳 Cuisine', 
+           'salaire': '💰 Salaire',
+           'jours-feries': '📅 Jours Fériés',
+           'formulaires': '📋 Formulaires'
+         };
+         return segmentNames[segment] || segment.charAt(0).toUpperCase() + segment.slice(1);
+       }
+     });
+   </script>
+ </body>
+</html>

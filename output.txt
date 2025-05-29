@@ -1,0 +1,909 @@
+=== Fichiers à la racine ===
+
+C:\Users\404_n\Desktop\DEV\retardunits\astro.config.mjs
+C:\Users\404_n\Desktop\DEV\retardunits\output.txt
+C:\Users\404_n\Desktop\DEV\retardunits\package-lock.json
+C:\Users\404_n\Desktop\DEV\retardunits\package.json
+C:\Users\404_n\Desktop\DEV\retardunits\postcss.config.js
+C:\Users\404_n\Desktop\DEV\retardunits\tailwind.config.js
+C:\Users\404_n\Desktop\DEV\retardunits\tamre.ps1
+
+--- Contenu de package.json ---
+
+{
+  "name": "retardunits",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/tailwind": "^6.0.2",
+    "astro": "^5.7.13"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.17"
+  }
+}
+
+--- Contenu de astro.config.mjs ---
+
+import { defineConfig } from 'astro/config';
+import tailwind from "@astrojs/tailwind";
+
+export default defineConfig({
+  integrations: [tailwind()],
+});
+
+--- Contenu de tailwind.config.js ---
+
+// tailwind.config.js
+export default {
+  content: [
+    "./src/**/*.{astro,html,js,jsx,ts,tsx,vue,svelte}"
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+};
+
+--- Contenu de postcss.config.js ---
+
+module.exports = {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+};
+
+=== Fichiers dans .\src\pages (sans recurse) ===
+
+C:\Users\404_n\Desktop\DEV\retardunits\src\pages\cuisine.astro
+C:\Users\404_n\Desktop\DEV\retardunits\src\pages\index.astro
+C:\Users\404_n\Desktop\DEV\retardunits\src\pages\mesures.astro
+C:\Users\404_n\Desktop\DEV\retardunits\src\pages\test.astro
+
+=== Contenu des fichiers .\src\pages ===
+
+
+--- Contenu de C:\Users\404_n\Desktop\DEV\retardunits\src\pages\cuisine.astro ---
+
+---
+import Layout from "../layouts/Layout.astro";
+
+export const layout = Layout;
+export const title = "🍳 Cuisine - Convertisseurs utiles pour les Français au Canada";
+export const description = "Convertir cups, grammes, températures, etc. pour les Français installés au Canada.";
+---
+
+<section class="card mb-10">
+  <h2 class="text-xl font-bold text-red-700 mb-4">🥣 Cups → Grammes</h2>
+
+  <div class="space-y-4">
+    <div>
+      <label for="ingredient" class="block text-sm font-semibold mb-1">Ingrédient</label>
+      <select id="ingredient" class="border p-3 rounded w-full">
+        <option value="sugar">Sucre</option>
+        <option value="flour">Farine</option>
+      </select>
+    </div>
+    <div>
+      <label for="cupsInput" class="block text-sm font-semibold mb-1">Quantité en CUPS</label>
+      <input type="number" id="cupsInput" class="border p-3 rounded w-full" placeholder="ex: 1.5" />
+    </div>
+    <div>
+      <label for="gramsOutput" class="block text-sm font-semibold mb-1">Équivalent en grammes</label>
+      <input type="number" id="gramsOutput" class="border p-3 rounded w-full bg-gray-100" readonly />
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  const conversions = {
+    sugar: 200,
+    flour: 120,
+  };
+
+  const select = document.getElementById("ingredient");
+  const input = document.getElementById("cupsInput");
+  const output = document.getElementById("gramsOutput");
+
+  function update() {
+    const val = parseFloat(input.value);
+    const factor = conversions[select.value];
+    output.value = isNaN(val) ? "" : (val * factor).toFixed(0);
+  }
+
+  input.addEventListener("input", update);
+  select.addEventListener("change", update);
+</script>
+
+--- Contenu de C:\Users\404_n\Desktop\DEV\retardunits\src\pages\index.astro ---
+
+---
+title: "Convertisseurs utiles pour les Français au Canada"
+description: "Tous les convertisseurs essentiels pour les Français qui s'installent ou voyagent au Canada : monnaie, température, poids, taille, surface, et plus."
+layout: null
+import "../assets/global.css";
+---
+
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Outils de conversion interactifs pour les Français au Canada. Convertissez les unités de mesure, d'argent, de température, etc. Design responsive et fun !" />
+    <meta name="keywords" content="convertisseur Canada, dollars CAD, euros, pieds, mètres, Celsius, Fahrenheit, miles, poids, taille, surface, cups, outils expatriés" />
+    <meta name="author" content="RetardUnits" />
+        <title>FR ⇄ CA | Le guide de survie ultime 🇫🇷🇨🇦</title>
+    <link rel="icon" href="/favicon.ico" />
+  </head>
+
+  <body class="px-4 sm:px-8 md:px-12 lg:px-24 xl:px-32">
+    <main class="max-w-5xl mx-auto py-12">
+<h1 class="text-4xl sm:text-5xl font-extrabold text-center mb-16 text-blue-700">
+  Ta trousse de survie FR ⇄ CA 🇫🇷🇨🇦
+</h1>
+
+
+      <!-- Navigation entre les pages -->
+      <nav class="mb-12">
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">🧭 Explore les outils :</h2>
+        <div class="flex space-x-4 overflow-x-auto pb-2 no-scrollbar">
+          <a href="/mesures" class="flex-none w-48 shrink-0 bg-blue-50 hover:bg-blue-100 border border-blue-200 rounded-xl p-4 transition-all duration-200 shadow-sm">
+            <div class="text-3xl mb-2">📏</div>
+            <div class="font-bold text-blue-700">Mesures</div>
+            <p class="text-sm text-blue-600">Longueur, poids, surface…</p>
+          </a>
+
+          <a href="/cuisine" class="flex-none w-48 shrink-0 bg-red-50 hover:bg-red-100 border border-red-200 rounded-xl p-4 transition-all duration-200 shadow-sm">
+            <div class="text-3xl mb-2">🍳</div>
+            <div class="font-bold text-red-700">Cuisine</div>
+            <p class="text-sm text-red-600">Cups, températures, ingrédients</p>
+          </a>
+
+          <a href="/salaires" class="flex-none w-48 shrink-0 bg-green-50 hover:bg-green-100 border border-green-200 rounded-xl p-4 transition-all duration-200 shadow-sm">
+            <div class="text-3xl mb-2">💰</div>
+            <div class="font-bold text-green-700">Salaires</div>
+            <p class="text-sm text-green-600">Comparer et convertir</p>
+          </a>
+
+          <a href="/jours-feries" class="flex-none w-48 shrink-0 bg-yellow-50 hover:bg-yellow-100 border border-yellow-200 rounded-xl p-4 transition-all duration-200 shadow-sm">
+            <div class="text-3xl mb-2">📆</div>
+            <div class="font-bold text-yellow-700">Jours fériés</div>
+            <p class="text-sm text-yellow-600">France vs Québec</p>
+          </a>
+
+          <a href="/formulaires" class="flex-none w-48 shrink-0 bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded-xl p-4 transition-all duration-200 shadow-sm">
+            <div class="text-3xl mb-2">📄</div>
+            <div class="font-bold text-gray-800">Formulaires</div>
+            <p class="text-sm text-gray-700">NAS, RAMQ, impôts...</p>
+          </a>
+        </div>
+      </nav>
+
+      <!-- Contenu principal -->
+      <section id="convertisseurs" class="space-y-12">
+        <!-- Ici tu pourras importer chaque bloc proprement via des composants Astro si besoin plus tard -->
+        <!-- Ex : <SurfaceConverter /> <LengthConverter /> etc. -->
+        <!-- Pour l'instant tout est inline pour garder le fichier simple -->
+      </section>
+    </main>
+  </body>
+</html>
+
+--- Contenu de C:\Users\404_n\Desktop\DEV\retardunits\src\pages\mesures.astro ---
+
+---
+title: "Convertisseurs utiles pour les Français au Canada"
+description: "Tous les convertisseurs essentiels pour les Français qui s'installent ou voyagent au Canada : monnaie, température, poids, taille, surface, et plus."
+layout: null
+import "../styles/global.css";
+
+---
+
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Outils de conversion interactifs et visuels pour les Français au Canada. Convertissez les unités de mesure, d'argent, de distance, de température et bien plus encore. Design intuitif, responsive, rapide et fun !" />
+    <meta name="keywords" content="convertisseur Canada, dollars CAD, euros, pieds, mètres, degrés, Celsius, Fahrenheit, miles, km, pouces, cm, poids, taille, surface, cups, gallons, litres, outils pour expatriés, français au Canada" />
+    <meta name="author" content="RetardUnits" />
+    <title>Convertisseurs utiles pour les Français au Canada | RetardUnits</title>
+    <link rel="icon" href="/favicon.ico" />
+    <style>
+      body {
+        font-family: 'Inter', sans-serif;
+        background: linear-gradient(to bottom right, #f9fafb, #e0f2fe);
+        color: #1f2937;
+      }
+      input {
+        font-size: 1.125rem;
+        font-weight: 500;
+      }
+      .card {
+        background: white;
+        border-radius: 1.5rem;
+        padding: 2rem;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.04);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+      .card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 20px 30px rgba(0,0,0,0.08);
+      }
+      .form-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: #2563eb;
+      }
+      .unit-block {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      @media (min-width: 768px) {
+        .unit-block {
+          flex-direction: row;
+          align-items: center;
+        }
+      }
+      .flag-label {
+        font-size: 0.875rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+    </style>
+  </head>
+
+  <body class="px-4 sm:px-8 md:px-12 lg:px-24 xl:px-32">
+    <main class="max-w-5xl mx-auto py-12">
+
+      
+      <h1 class="text-4xl sm:text-5xl font-extrabold text-center mb-16 text-blue-700">
+        Convertisseurs essentiels pour les Français au Canada 🇫🇷🇨🇦
+      </h1>
+
+      <!-- Bloc navigation principale -->
+<section class="mb-12">
+  <h2 class="text-xl font-semibold text-gray-800 mb-4">🧭 Explore les outils :</h2>
+
+  <div class="flex space-x-4 overflow-x-auto pb-2 no-scrollbar">
+    <a href="/mesures" class="flex-none w-48 shrink-0 bg-blue-50 hover:bg-blue-100 border border-blue-200 rounded-xl p-4 transition-all duration-200 shadow-sm">
+      <div class="text-3xl mb-2">📏</div>
+      <div class="font-bold text-blue-700">Mesures</div>
+      <p class="text-sm text-blue-600">Longueur, poids, surface…</p>
+    </a>
+
+    <a href="/cuisine" class="flex-none w-48 shrink-0 bg-red-50 hover:bg-red-100 border border-red-200 rounded-xl p-4 transition-all duration-200 shadow-sm">
+      <div class="text-3xl mb-2">🍳</div>
+      <div class="font-bold text-red-700">Cuisine</div>
+      <p class="text-sm text-red-600">Cups, degrés cuisson, aliments</p>
+    </a>
+
+    <a href="/salaires" class="flex-none w-48 shrink-0 bg-green-50 hover:bg-green-100 border border-green-200 rounded-xl p-4 transition-all duration-200 shadow-sm">
+      <div class="text-3xl mb-2">💰</div>
+      <div class="font-bold text-green-700">Salaires</div>
+      <p class="text-sm text-green-600">Convertir et comparer</p>
+    </a>
+
+    <a href="/jours-feries" class="flex-none w-48 shrink-0 bg-yellow-50 hover:bg-yellow-100 border border-yellow-200 rounded-xl p-4 transition-all duration-200 shadow-sm">
+      <div class="text-3xl mb-2">📆</div>
+      <div class="font-bold text-yellow-700">Jours fériés</div>
+      <p class="text-sm text-yellow-600">France / Québec triés</p>
+    </a>
+
+    <a href="/formulaires" class="flex-none w-48 shrink-0 bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded-xl p-4 transition-all duration-200 shadow-sm">
+      <div class="text-3xl mb-2">📄</div>
+      <div class="font-bold text-gray-800">Formulaires</div>
+      <p class="text-sm text-gray-700">NAS, RAMQ, carte soleil...</p>
+    </a>
+  </div>
+</section>
+
+
+      <section id="convertisseurs" aria-labelledby="convertisseurs" class="space-y-12">
+
+<!-- Bloc Accordéon Surface -->
+<div class="card bg-gradient-to-br from-white to-slate-50">
+  <button
+    type="button"
+    onclick="toggleAccordion('surfaceAccordion', 'surfaceAccordionChevron')"
+    class="w-full flex justify-between items-center text-left font-bold text-xl text-blue-700"
+  >
+    <span class="flex items-center gap-2">🏡 Surface</span>
+    <span id="surfaceAccordionChevron" class="transition-transform duration-200">▼</span>
+  </button>
+
+  <div id="surfaceAccordion" class="mt-4 hidden flex flex-col gap-6 transition-all duration-300">
+
+    <!-- 🇫🇷 Colonne Française -->
+    <div class="bg-blue-50 rounded-xl p-4 space-y-4">
+      <p class="text-blue-600 font-semibold text-sm uppercase tracking-wide">🇫🇷 Unités françaises</p>
+      <div>
+        <label class="flag-label text-blue-700">Hectares (ha)</label>
+        <input type="number" id="surface_ha" class="border border-blue-200 focus:ring-2 focus:ring-blue-400 p-3 rounded w-full" placeholder="ex: 0.5" />
+      </div>
+      <div>
+        <label class="flag-label text-blue-700">Mètres² (m²)</label>
+        <input type="number" id="surface_m2" class="border border-blue-200 focus:ring-2 focus:ring-blue-400 p-3 rounded w-full" placeholder="ex: 500" />
+      </div>
+    </div>
+
+    <!-- 🇨🇦 Colonne Canadienne -->
+    <div class="bg-red-50 rounded-xl p-4 space-y-4">
+      <p class="text-red-600 font-semibold text-sm uppercase tracking-wide">🇨🇦 Unités canadiennes</p>
+      <div>
+        <label class="flag-label text-red-700">Pieds² (ft²)</label>
+        <input type="number" id="surface_ft2" class="border border-red-200 focus:ring-2 focus:ring-red-400 p-3 rounded w-full" placeholder="ex: 538" />
+      </div>
+    </div>
+
+    <!-- 🌍 Unité commune -->
+    <div class="bg-gray-100 rounded-xl p-4 space-y-2 text-center">
+      <p class="text-gray-700 font-semibold text-sm uppercase tracking-wide">🌎 Unité internationale</p>
+      <label class="flag-label">Acres</label>
+      <input type="number" id="surface_acres" class="border p-3 rounded w-full text-center focus:ring-2 focus:ring-gray-400" placeholder="ex: 0.012" />
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Bloc Accordéon Longueur -->
+<div class="card bg-gradient-to-br from-white to-slate-50">
+  <button
+    type="button"
+    onclick="toggleAccordion('lengthAccordion', 'lengthAccordionChevron')"
+    class="w-full flex justify-between items-center text-left text-blue-700 font-bold text-xl"
+  >
+    📏 Longueur
+    <span id="lengthAccordionChevron" class="transition-transform duration-200">▼</span>
+  </button>
+
+  <div id="lengthAccordion" class="mt-4 hidden flex flex-col gap-6 transition-all duration-300">
+
+    <!-- 🇫🇷 Colonne Française -->
+    <div class="bg-blue-50 rounded-xl p-4 space-y-4">
+      <p class="text-blue-600 font-semibold text-sm uppercase tracking-wide">🇫🇷 Unités françaises</p>
+      <div>
+        <label class="flag-label text-blue-700">Kilomètres (km)</label>
+        <input type="number" id="length_km" class="border border-blue-200 focus:ring-2 focus:ring-blue-400 p-3 rounded w-full" placeholder="ex: 1.6" />
+      </div>
+      <div>
+        <label class="flag-label text-blue-700">Mètres (m)</label>
+        <input type="number" id="length_m" class="border border-blue-200 focus:ring-2 focus:ring-blue-400 p-3 rounded w-full" placeholder="ex: 1000" />
+      </div>
+      <div>
+        <label class="flag-label text-blue-700">Centimètres (cm)</label>
+        <input type="number" id="length_cm" class="border border-blue-200 focus:ring-2 focus:ring-blue-400 p-3 rounded w-full" placeholder="ex: 100" />
+      </div>
+      <div>
+        <label class="flag-label text-blue-700">Millimètres (mm)</label>
+        <input type="number" id="length_mm" class="border border-blue-200 focus:ring-2 focus:ring-blue-400 p-3 rounded w-full" placeholder="ex: 10" />
+      </div>
+    </div>
+
+    <!-- 🇨🇦 Colonne Canadienne -->
+    <div class="bg-red-50 rounded-xl p-4 space-y-4">
+      <p class="text-red-600 font-semibold text-sm uppercase tracking-wide">🇨🇦 Unités canadiennes</p>
+      <div>
+        <label class="flag-label text-red-700">Miles (mi)</label>
+        <input type="number" id="length_mi" class="border border-red-200 focus:ring-2 focus:ring-red-400 p-3 rounded w-full" placeholder="ex: 1" />
+      </div>
+      <div>
+        <label class="flag-label text-red-700">Yards (yd)</label>
+        <input type="number" id="length_yd" class="border border-red-200 focus:ring-2 focus:ring-red-400 p-3 rounded w-full" placeholder="ex: 1093.6" />
+      </div>
+      <div>
+        <label class="flag-label text-red-700">Pieds (ft)</label>
+        <input type="number" id="length_ft" class="border border-red-200 focus:ring-2 focus:ring-red-400 p-3 rounded w-full" placeholder="ex: 3280.8" />
+      </div>
+      <div>
+        <label class="flag-label text-red-700">Pouces (in)</label>
+        <input type="number" id="length_in" class="border border-red-200 focus:ring-2 focus:ring-red-400 p-3 rounded w-full" placeholder="ex: 39370" />
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+<!-- Bloc Accordéon Poids -->
+<div class="card bg-gradient-to-br from-white to-slate-50">
+  <button
+    type="button"
+    onclick="toggleAccordion('weightAccordion', 'weightAccordionChevron')"
+    class="w-full flex justify-between items-center text-left text-blue-700 font-bold text-xl"
+  >
+    ⚖️ Poids
+    <span id="weightAccordionChevron" class="transition-transform duration-200">▼</span>
+  </button>
+
+  <div id="weightAccordion" class="mt-4 hidden flex flex-col gap-6 transition-all duration-300">
+    
+    <!-- 🇫🇷 Colonne Française -->
+    <div class="bg-blue-50 rounded-xl p-4 space-y-4">
+      <p class="text-blue-600 font-semibold text-sm uppercase tracking-wide">🇫🇷 Unités françaises</p>
+      <div>
+        <label class="flag-label text-blue-700">Kilogrammes (kg)</label>
+        <input type="number" id="weight_kg" class="border border-blue-200 focus:ring-2 focus:ring-blue-400 p-3 rounded w-full" placeholder="ex: 0.5" />
+      </div>
+      <div>
+        <label class="flag-label text-blue-700">Grammes (g)</label>
+        <input type="number" id="weight_g" class="border border-blue-200 focus:ring-2 focus:ring-blue-400 p-3 rounded w-full" placeholder="ex: 500" />
+      </div>
+    </div>
+
+    <!-- 🇨🇦 Colonne Canadienne -->
+    <div class="bg-red-50 rounded-xl p-4 space-y-4">
+      <p class="text-red-600 font-semibold text-sm uppercase tracking-wide">🇨🇦 Unités canadiennes</p>
+      <div>
+        <label class="flag-label text-red-700">Livres (lb)</label>
+        <input type="number" id="weight_lb" class="border border-red-200 focus:ring-2 focus:ring-red-400 p-3 rounded w-full" placeholder="ex: 1.1" />
+      </div>
+      <div>
+        <label class="flag-label text-red-700">Onces (oz)</label>
+        <input type="number" id="weight_oz" class="border border-red-200 focus:ring-2 focus:ring-red-400 p-3 rounded w-full" placeholder="ex: 17.6" />
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+        <!-- Bloc Accordéon Temperature -->
+
+<div class="card">
+  <button
+    type="button"
+    onclick="toggleAccordion('tempAccordion', 'tempAccordionChevron')"
+    class="w-full flex justify-between items-center text-left text-blue-700 font-bold text-xl"
+  >
+    🌡️ Température
+    <span id="tempAccordionChevron" class="transition-transform duration-200">▼</span>
+  </button>
+
+  <div id="tempAccordion" class="mt-4 hidden flex flex-col gap-6 transition-all duration-300">
+    <div class="grid md:grid-cols-2 gap-6">
+      
+      <!-- 🇫🇷 -->
+      <div class="space-y-4">
+        <label class="flag-label text-blue-600">🇫🇷 Celsius (°C)</label>
+        <input type="number" id="temp_c" class="border p-3 rounded w-full" placeholder="ex: 20" />
+      </div>
+
+      <!-- 🇨🇦 -->
+      <div class="space-y-4">
+        <label class="flag-label text-red-600">🇨🇦 Fahrenheit (°F)</label>
+        <input type="number" id="temp_f" class="border p-3 rounded w-full" placeholder="ex: 68" />
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Bloc Accordéon Liquide -->
+<div class="card">
+  <button
+    type="button"
+    onclick="toggleAccordion('volumeAccordion', 'volumeAccordionChevron')"
+    class="w-full flex justify-between items-center text-left text-blue-700 font-bold text-xl"
+  >
+    ⛽ Liquide
+    <span id="volumeAccordionChevron" class="transition-transform duration-200">▼</span>
+  </button>
+
+  <div id="volumeAccordion" class="mt-4 hidden flex flex-col gap-6 transition-all duration-300">
+    <div class="grid md:grid-cols-2 gap-6">
+      
+      <!-- 🇫🇷 Colonne française -->
+      <div class="space-y-4">
+        <div>
+          <label class="flag-label text-blue-600">🇫🇷 Litres (L)</label>
+          <input type="number" id="volume_l" class="border p-3 rounded w-full" placeholder="ex: 1" />
+        </div>
+        <div>
+          <label class="flag-label text-blue-600">🇫🇷 Millilitres (ml)</label>
+          <input type="number" id="volume_ml" class="border p-3 rounded w-full" placeholder="ex: 1000" />
+        </div>
+      </div>
+
+      <!-- 🇨🇦 Colonne canadienne -->
+      <div class="space-y-4">
+        <div>
+          <label class="flag-label text-red-600">🇨🇦 Gallons (US gal)</label>
+          <input type="number" id="volume_gal" class="border p-3 rounded w-full" placeholder="ex: 0.26" />
+        </div>
+        <div>
+          <label class="flag-label text-red-600">🇨🇦 Cups (tasses)</label>
+          <input type="number" id="volume_cup" class="border p-3 rounded w-full" placeholder="ex: 4.2" />
+        </div>
+        <div>
+          <label class="flag-label text-red-600">🇨🇦 Onces liquides (fl oz)</label>
+          <input type="number" id="volume_floz" class="border p-3 rounded w-full" placeholder="ex: 33.8" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bloc Accordéon Monnaie -->
+<div class="card">
+  <button
+    type="button"
+    onclick="toggleAccordion('moneyAccordion', 'moneyAccordionChevron')"
+    class="w-full flex justify-between items-center text-left text-blue-700 font-bold text-xl"
+  >
+    💸 Monnaie
+    <span id="moneyAccordionChevron" class="transition-transform duration-200">▼</span>
+  </button>
+
+  <div id="moneyAccordion" class="mt-4 hidden flex flex-col gap-6 transition-all duration-300">
+    <div class="grid md:grid-cols-2 gap-6">
+      
+      <!-- 🇫🇷 Colonne française -->
+      <div class="space-y-4">
+        <div>
+          <label class="flag-label text-blue-600">🇫🇷 Euros (€)</label>
+          <input type="number" id="money_eur" class="border p-3 rounded w-full" placeholder="ex: 68" />
+        </div>
+        <div>
+          <label class="flag-label text-yellow-500">₿ Bitcoin</label>
+          <input type="number" id="money_btc" class="border p-3 rounded w-full" placeholder="ex: 0.0001" />
+        </div>
+      </div>
+
+      <!-- 🇨🇦 / 🇺🇸 Colonne Amérique -->
+      <div class="space-y-4">
+        <div>
+          <label class="flag-label text-red-600">🇨🇦 Dollars CAD</label>
+          <input type="number" id="money_cad" class="border p-3 rounded w-full" placeholder="ex: 100" />
+        </div>
+        <div>
+          <label class="flag-label text-green-600">🇺🇸 Dollars USD</label>
+          <input type="number" id="money_usd" class="border p-3 rounded w-full" placeholder="ex: 73" />
+        </div>
+        <div>
+          <label class="flag-label text-yellow-700">⚡ Satoshis (sats)</label>
+          <input type="number" id="money_sats" class="border p-3 rounded w-full" placeholder="ex: 10000" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+      </section>
+    </main>
+
+    <script is:inline>
+  // --- Accordéons ---
+  function toggleAccordion(contentId, chevronId) {
+    const content = document.getElementById(contentId);
+    const chevron = document.getElementById(chevronId);
+
+    if (!content) return;
+
+    const isHidden = content.classList.contains("hidden");
+    content.classList.toggle("hidden");
+    if (chevron) chevron.textContent = isHidden ? "▲" : "▼";
+  }
+
+  // --- Surface ---
+  const surfaceInputs = {
+    m2: document.getElementById("surface_m2"),
+    ft2: document.getElementById("surface_ft2"),
+  const fromM2 = (m2) => ({
+    m2,
+    ft2: m2 / 0.092903,
+    ha: m2 / 10000,
+    acres: m2 * 0.000247105,
+  });
+
+  const toM2 = {
+    m2: (v) => v,
+    ft2: (v) => v * 0.092903,
+    ha: (v) => v * 10000,
+    acres: (v) => v / 0.000247105,
+  };
+
+  let surfaceLock = false;
+  Object.entries(surfaceInputs).forEach(([unit, input]) => {
+    if (!input) return;
+    input.addEventListener("input", (e) => {
+      if (surfaceLock) return;
+      const val = parseFloat(e.target.value);
+      if (isNaN(val)) return;
+
+      surfaceLock = true;
+      const m2 = unit === "m2" ? val : toM2[unit](val);
+      const conversions = fromM2(m2);
+
+      Object.entries(conversions).forEach(([k, v]) => {
+        if (k !== unit && surfaceInputs[k]) {
+          surfaceInputs[k].value = v.toFixed(4);
+        }
+      });
+
+      surfaceLock = false;
+    });
+  });
+
+  // --- Longueur ---
+  const lengthInputs = {
+    mm: document.getElementById("length_mm"),
+    cm: document.getElementById("length_cm"),
+    m: document.getElementById("length_m"),
+    km: document.getElementById("length_km"),
+    in: document.getElementById("length_in"),
+    ft: document.getElementById("length_ft"),
+    yd: document.getElementById("length_yd"),
+    mi: document.getElementById("length_mi"),
+  };
+
+  const fromM = (m) => ({
+    mm: m * 1000,
+    cm: m * 100,
+    m,
+    km: m / 1000,
+    in: m / 0.0254,
+    ft: m / 0.3048,
+    yd: m / 0.9144,
+    mi: m / 1609.344,
+  });
+
+  const toM = {
+    mm: (v) => v / 1000,
+    cm: (v) => v / 100,
+    m: (v) => v,
+    km: (v) => v * 1000,
+    in: (v) => v * 0.0254,
+    ft: (v) => v * 0.3048,
+    yd: (v) => v * 0.9144,
+    mi: (v) => v * 1609.344,
+  };
+
+  let lengthLock = false;
+  Object.entries(lengthInputs).forEach(([unit, input]) => {
+    if (!input) return;
+    input.addEventListener("input", (e) => {
+      if (lengthLock) return;
+      const val = parseFloat(e.target.value);
+      if (isNaN(val)) return;
+
+      lengthLock = true;
+      const meters = unit === "m" ? val : toM[unit](val);
+      const conversions = fromM(meters);
+
+      Object.entries(conversions).forEach(([k, v]) => {
+        if (k !== unit && lengthInputs[k]) {
+          lengthInputs[k].value = v.toFixed(4);
+        }
+      });
+
+      lengthLock = false;
+    });
+  });
+
+  // --- Poids ---
+  const weightInputs = {
+    g: document.getElementById("weight_g"),
+    kg: document.getElementById("weight_kg"),
+    lb: document.getElementById("weight_lb"),
+    oz: document.getElementById("weight_oz"),
+  };
+
+  const fromKg = (kg) => ({
+    g: kg * 1000,
+    kg,
+    lb: kg * 2.20462,
+    oz: kg * 35.27396,
+  });
+
+  const toKg = {
+    g: (v) => v / 1000,
+    kg: (v) => v,
+    lb: (v) => v / 2.20462,
+    oz: (v) => v / 35.27396,
+  };
+
+  let weightLock = false;
+  Object.entries(weightInputs).forEach(([unit, input]) => {
+    if (!input) return;
+    input.addEventListener("input", (e) => {
+      if (weightLock) return;
+      const val = parseFloat(e.target.value);
+      if (isNaN(val)) return;
+
+      weightLock = true;
+      const kg = unit === "kg" ? val : toKg[unit](val);
+      const conversions = fromKg(kg);
+
+      Object.entries(conversions).forEach(([k, v]) => {
+        if (k !== unit && weightInputs[k]) {
+          weightInputs[k].value = v.toFixed(4);
+        }
+      });
+
+      weightLock = false;
+    });
+  });
+
+  // --- Temperature ---
+
+  const temp_c = document.getElementById("temp_c");
+const temp_f = document.getElementById("temp_f");
+
+if (temp_c && temp_f) {
+  let tempLock = false;
+
+  temp_c.addEventListener("input", (e) => {
+    if (tempLock) return;
+    const val = parseFloat(e.target.value);
+    if (isNaN(val)) return;
+    tempLock = true;
+    temp_f.value = ((val * 9) / 5 + 32).toFixed(1);
+    tempLock = false;
+  });
+
+  temp_f.addEventListener("input", (e) => {
+    if (tempLock) return;
+    const val = parseFloat(e.target.value);
+    if (isNaN(val)) return;
+    tempLock = true;
+    temp_c.value = (((val - 32) * 5) / 9).toFixed(1);
+    tempLock = false;
+  });
+}
+
+// --- Volume ---
+const volumeInputs = {
+  l: document.getElementById("volume_l"),
+  ml: document.getElementById("volume_ml"),
+  gal: document.getElementById("volume_gal"),
+  cup: document.getElementById("volume_cup"),
+  floz: document.getElementById("volume_floz"),
+};
+
+const fromLiters = (l) => ({
+  l,
+  ml: l * 1000,
+  gal: l * 0.264172,
+  cup: l * 4.22675,
+  floz: l * 33.814,
+});
+
+const toLiters = {
+  l: (v) => v,
+  ml: (v) => v / 1000,
+  gal: (v) => v / 0.264172,
+  cup: (v) => v / 4.22675,
+  floz: (v) => v / 33.814,
+};
+
+let volumeLock = false;
+Object.entries(volumeInputs).forEach(([unit, input]) => {
+  if (!input) return;
+
+  input.addEventListener("input", (e) => {
+    if (volumeLock) return;
+    const val = parseFloat(e.target.value);
+    if (isNaN(val)) return;
+
+    volumeLock = true;
+    const liters = unit === "l" ? val : toLiters[unit](val);
+    const converted = fromLiters(liters);
+
+    Object.entries(converted).forEach(([k, v]) => {
+      if (k !== unit && volumeInputs[k]) {
+        volumeInputs[k].value = v.toFixed(4);
+      }
+    });
+
+    volumeLock = false;
+  });
+});
+
+// --- Monnaie ---
+// 💡 À ajuster dynamiquement si besoin avec une API
+const rate = {
+  cadToEur: 0.68,
+  cadToUsd: 0.73,
+  cadToBtc: 1 / 95000, // 1 BTC = 95 000 CAD (exemple)
+};
+
+const moneyInputs = {
+  cad: document.getElementById("money_cad"),
+  eur: document.getElementById("money_eur"),
+  usd: document.getElementById("money_usd"),
+  btc: document.getElementById("money_btc"),
+  sats: document.getElementById("money_sats"),
+};
+
+const fromCAD = (cad) => ({
+  cad,
+  eur: cad * rate.cadToEur,
+  usd: cad * rate.cadToUsd,
+  btc: cad * rate.cadToBtc,
+  sats: cad * rate.cadToBtc * 1e8,
+});
+
+const toCAD = {
+  cad: (v) => v,
+  eur: (v) => v / rate.cadToEur,
+  usd: (v) => v / rate.cadToUsd,
+  btc: (v) => v / rate.cadToBtc,
+  sats: (v) => v / (rate.cadToBtc * 1e8),
+};
+
+let moneyLock = false;
+Object.entries(moneyInputs).forEach(([unit, input]) => {
+  if (!input) return;
+  input.addEventListener("input", (e) => {
+    if (moneyLock) return;
+    const val = parseFloat(e.target.value);
+    if (isNaN(val)) return;
+
+    moneyLock = true;
+    const cad = unit === "cad" ? val : toCAD[unit](val);
+    const conversions = fromCAD(cad);
+
+    Object.entries(conversions).forEach(([k, v]) => {
+      if (k !== unit && moneyInputs[k]) {
+        moneyInputs[k].value = v.toFixed(k === "sats" ? 0 : 4);
+      }
+    });
+
+    moneyLock = false;
+  });
+});
+
+
+</script>
+
+  </body>
+</html>
+
+--- Contenu de C:\Users\404_n\Desktop\DEV\retardunits\src\pages\test.astro ---
+
+---
+import BaseLayout from "../layouts/Layout.astro";
+export const layout = BaseLayout;
+export const title = "Test layout";
+---
+
+<section class="card bg-white p-6 rounded-xl shadow-md">
+  <h2 class="text-xl font-semibold text-red-500">Test avec layout ✅</h2>
+</section>
+
+=== Fichiers dans .\src\styles (sans recurse) ===
+
+C:\Users\404_n\Desktop\DEV\retardunits\src\styles\global.css
+
+=== Contenu des fichiers .\src\styles ===
+
+
+--- Contenu de C:\Users\404_n\Desktop\DEV\retardunits\src\styles\global.css ---
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-gradient-to-br from-neutral-50 to-blue-100 text-neutral-800 font-sans;
+}
+
+.card {
+  @apply bg-white rounded-2xl p-6 shadow transition-all hover:-translate-y-1 hover:shadow-lg;
+}

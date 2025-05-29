@@ -1,0 +1,934 @@
+---
+// src/pages/mesures.astro
+import Layout from '../layouts/Default.astro';
+
+const title = "📏 Convertisseur Mesures Canada-France | Pieds, Pouces, Livres";
+const description = "Convertis facilement entre mesures canadiennes et françaises : pieds/mètres, livres/kilos, Fahrenheit/Celsius. Guide complet avec exemples pratiques pour nouveaux arrivants.";
+---
+
+<Layout title={title} description={description}>
+ <div class="max-w-6xl mx-auto">
+   <!-- Header -->
+   <div class="text-center mb-8">
+     <h1 class="text-4xl font-bold text-indigo-700 mb-4">📏 Convertisseur Mesures CA ⇄ FR</h1>
+     <p class="text-lg text-gray-600 mb-6">Maîtrise les mesures canadiennes comme un pro !</p>
+     
+<!-- Sélecteur rapide -->
+<div class="bg-white rounded-xl shadow-md p-4 inline-block border border-gray-200">
+  <label class="text-indigo-700 font-medium mr-3">Conversion rapide :</label>
+  <select id="quick_converter" class="border border-indigo-300 p-2 rounded-lg">
+    <option value="">Choisis une conversion...</option>
+    <option value="height">🧍 Ma taille (pieds/pouces ⇄ cm)</option>
+    <option value="weight">⚖️ Mon poids (livres ⇄ kg)</option>
+    <option value="temp">🌡️ Température (°F ⇄ °C)</option>
+    <option value="distance">🚗 Distance (miles ⇄ km)</option>
+    <option value="clothing">👕 Vêtements & chaussures (FR ⇄ CA/US)</option>
+    <option value="other">📐 Superficie & volume (sq.ft ⇄ m²)</option>
+  </select>
+</div>
+
+   <!-- Convertisseur de taille -->
+   <section class="card bg-white rounded-xl shadow-lg p-6 mb-6 border border-gray-200">
+     <button 
+       class="w-full flex justify-between items-center text-left"
+       data-accordion-toggle
+       data-accordion-target="height-section"
+       data-accordion-chevron="chevron-height"
+     >
+       <h2 class="text-2xl font-semibold text-blue-600">🧍 Taille (Pieds/Pouces ⇄ Centimètres)</h2>
+       <span id="chevron-height" class="text-blue-600 font-bold">▼</span>
+     </button>
+     
+     <div id="height-section" class="mt-6 space-y-6">
+       <div class="bg-blue-50 rounded-lg p-4 border border-blue-200">
+         <p class="text-sm text-blue-800">
+           <strong>💡 Info :</strong> Au Canada, on dit "I'm 5 foot 8" (5 pieds 8 pouces). 
+           Sur les formulaires médicaux, c'est souvent en pieds/pouces !
+         </p>
+       </div>
+       
+       <div class="grid md:grid-cols-3 gap-6">
+         <div class="space-y-2">
+           <label class="text-blue-700 font-medium">🇨🇦 Pieds</label>
+           <input type="number" id="feet" class="border border-blue-300 p-3 rounded-lg w-full" placeholder="5" min="0" max="8" />
+         </div>
+         
+         <div class="space-y-2">
+           <label class="text-blue-700 font-medium">🇨🇦 Pouces</label>
+           <input type="number" id="inches" class="border border-blue-300 p-3 rounded-lg w-full" placeholder="8" min="0" max="11" />
+         </div>
+         
+         <div class="space-y-2">
+           <label class="text-blue-700 font-medium">🇫🇷 Centimètres</label>
+           <input type="number" id="centimeters" class="border border-blue-300 p-3 rounded-lg w-full" placeholder="173" />
+         </div>
+       </div>
+       
+       <div class="bg-white rounded-lg p-4 border border-gray-200">
+         <h3 class="font-semibold text-gray-700 mb-3">📊 Tailles courantes</h3>
+         <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm">
+           <button class="height-btn bg-blue-50 border border-blue-200 rounded px-3 py-2 hover:bg-blue-100 text-left" data-feet="5" data-inches="0">5'0" = 152 cm</button>
+           <button class="height-btn bg-blue-50 border border-blue-200 rounded px-3 py-2 hover:bg-blue-100 text-left" data-feet="5" data-inches="4">5'4" = 163 cm</button>
+           <button class="height-btn bg-blue-50 border border-blue-200 rounded px-3 py-2 hover:bg-blue-100 text-left" data-feet="5" data-inches="8">5'8" = 173 cm</button>
+           <button class="height-btn bg-blue-50 border border-blue-200 rounded px-3 py-2 hover:bg-blue-100 text-left" data-feet="6" data-inches="0">6'0" = 183 cm</button>
+           <button class="height-btn bg-blue-50 border border-blue-200 rounded px-3 py-2 hover:bg-blue-100 text-left" data-feet="5" data-inches="2">5'2" = 157 cm</button>
+           <button class="height-btn bg-blue-50 border border-blue-200 rounded px-3 py-2 hover:bg-blue-100 text-left" data-feet="5" data-inches="6">5'6" = 168 cm</button>
+           <button class="height-btn bg-blue-50 border border-blue-200 rounded px-3 py-2 hover:bg-blue-100 text-left" data-feet="5" data-inches="10">5'10" = 178 cm</button>
+           <button class="height-btn bg-blue-50 border border-blue-200 rounded px-3 py-2 hover:bg-blue-100 text-left" data-feet="6" data-inches="2">6'2" = 188 cm</button>
+         </div>
+       </div>
+     </div>
+   </section>
+
+   <!-- Convertisseur de poids -->
+   <section class="card bg-white rounded-xl shadow-lg p-6 mb-6 border border-gray-200">
+     <button 
+       class="w-full flex justify-between items-center text-left"
+       data-accordion-toggle
+       data-accordion-target="weight-section"
+       data-accordion-chevron="chevron-weight"
+     >
+       <h2 class="text-2xl font-semibold text-green-600">⚖️ Poids (Livres ⇄ Kilogrammes)</h2>
+       <span id="chevron-weight" class="text-green-600 font-bold">▼</span>
+     </button>
+     
+     <div id="weight-section" class="hidden mt-6 space-y-6">
+       <div class="bg-green-50 rounded-lg p-4 border border-green-200">
+         <p class="text-sm text-green-800">
+           <strong>💡 Info :</strong> Au Canada, tout le monde parle en livres (pounds/lbs). 
+           Même les médecins ! 1 livre = 0.45 kg environ.
+         </p>
+       </div>
+       
+       <div class="grid md:grid-cols-2 gap-6">
+         <div class="space-y-2">
+           <label class="text-green-700 font-medium">🇨🇦 Livres (lbs)</label>
+           <input type="number" id="pounds" class="border border-green-300 p-3 rounded-lg w-full" placeholder="150" />
+         </div>
+         
+         <div class="space-y-2">
+           <label class="text-green-700 font-medium">🇫🇷 Kilogrammes (kg)</label>
+           <input type="number" id="kilograms" class="border border-green-300 p-3 rounded-lg w-full" placeholder="68" />
+         </div>
+       </div>
+       
+       <div class="bg-white rounded-lg p-4 border border-gray-200">
+         <h3 class="font-semibold text-gray-700 mb-3">📊 Poids de référence</h3>
+         <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm">
+           <button class="weight-btn bg-green-50 border border-green-200 rounded px-3 py-2 hover:bg-green-100 text-left" data-lbs="110">110 lbs = 50 kg</button>
+           <button class="weight-btn bg-green-50 border border-green-200 rounded px-3 py-2 hover:bg-green-100 text-left" data-lbs="130">130 lbs = 59 kg</button>
+           <button class="weight-btn bg-green-50 border border-green-200 rounded px-3 py-2 hover:bg-green-100 text-left" data-lbs="150">150 lbs = 68 kg</button>
+           <button class="weight-btn bg-green-50 border border-green-200 rounded px-3 py-2 hover:bg-green-100 text-left" data-lbs="170">170 lbs = 77 kg</button>
+           <button class="weight-btn bg-green-50 border border-green-200 rounded px-3 py-2 hover:bg-green-100 text-left" data-lbs="120">120 lbs = 54 kg</button>
+           <button class="weight-btn bg-green-50 border border-green-200 rounded px-3 py-2 hover:bg-green-100 text-left" data-lbs="140">140 lbs = 64 kg</button>
+           <button class="weight-btn bg-green-50 border border-green-200 rounded px-3 py-2 hover:bg-green-100 text-left" data-lbs="160">160 lbs = 73 kg</button>
+           <button class="weight-btn bg-green-50 border border-green-200 rounded px-3 py-2 hover:bg-green-100 text-left" data-lbs="180">180 lbs = 82 kg</button>
+         </div>
+       </div>
+     </div>
+   </section>
+
+   <!-- Convertisseur de température -->
+   <section class="card bg-white rounded-xl shadow-lg p-6 mb-6 border border-gray-200">
+     <button 
+       class="w-full flex justify-between items-center text-left"
+       data-accordion-toggle
+       data-accordion-target="temperature-section"
+       data-accordion-chevron="chevron-temperature"
+     >
+       <h2 class="text-2xl font-semibold text-orange-600">🌡️ Température (Fahrenheit ⇄ Celsius)</h2>
+       <span id="chevron-temperature" class="text-orange-600 font-bold">▼</span>
+     </button>
+     
+     <div id="temperature-section" class="hidden mt-6 space-y-6">
+       <div class="bg-orange-50 rounded-lg p-4 border border-orange-200">
+         <p class="text-sm text-orange-800">
+           <strong>💡 Info :</strong> Météo, four, piscine... tout est en Fahrenheit au Canada ! 
+           32°F = 0°C (gel), 100°F = 38°C (canicule).
+         </p>
+       </div>
+       
+       <div class="grid md:grid-cols-2 gap-6">
+         <div class="space-y-2">
+           <label class="text-orange-700 font-medium">🇨🇦 Fahrenheit (°F)</label>
+           <input type="number" id="fahrenheit" class="border border-orange-300 p-3 rounded-lg w-full" placeholder="68" />
+         </div>
+         
+         <div class="space-y-2">
+           <label class="text-orange-700 font-medium">🇫🇷 Celsius (°C)</label>
+           <input type="number" id="celsius" class="border border-orange-300 p-3 rounded-lg w-full" placeholder="20" />
+         </div>
+       </div>
+       
+       <div class="bg-white rounded-lg p-4 border border-gray-200">
+         <h3 class="font-semibold text-gray-700 mb-3">🌡️ Températures de référence</h3>
+         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+           <div>
+             <h4 class="font-medium text-gray-600 mb-2">🏠 Quotidien</h4>
+             <div class="space-y-1">
+               <button class="temp-btn w-full bg-orange-50 border border-orange-200 rounded px-3 py-2 hover:bg-orange-100 text-left" data-temp-f="32">32°F = 0°C (gel)</button>
+               <button class="temp-btn w-full bg-orange-50 border border-orange-200 rounded px-3 py-2 hover:bg-orange-100 text-left" data-temp-f="68">68°F = 20°C (maison)</button>
+               <button class="temp-btn w-full bg-orange-50 border border-orange-200 rounded px-3 py-2 hover:bg-orange-100 text-left" data-temp-f="77">77°F = 25°C (agréable)</button>
+               <button class="temp-btn w-full bg-orange-50 border border-orange-200 rounded px-3 py-2 hover:bg-orange-100 text-left" data-temp-f="86">86°F = 30°C (chaud)</button>
+             </div>
+           </div>
+           
+           <div>
+             <h4 class="font-medium text-gray-600 mb-2">🌡️ Extrêmes</h4>
+             <div class="space-y-1">
+               <button class="temp-btn w-full bg-orange-50 border border-orange-200 rounded px-3 py-2 hover:bg-orange-100 text-left" data-temp-f="-4">-4°F = -20°C (hiver QC)</button>
+               <button class="temp-btn w-full bg-orange-50 border border-orange-200 rounded px-3 py-2 hover:bg-orange-100 text-left" data-temp-f="14">14°F = -10°C (froid)</button>
+               <button class="temp-btn w-full bg-orange-50 border border-orange-200 rounded px-3 py-2 hover:bg-orange-100 text-left" data-temp-f="95">95°F = 35°C (canicule)</button>
+               <button class="temp-btn w-full bg-orange-50 border border-orange-200 rounded px-3 py-2 hover:bg-orange-100 text-left" data-temp-f="104">104°F = 40°C (extrême)</button>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   </section>
+
+   <!-- Convertisseur de distance -->
+   <section class="card bg-white rounded-xl shadow-lg p-6 mb-6 border border-gray-200">
+     <button 
+       class="w-full flex justify-between items-center text-left"
+       data-accordion-toggle
+       data-accordion-target="distance-section"
+       data-accordion-chevron="chevron-distance"
+     >
+       <h2 class="text-2xl font-semibold text-purple-600">🚗 Distance (Miles ⇄ Kilomètres)</h2>
+       <span id="chevron-distance" class="text-purple-600 font-bold">▼</span>
+     </button>
+     
+     <div id="distance-section" class="hidden mt-6 space-y-6">
+       <div class="bg-purple-50 rounded-lg p-4 border border-purple-200">
+         <p class="text-sm text-purple-800">
+           <strong>💡 Info :</strong> Au Canada, les distances officielles sont en km, mais les Américains et certains Canadiens parlent encore en miles.
+         </p>
+       </div>
+       
+       <div class="grid md:grid-cols-2 gap-6">
+         <div class="space-y-2">
+           <label class="text-purple-700 font-medium">🇺🇸 Miles</label>
+           <input type="number" id="miles" class="border border-purple-300 p-3 rounded-lg w-full" placeholder="100" />
+         </div>
+         
+         <div class="space-y-2">
+           <label class="text-purple-700 font-medium">🇨🇦🇫🇷 Kilomètres</label>
+           <input type="number" id="kilometers" class="border border-purple-300 p-3 rounded-lg w-full" placeholder="161" />
+         </div>
+       </div>
+       
+       <div class="bg-white rounded-lg p-4 border border-gray-200">
+         <h3 class="font-semibold text-gray-700 mb-3">🗺️ Distances de référence</h3>
+         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+           <div>
+             <h4 class="font-medium text-gray-600 mb-2">🏃 Courtes distances</h4>
+             <div class="space-y-1">
+               <button class="dist-btn w-full bg-purple-50 border border-purple-200 rounded px-3 py-2 hover:bg-purple-100 text-left" data-miles="1">1 mile = 1.6 km</button>
+               <button class="dist-btn w-full bg-purple-50 border border-purple-200 rounded px-3 py-2 hover:bg-purple-100 text-left" data-miles="5">5 miles = 8 km</button>
+               <button class="dist-btn w-full bg-purple-50 border border-purple-200 rounded px-3 py-2 hover:bg-purple-100 text-left" data-miles="10">10 miles = 16 km</button>
+               <button class="dist-btn w-full bg-purple-50 border border-purple-200 rounded px-3 py-2 hover:bg-purple-100 text-left" data-miles="25">25 miles = 40 km</button>
+             </div>
+           </div>
+           
+           <div>
+             <h4 class="font-medium text-gray-600 mb-2">🚗 Longs trajets</h4>
+             <div class="space-y-1">
+               <button class="dist-btn w-full bg-purple-50 border border-purple-200 rounded px-3 py-2 hover:bg-purple-100 text-left" data-miles="50">50 miles = 80 km</button>
+               <button class="dist-btn w-full bg-purple-50 border border-purple-200 rounded px-3 py-2 hover:bg-purple-100 text-left" data-miles="100">100 miles = 161 km</button>
+               <button class="dist-btn w-full bg-purple-50 border border-purple-200 rounded px-3 py-2 hover:bg-purple-100 text-left" data-miles="200">200 miles = 322 km</button>
+               <button class="dist-btn w-full bg-purple-50 border border-purple-200 rounded px-3 py-2 hover:bg-purple-100 text-left" data-miles="500">500 miles = 805 km</button>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   </section>
+
+   <!-- Convertisseur de tailles de vêtements -->
+    <section class="card bg-white rounded-xl shadow-lg p-6 mb-6 border border-gray-200">
+      <button 
+        class="w-full flex justify-between items-center text-left"
+        data-accordion-toggle
+        data-accordion-target="clothing-section"
+        data-accordion-chevron="chevron-clothing"
+      >
+        <h2 class="text-2xl font-semibold text-rose-600">👕 Tailles de Vêtements (FR ⇄ CA/US)</h2>
+        <span id="chevron-clothing" class="text-rose-600 font-bold">▼</span>
+      </button>
+      
+      <div id="clothing-section" class="hidden mt-6 space-y-6">
+        <div class="bg-rose-50 rounded-lg p-4 border border-rose-200">
+          <p class="text-sm text-rose-800">
+            <strong>💡 Info :</strong> Au Canada, on utilise les tailles américaines. Les femmes ont des tailles différentes des hommes même pour les chaussures !
+          </p>
+        </div>
+        
+        <!-- Chaussures -->
+        <div class="bg-white rounded-lg p-4 border border-gray-200">
+          <h3 class="text-xl font-semibold text-gray-800 mb-4">👟 Chaussures</h3>
+          
+          <div class="grid md:grid-cols-2 gap-6 mb-4">
+            <!-- Hommes -->
+            <div>
+              <h4 class="font-semibold text-blue-600 mb-3">👨 Hommes</h4>
+              <div class="grid grid-cols-2 gap-2">
+                <div class="space-y-1">
+                  <label class="text-blue-700 text-sm font-medium">🇫🇷 Pointure FR</label>
+                  <input type="number" id="shoe_fr_men" class="border border-blue-300 p-2 rounded w-full text-sm" placeholder="42" />
+                </div>
+                <div class="space-y-1">
+                  <label class="text-blue-700 text-sm font-medium">🇨🇦 Taille US</label>
+                  <input type="number" id="shoe_us_men" class="border border-blue-300 p-2 rounded w-full text-sm" placeholder="9" step="0.5" />
+                </div>
+              </div>
+              
+              <div class="mt-3 space-y-1 text-xs">
+                <div class="grid grid-cols-3 gap-1">
+                  <button class="shoe-btn-men bg-blue-50 border border-blue-200 rounded px-2 py-1 hover:bg-blue-100" data-fr="39" data-us="6.5">39→6.5</button>
+                  <button class="shoe-btn-men bg-blue-50 border border-blue-200 rounded px-2 py-1 hover:bg-blue-100" data-fr="40" data-us="7.5">40→7.5</button>
+                  <button class="shoe-btn-men bg-blue-50 border border-blue-200 rounded px-2 py-1 hover:bg-blue-100" data-fr="41" data-us="8">41→8</button>
+                  <button class="shoe-btn-men bg-blue-50 border border-blue-200 rounded px-2 py-1 hover:bg-blue-100" data-fr="42" data-us="9">42→9</button>
+                  <button class="shoe-btn-men bg-blue-50 border border-blue-200 rounded px-2 py-1 hover:bg-blue-100" data-fr="43" data-us="10">43→10</button>
+                  <button class="shoe-btn-men bg-blue-50 border border-blue-200 rounded px-2 py-1 hover:bg-blue-100" data-fr="44" data-us="11">44→11</button>
+                  <button class="shoe-btn-men bg-blue-50 border border-blue-200 rounded px-2 py-1 hover:bg-blue-100" data-fr="45" data-us="12">45→12</button>
+                  <button class="shoe-btn-men bg-blue-50 border border-blue-200 rounded px-2 py-1 hover:bg-blue-100" data-fr="46" data-us="13">46→13</button>
+                  <button class="shoe-btn-men bg-blue-50 border border-blue-200 rounded px-2 py-1 hover:bg-blue-100" data-fr="47" data-us="14">47→14</button>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Femmes -->
+            <div>
+              <h4 class="font-semibold text-pink-600 mb-3">👩 Femmes</h4>
+              <div class="grid grid-cols-2 gap-2">
+                <div class="space-y-1">
+                  <label class="text-pink-700 text-sm font-medium">🇫🇷 Pointure FR</label>
+                  <input type="number" id="shoe_fr_women" class="border border-pink-300 p-2 rounded w-full text-sm" placeholder="38" />
+                </div>
+                <div class="space-y-1">
+                  <label class="text-pink-700 text-sm font-medium">🇨🇦 Taille US</label>
+                  <input type="number" id="shoe_us_women" class="border border-pink-300 p-2 rounded w-full text-sm" placeholder="7.5" step="0.5" />
+                </div>
+              </div>
+              
+              <div class="mt-3 space-y-1 text-xs">
+                <div class="grid grid-cols-3 gap-1">
+                  <button class="shoe-btn-women bg-pink-50 border border-pink-200 rounded px-2 py-1 hover:bg-pink-100" data-fr="35" data-us="5">35→5</button>
+                  <button class="shoe-btn-women bg-pink-50 border border-pink-200 rounded px-2 py-1 hover:bg-pink-100" data-fr="36" data-us="6">36→6</button>
+                  <button class="shoe-btn-women bg-pink-50 border border-pink-200 rounded px-2 py-1 hover:bg-pink-100" data-fr="37" data-us="6.5">37→6.5</button>
+                  <button class="shoe-btn-women bg-pink-50 border border-pink-200 rounded px-2 py-1 hover:bg-pink-100" data-fr="38" data-us="7.5">38→7.5</button>
+                  <button class="shoe-btn-women bg-pink-50 border border-pink-200 rounded px-2 py-1 hover:bg-pink-100" data-fr="39" data-us="8.5">39→8.5</button>
+                  <button class="shoe-btn-women bg-pink-50 border border-pink-200 rounded px-2 py-1 hover:bg-pink-100" data-fr="40" data-us="9">40→9</button>
+                  <button class="shoe-btn-women bg-pink-50 border border-pink-200 rounded px-2 py-1 hover:bg-pink-100" data-fr="41" data-us="10">41→10</button>
+                  <button class="shoe-btn-women bg-pink-50 border border-pink-200 rounded px-2 py-1 hover:bg-pink-100" data-fr="42" data-us="11">42→11</button>
+                  <button class="shoe-btn-women bg-pink-50 border border-pink-200 rounded px-2 py-1 hover:bg-pink-100" data-fr="43" data-us="12">43→12</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Vêtements -->
+        <div class="bg-white rounded-lg p-4 border border-gray-200">
+          <h3 class="text-xl font-semibold text-gray-800 mb-4">👔 Vêtements</h3>
+          
+          <div class="grid md:grid-cols-2 gap-6">
+            <!-- Hommes -->
+            <div>
+              <h4 class="font-semibold text-blue-600 mb-3">👨 Hommes</h4>
+              
+              <!-- Chemises/T-shirts -->
+              <div class="mb-4">
+                <h5 class="font-medium text-gray-700 mb-2">👕 Hauts (Chemises/T-shirts)</h5>
+                <div class="bg-blue-50 rounded p-3 text-sm">
+                  <div class="grid grid-cols-2 gap-2 text-xs">
+                    <div><strong>🇫🇷 FR</strong> → <strong>🇨🇦 CA/US</strong></div>
+                    <div></div>
+                    <div>XS (44)</div><div>XS</div>
+                    <div>S (46-48)</div><div>S</div>
+                    <div>M (50-52)</div><div>M</div>
+                    <div>L (54-56)</div><div>L</div>
+                    <div>XL (58-60)</div><div>XL</div>
+                    <div>XXL (62-64)</div><div>XXL</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Pantalons -->
+              <div class="mb-4">
+                <h5 class="font-medium text-gray-700 mb-2">👖 Pantalons (tour de taille)</h5>
+                <div class="bg-blue-50 rounded p-3 text-sm">
+                  <div class="grid grid-cols-2 gap-2 text-xs">
+                    <div><strong>🇫🇷 FR (cm)</strong> → <strong>🇨🇦 US (pouces)</strong></div>
+                    <div></div>
+                    <div>76 cm</div><div>30"</div>
+                    <div>81 cm</div><div>32"</div>
+                    <div>86 cm</div><div>34"</div>
+                    <div>91 cm</div><div>36"</div>
+                    <div>97 cm</div><div>38"</div>
+                    <div>102 cm</div><div>40"</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Femmes -->
+            <div>
+              <h4 class="font-semibold text-pink-600 mb-3">👩 Femmes</h4>
+              
+              <!-- Hauts -->
+              <div class="mb-4">
+                <h5 class="font-medium text-gray-700 mb-2">👚 Hauts</h5>
+                <div class="bg-pink-50 rounded p-3 text-sm">
+                  <div class="grid grid-cols-2 gap-2 text-xs">
+                    <div><strong>🇫🇷 FR</strong> → <strong>🇨🇦 CA/US</strong></div>
+                    <div></div>
+                    <div>32-34</div><div>XS (0-2)</div>
+                    <div>36-38</div><div>S (4-6)</div>
+                    <div>40-42</div><div>M (8-10)</div>
+                    <div>44-46</div><div>L (12-14)</div>
+                    <div>48-50</div><div>XL (16-18)</div>
+                    <div>52-54</div><div>XXL (20-22)</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Soutiens-gorge -->
+              <div class="mb-4">
+                <h5 class="font-medium text-gray-700 mb-2">👙 Soutiens-gorge</h5>
+                <div class="bg-pink-50 rounded p-3 text-sm">
+                  <div class="grid grid-cols-2 gap-2 text-xs">
+                    <div><strong>🇫🇷 FR</strong> → <strong>🇨🇦 CA/US</strong></div>
+                    <div></div>
+                    <div>80A</div><div>30A</div>
+                    <div>85B</div><div>32B</div>
+                    <div>90C</div><div>34C</div>
+                    <div>95D</div><div>36D</div>
+                    <div>100E</div><div>38DD</div>
+                  </div>
+                  <p class="text-xs text-pink-600 mt-2">💡 Astuce : Soustraire 15 du tour de dos FR pour avoir la taille US</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Conseils pratiques -->
+        <div class="bg-yellow-50 rounded-lg p-4 border border-yellow-200">
+          <h3 class="font-semibold text-yellow-700 mb-3">💡 Conseils shopping</h3>
+          <div class="grid md:grid-cols-2 gap-4 text-sm text-gray-700">
+            <div>
+              <h4 class="font-medium text-gray-600 mb-2">🛍️ Où acheter</h4>
+              <ul class="space-y-1 text-xs">
+                <li>• <strong>Winners/Marshalls :</strong> Marques discount</li>
+                <li>• <strong>The Bay :</strong> Grand magasin canadien</li>
+                <li>• <strong>Costco :</strong> Vêtements basiques pas chers</li>
+                <li>• <strong>Online :</strong> Amazon.ca, Simons, Reitmans</li>
+              </ul>
+            </div>
+            
+            <div>
+              <h4 class="font-medium text-gray-600 mb-2">⚠️ À retenir</h4>
+              <ul class="space-y-1 text-xs">
+                <li>• <strong>Essayer TOUJOURS :</strong> Les tailles varient énormément</li>
+                <li>• <strong>Retours faciles :</strong> La plupart des magasins acceptent</li>
+                <li>• <strong>Taxes en plus :</strong> +15% environ selon province</li>
+                <li>• <strong>Soldes :</strong> Boxing Day, Back-to-school, Black Friday</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+   <!-- Autres mesures utiles -->
+   <section class="card bg-white rounded-xl shadow-lg p-6 mb-6 border border-gray-200">
+     <button 
+       class="w-full flex justify-between items-center text-left"
+       data-accordion-toggle
+       data-accordion-target="other-section"
+       data-accordion-chevron="chevron-other"
+     >
+       <h2 class="text-2xl font-semibold text-teal-600">📐 Autres Mesures Utiles</h2>
+       <span id="chevron-other" class="text-teal-600 font-bold">▼</span>
+     </button>
+     
+     <div id="other-section" class="hidden mt-6 space-y-6">
+       <div class="grid md:grid-cols-2 gap-6">
+         <!-- Surface -->
+         <div class="bg-teal-50 rounded-lg p-4 border border-teal-200">
+           <h3 class="font-semibold text-teal-700 mb-3">🏠 Superficie</h3>
+           <div class="space-y-3">
+             <div class="grid grid-cols-2 gap-2">
+               <div class="space-y-1">
+                 <label class="text-teal-700 text-sm font-medium">Pieds carrés</label>
+                 <input type="number" id="sqft" class="border border-teal-300 p-2 rounded w-full text-sm" placeholder="1000" />
+               </div>
+               <div class="space-y-1">
+                 <label class="text-teal-700 text-sm font-medium">Mètres carrés</label>
+                 <input type="number" id="sqm" class="border border-teal-300 p-2 rounded w-full text-sm" placeholder="93" />
+               </div>
+             </div>
+             <div class="text-xs text-teal-600 space-y-1">
+               <p>🏠 Appart 3½ : ~800 sq.ft (74 m²)</p>
+               <p>🏠 Maison : ~1500 sq.ft (139 m²)</p>
+             </div>
+           </div>
+         </div>
+
+         <!-- Volume/Essence -->
+         <div class="bg-teal-50 rounded-lg p-4 border border-teal-200">
+           <h3 class="font-semibold text-teal-700 mb-3">⛽ Volume (Essence)</h3>
+           <div class="space-y-3">
+             <div class="grid grid-cols-2 gap-2">
+               <div class="space-y-1">
+                 <label class="text-teal-700 text-sm font-medium">Gallons US</label>
+                 <input type="number" id="gallons" class="border border-teal-300 p-2 rounded w-full text-sm" placeholder="10" />
+               </div>
+               <div class="space-y-1">
+                 <label class="text-teal-700 text-sm font-medium">Litres</label>
+                 <input type="number" id="liters" class="border border-teal-300 p-2 rounded w-full text-sm" placeholder="38" />
+               </div>
+             </div>
+             <div class="text-xs text-teal-600 space-y-1">
+               <p>⛽ Plein d'essence : ~12-15 gallons</p>
+               <p>🥛 1 gallon ≈ 4 litres (3.78L exactement)</p>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   </section>
+
+   <!-- Guide pratique -->
+   <section class="card bg-gradient-to-r from-blue-100 to-purple-100 rounded-xl shadow-lg p-6 border border-gray-200">
+     <h2 class="text-2xl font-semibold text-gray-800 mb-6">💡 Guide pratique pour nouveaux arrivants</h2>
+     
+     <div class="grid md:grid-cols-2 gap-6">
+       <div>
+         <h3 class="font-semibold text-gray-700 mb-3">🎯 Priorités à retenir</h3>
+         <ul class="text-sm text-gray-600 space-y-2">
+           <li class="flex items-start">
+             <span class="text-blue-500 mr-2">•</span>
+             <span><strong>Taille/Poids :</strong> Indispensable pour formulaires médicaux</span>
+           </li>
+           <li class="flex items-start">
+             <span class="text-blue-500 mr-2">•</span>
+             <span><strong>Température :</strong> Météo, four, piscine = tout en °F</span>
+           </li>
+           <li class="flex items-start">
+             <span class="text-blue-500 mr-2">•</span>
+             <span><strong>Distance :</strong> Panneaux en km, mais GPS parfois en miles</span>
+           </li>
+           <li class="flex items-start">
+             <span class="text-blue-500 mr-2">•</span>
+             <span><strong>Logement :</strong> Toujours en pieds carrés dans les annonces</span>
+           </li>
+         </ul>
+       </div>
+       
+       <div>
+         <h3 class="font-semibold text-gray-700 mb-3">📱 Applications utiles</h3>
+         <ul class="text-sm text-gray-600 space-y-2">
+           <li class="flex items-start">
+             <span class="text-purple-500 mr-2">•</span>
+             <span><strong>Météo :</strong> Toujours vérifier en °C ET °F</span>
+           </li>
+           <li class="flex items-start">
+             <span class="text-purple-500 mr-2">•</span>
+             <span><strong>GPS :</strong> Régler en km/h (pas mph)</span>
+           </li>
+           <li class="flex items-start">
+             <span class="text-purple-500 mr-2">•</span>
+             <span><strong>Balance :</strong> Acheter une balance kg/lbs</span>
+           </li>
+           <li class="flex items-start">
+             <span class="text-purple-500 mr-2">•</span>
+             <span><strong>Calculatrice :</strong> Ajouter RetardUnits.com aux favoris ! 😉</span>
+           </li>
+         </ul>
+       </div>
+     </div>
+   </section>
+ </div>
+
+ <!-- Script pour les conversions -->
+ <script is:inline>
+   // Variables pour éviter les boucles infinies
+   let convertingHeight = false;
+   let convertingWeight = false;
+   let convertingTemp = false;
+   let convertingDistance = false;
+   let convertingSurface = false;
+   let convertingVolume = false;
+
+   // Fonctions de conversion
+   function convertHeight(fromFeetInches = true) {
+     if (convertingHeight) return;
+     convertingHeight = true;
+     
+     const feetInput = document.getElementById('feet');
+     const inchesInput = document.getElementById('inches');
+     const cmInput = document.getElementById('centimeters');
+     
+     if (fromFeetInches) {
+       const feet = parseFloat(feetInput.value) || 0;
+       const inches = parseFloat(inchesInput.value) || 0;
+       const totalInches = (feet * 12) + inches;
+       const cm = Math.round(totalInches * 2.54);
+       cmInput.value = cm > 0 ? cm : '';
+     } else {
+       const cm = parseFloat(cmInput.value) || 0;
+       const totalInches = cm / 2.54;
+       const feet = Math.floor(totalInches / 12);
+       const inches = Math.round(totalInches % 12);
+       feetInput.value = feet > 0 ? feet : '';
+       inchesInput.value = inches > 0 ? inches : '';
+     }
+     
+     convertingHeight = false;
+   }
+
+   function convertWeight(fromPounds = true) {
+     if (convertingWeight) return;
+     convertingWeight = true;
+     
+     const poundsInput = document.getElementById('pounds');
+     const kgInput = document.getElementById('kilograms');
+     
+     if (fromPounds) {
+       const pounds = parseFloat(poundsInput.value) || 0;
+       const kg = Math.round(pounds * 0.453592 * 10) / 10;
+       kgInput.value = kg > 0 ? kg : '';
+     } else {
+       const kg = parseFloat(kgInput.value) || 0;
+       const pounds = Math.round(kg / 0.453592);
+       poundsInput.value = pounds > 0 ? pounds : '';
+     }
+     
+     convertingWeight = false;
+   }
+
+   function convertTemperature(fromF = true) {
+     if (convertingTemp) return;
+     convertingTemp = true;
+     
+     const fInput = document.getElementById('fahrenheit');
+     const cInput = document.getElementById('celsius');
+     
+     if (fromF) {
+       const f = parseFloat(fInput.value);
+       if (!isNaN(f)) {
+         const c = Math.round((f - 32) * 5/9 * 10) / 10;
+         cInput.value = c;
+       } else {
+         cInput.value = '';
+       }
+     } else {
+       const c = parseFloat(cInput.value);
+       if (!isNaN(c)) {
+         const f = Math.round((c * 9/5 + 32) * 10) / 10;
+         fInput.value = f;
+       } else {
+         fInput.value = '';
+       }
+     }
+     
+     convertingTemp = false;
+   }
+
+   function convertDistance(fromMiles = true) {
+     if (convertingDistance) return;
+     convertingDistance = true;
+     
+     const milesInput = document.getElementById('miles');
+     const kmInput = document.getElementById('kilometers');
+     
+     if (fromMiles) {
+       const miles = parseFloat(milesInput.value) || 0;
+       const km = Math.round(miles * 1.60934 * 10) / 10;
+       kmInput.value = km > 0 ? km : '';
+     } else {
+       const km = parseFloat(kmInput.value) || 0;
+       const miles = Math.round(km / 1.60934 * 10) / 10;
+       milesInput.value = miles > 0 ? miles : '';
+     }
+     
+     convertingDistance = false;
+   }
+
+   function convertSurface(fromSqFt = true) {
+     if (convertingSurface) return;
+     convertingSurface = true;
+     
+     const sqftInput = document.getElementById('sqft');
+     const sqmInput = document.getElementById('sqm');
+     
+     if (fromSqFt) {
+       const sqft = parseFloat(sqftInput.value) || 0;
+       const sqm = Math.round(sqft * 0.092903 * 10) / 10;
+       sqmInput.value = sqm > 0 ? sqm : '';
+     } else {
+       const sqm = parseFloat(sqmInput.value) || 0;
+       const sqft = Math.round(sqm / 0.092903);
+       sqftInput.value = sqft > 0 ? sqft : '';
+     }
+     
+     convertingSurface = false;
+   }
+
+   function convertVolume(fromGallons = true) {
+     if (convertingVolume) return;
+     convertingVolume = true;
+     
+     const gallonsInput = document.getElementById('gallons');
+     const litersInput = document.getElementById('liters');
+     
+     if (fromGallons) {
+       const gallons = parseFloat(gallonsInput.value) || 0;
+       const liters = Math.round(gallons * 3.78541 * 10) / 10;
+       litersInput.value = liters > 0 ? liters : '';
+     } else {
+       const liters = parseFloat(litersInput.value) || 0;
+       const gallons = Math.round(liters / 3.78541 * 10) / 10;
+       gallonsInput.value = gallons > 0 ? gallons : '';
+     }
+     
+     convertingVolume = false;
+   }
+
+// Fonction de conversion rapide
+function quickConvert(type) {
+  const sections = {
+    'height': 'height-section',
+    'weight': 'weight-section', 
+    'temp': 'temperature-section',
+    'distance': 'distance-section',
+    'clothing': 'clothing-section',
+    'other': 'other-section'
+  };
+  
+  if (sections[type]) {
+    const section = document.getElementById(sections[type]);
+    const chevronMapping = {
+      'height': 'chevron-height',
+      'weight': 'chevron-weight',
+      'temp': 'chevron-temperature',
+      'distance': 'chevron-distance',
+      'clothing': 'chevron-clothing',
+      'other': 'chevron-other'
+    };
+    
+    const chevron = document.getElementById(chevronMapping[type]);
+    
+    if (section && section.classList.contains('hidden')) {
+      section.classList.remove('hidden');
+      section.style.display = 'block';
+      if (chevron) chevron.textContent = "▲";
+    }
+    
+    // Scroll vers la section
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+   // Chaussures hommes
+      const shoeFrMenInput = document.getElementById('shoe_fr_men');  
+      const shoeUsMenInput = document.getElementById('shoe_us_men');
+      
+      if (shoeFrMenInput) {
+        shoeFrMenInput.addEventListener('input', function() {
+          const frSize = parseFloat(this.value);
+          if (!isNaN(frSize)) {
+            // Formule approximative : US = (FR - 33) / 1.5
+            const usSize = Math.round(((frSize - 33) / 1.5) * 2) / 2; // Arrondi au 0.5
+            shoeUsMenInput.value = usSize > 0 ? usSize : '';
+          } else {
+            shoeUsMenInput.value = '';
+          }
+        });
+      }
+      
+      if (shoeUsMenInput) {
+        shoeUsMenInput.addEventListener('input', function() {
+          const usSize = parseFloat(this.value);
+          if (!isNaN(usSize)) {
+            // Formule inverse : FR = (US * 1.5) + 33
+            const frSize = Math.round((usSize * 1.5) + 33);
+            shoeFrMenInput.value = frSize > 0 ? frSize : '';
+          } else {
+            shoeFrMenInput.value = '';
+          }
+        });
+      }
+
+      // Chaussures femmes
+      const shoeFrWomenInput = document.getElementById('shoe_fr_women');
+      const shoeUsWomenInput = document.getElementById('shoe_us_women');
+      
+      if (shoeFrWomenInput) {
+        shoeFrWomenInput.addEventListener('input', function() {
+          const frSize = parseFloat(this.value);
+          if (!isNaN(frSize)) {
+            // Formule femmes : US = (FR - 31) / 1.5
+            const usSize = Math.round(((frSize - 31) / 1.5) * 2) / 2;
+            shoeUsWomenInput.value = usSize > 0 ? usSize : '';
+          } else {
+            shoeUsWomenInput.value = '';
+          }
+        });
+      }
+      
+      if (shoeUsWomenInput) {
+        shoeUsWomenInput.addEventListener('input', function() {
+          const usSize = parseFloat(this.value);
+          if (!isNaN(usSize)) {
+            // Formule inverse femmes : FR = (US * 1.5) + 31
+            const frSize = Math.round((usSize * 1.5) + 31);
+            shoeFrWomenInput.value = frSize > 0 ? frSize : '';
+          } else {
+            shoeFrWomenInput.value = '';
+          }
+        });
+      }
+
+      // Boutons raccourcis chaussures hommes
+      document.querySelectorAll('.shoe-btn-men').forEach(btn => {
+        btn.addEventListener('click', function() {
+          document.getElementById('shoe_fr_men').value = this.dataset.fr;
+          document.getElementById('shoe_us_men').value = this.dataset.us;
+        });
+      });
+
+      // Boutons raccourcis chaussures femmes  
+      document.querySelectorAll('.shoe-btn-women').forEach(btn => {
+        btn.addEventListener('click', function() {
+          document.getElementById('shoe_fr_women').value = this.dataset.fr;
+          document.getElementById('shoe_us_women').value = this.dataset.us;
+        });
+      });
+
+   // Event listeners
+   document.addEventListener('DOMContentLoaded', function() {
+     // Accordéons
+     document.querySelectorAll("[data-accordion-toggle]").forEach(button => {
+       button.addEventListener("click", function() {
+         const targetId = this.getAttribute("data-accordion-target");
+         const content = document.getElementById(targetId);
+         const chevronId = this.getAttribute("data-accordion-chevron");
+         const chevron = document.getElementById(chevronId);
+         
+         if (content) {
+           const style = window.getComputedStyle(content);
+           const isVisible = style.display !== 'none' && !content.classList.contains("hidden");
+           
+           if (isVisible) {
+             content.style.display = 'none';
+             content.classList.add('hidden');
+             if (chevron) chevron.textContent = "▼";
+           } else {
+             content.classList.remove('hidden');
+             content.style.display = 'block';
+             if (chevron) chevron.textContent = "▲";
+           }
+         }
+       });
+     });
+
+     // Conversion rapide
+     document.getElementById('quick_converter').addEventListener('change', function() {
+       if (this.value) {
+         quickConvert(this.value);
+         this.value = ''; // Reset
+       }
+     });
+
+     // Taille
+     const feetInput = document.getElementById('feet');
+     const inchesInput = document.getElementById('inches');
+     const cmInput = document.getElementById('centimeters');
+     
+     if (feetInput) feetInput.addEventListener('input', () => convertHeight(true));
+     if (inchesInput) inchesInput.addEventListener('input', () => convertHeight(true));
+     if (cmInput) cmInput.addEventListener('input', () => convertHeight(false));
+
+     // Poids
+     const poundsInput = document.getElementById('pounds');
+     const kgInput = document.getElementById('kilograms');
+     
+     if (poundsInput) poundsInput.addEventListener('input', () => convertWeight(true));
+     if (kgInput) kgInput.addEventListener('input', () => convertWeight(false));
+
+     // Température
+     const fInput = document.getElementById('fahrenheit');
+     const cInput = document.getElementById('celsius');
+     
+     if (fInput) fInput.addEventListener('input', () => convertTemperature(true));
+     if (cInput) cInput.addEventListener('input', () => convertTemperature(false));
+
+     // Distance
+     const milesInput = document.getElementById('miles');
+     const kmInput = document.getElementById('kilometers');
+     
+     if (milesInput) milesInput.addEventListener('input', () => convertDistance(true));
+     if (kmInput) kmInput.addEventListener('input', () => convertDistance(false));
+
+     // Surface
+     const sqftInput = document.getElementById('sqft');
+     const sqmInput = document.getElementById('sqm');
+     
+     if (sqftInput) sqftInput.addEventListener('input', () => convertSurface(true));
+     if (sqmInput) sqmInput.addEventListener('input', () => convertSurface(false));
+
+     // Volume
+     const gallonsInput = document.getElementById('gallons');
+     const litersInput = document.getElementById('liters');
+     
+     if (gallonsInput) gallonsInput.addEventListener('input', () => convertVolume(true));
+     if (litersInput) litersInput.addEventListener('input', () => convertVolume(false));
+
+     // Boutons de raccourcis
+     
+     // Taille
+     document.querySelectorAll('.height-btn').forEach(btn => {
+       btn.addEventListener('click', function() {
+         document.getElementById('feet').value = this.dataset.feet;
+         document.getElementById('inches').value = this.dataset.inches;
+         convertHeight(true);
+       });
+     });
+
+     // Poids
+     document.querySelectorAll('.weight-btn').forEach(btn => {
+       btn.addEventListener('click', function() {
+         document.getElementById('pounds').value = this.dataset.lbs;
+         convertWeight(true);
+       });
+     });
+
+     // Température
+     document.querySelectorAll('.temp-btn').forEach(btn => {
+       btn.addEventListener('click', function() {
+         document.getElementById('fahrenheit').value = this.dataset.tempF;
+         convertTemperature(true);
+       });
+     });
+
+     // Distance
+     document.querySelectorAll('.dist-btn').forEach(btn => {
+       btn.addEventListener('click', function() {
+         document.getElementById('miles').value = this.dataset.miles;
+         convertDistance(true);
+       });
+     });
+
+     // Valeurs par défaut pour l'exemple
+     setTimeout(() => {
+       document.getElementById('feet').value = '5';
+       document.getElementById('inches').value = '8';
+       convertHeight(true);
+     }, 100);
+   });
+ </script>
+</Layout>

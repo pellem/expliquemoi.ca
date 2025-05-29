@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-gradient-to-br from-neutral-50 to-blue-100 text-neutral-800 font-sans;
+}
+
+.card {
+  @apply bg-white rounded-2xl p-6 shadow transition-all hover:-translate-y-1 hover:shadow-lg;
+}
