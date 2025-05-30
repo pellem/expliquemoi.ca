@@ -1,0 +1,1252 @@
+---
+// src/pages/banques.astro
+import Layout from '../layouts/Default.astro';
+
+const title = "🏦 Banques Canada | Comparateur Comptes, Cartes & Frais 2025";
+const description = "Compare les banques canadiennes : RBC, TD, BMO, Scotiabank, CIBC, Tangerine, Simplii. Frais, cartes de crédit, service en français. Guide complet pour nouveaux arrivants.";
+---
+
+<Layout title={title} description={description}>
+ <div class="max-w-6xl mx-auto">
+   <!-- Header -->
+   <div class="text-center mb-8">
+     <h1 class="text-4xl font-bold text-blue-700 mb-4">🏦 Guide Complet des Banques Canadiennes</h1>
+     <p class="text-lg text-gray-600 mb-6">Trouve la banque parfaite selon tes besoins et ton profil !</p>
+     
+     <!-- Quick wins pour nouveaux arrivants -->
+     <div class="bg-green-50 border border-green-200 rounded-lg p-4 max-w-4xl mx-auto">
+       <div class="flex items-center justify-center mb-3">
+         <span class="text-green-600 text-xl mr-3">🎯</span>
+         <h2 class="font-semibold text-green-800">Recommandations Express pour Nouveaux Arrivants</h2>
+       </div>
+       <div class="grid md:grid-cols-3 gap-4 text-sm">
+         <div class="bg-white rounded-lg p-3 border border-green-200">
+           <h3 class="font-semibold text-green-700">🚀 Accès rapide</h3>
+           <p class="text-gray-600">Tangerine ou Simplii</p>
+           <a href="#tangerine" class="text-green-600 hover:underline">→ Voir détails</a>
+         </div>
+         <div class="bg-white rounded-lg p-3 border border-green-200">
+           <h3 class="font-semibold text-green-700">🛡️ Sécurité max</h3>
+           <p class="text-gray-600">RBC ou TD Bank</p>
+           <a href="#big5" class="text-green-600 hover:underline">→ Voir détails</a>
+         </div>
+         <div class="bg-white rounded-lg p-3 border border-green-200">
+           <h3 class="font-semibold text-green-700">💰 Économies</h3>
+           <p class="text-gray-600">Comptes étudiants ou Koodo</p>
+           <a href="#budget" class="text-green-600 hover:underline">→ Voir détails</a>
+         </div>
+       </div>
+     </div>
+   </div>
+
+   <!-- Filtres intelligents -->
+   <section class="card bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl shadow-lg p-6 mb-8 border border-blue-200">
+     <h2 class="text-2xl font-semibold text-blue-700 mb-4">🔍 Trouve ta banque idéale</h2>
+     
+     <div class="grid md:grid-cols-4 gap-4">
+       <div class="space-y-2">
+         <label class="text-blue-700 font-medium">Ton profil</label>
+         <select id="profile_filter" class="border border-blue-300 p-3 rounded-lg w-full">
+           <option value="all">Tous les profils</option>
+           <option value="newcomer">Nouveau arrivant</option>
+           <option value="student">Étudiant</option>
+           <option value="professional">Professionnel</option>
+           <option value="family">Famille</option>
+           <option value="business">Entrepreneur</option>
+         </select>
+       </div>
+       
+       <div class="space-y-2">
+         <label class="text-blue-700 font-medium">Budget mensuel</label>
+         <select id="budget_filter" class="border border-blue-300 p-3 rounded-lg w-full">
+           <option value="all">Tous les budgets</option>
+           <option value="free">Gratuit</option>
+           <option value="low">Moins de 15$/mois</option>
+           <option value="mid">15-30$/mois</option>
+           <option value="premium">30$/mois et plus</option>
+         </select>
+       </div>
+       
+       <div class="space-y-2">
+         <label class="text-blue-700 font-medium">Services prioritaires</label>
+         <select id="services_filter" class="border border-blue-300 p-3 rounded-lg w-full">
+           <option value="all">Tous les services</option>
+           <option value="credit">Cartes de crédit</option>
+           <option value="mortgage">Hypothèques</option>
+           <option value="investment">Investissements</option>
+           <option value="french">Service en français</option>
+         </select>
+       </div>
+       
+       <div class="space-y-2">
+         <label class="text-blue-700 font-medium">Type de banque</label>
+         <select id="type_filter" class="border border-blue-300 p-3 rounded-lg w-full">
+           <option value="all">Toutes</option>
+           <option value="big5">Big 5 traditionnelles</option>
+           <option value="digital">Banques numériques</option>
+           <option value="credit_union">Coopératives</option>
+         </select>
+       </div>
+     </div>
+     
+     <div class="mt-4 text-center">
+       <span id="results_count" class="text-sm text-gray-600">8 banques correspondent à tes critères</span>
+     </div>
+   </section>
+
+   <!-- Banques numériques (Featured - pour affiliation) -->
+   <section id="digital" class="mb-8">
+     <div class="flex items-center justify-between mb-6">
+       <h2 class="text-2xl font-semibold text-gray-800">🚀 Banques Numériques (Recommandées)</h2>
+       <span class="bg-green-100 text-green-800 text-xs font-bold px-3 py-1 rounded-full">CHOIX POPULAIRE</span>
+     </div>
+     
+     <div class="grid md:grid-cols-2 gap-6">
+       <!-- Tangerine (Spot affiliation principal) -->
+       <div id="tangerine" class="card bg-gradient-to-br from-orange-50 to-red-50 rounded-xl shadow-lg p-6 border border-orange-200 relative">
+         <!-- Badge recommandé -->
+         <div class="absolute -top-2 -right-2 bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full rotate-12">
+           💰 OFFRE SPÉCIALE
+         </div>
+         
+         <div class="flex items-center mb-4">
+           <div class="w-12 h-12 bg-orange-500 rounded-lg flex items-center justify-center text-white font-bold text-xl">
+             T
+           </div>
+           <div class="ml-3">
+             <h3 class="font-bold text-orange-700 text-xl">Tangerine</h3>
+             <p class="text-sm text-gray-600">Banque 100% numérique de Scotiabank</p>
+           </div>
+         </div>
+         
+         <div class="grid grid-cols-2 gap-4 mb-4 text-sm">
+           <div class="space-y-2">
+             <div class="flex justify-between">
+               <span>Compte chèques :</span>
+               <span class="font-bold text-green-600">GRATUIT</span>
+             </div>
+             <div class="flex justify-between">
+               <span>Épargne :</span>
+               <span class="font-bold text-green-600">2.25% promo</span>
+             </div>
+             <div class="flex justify-between">
+               <span>Carte de crédit :</span>
+               <span class="font-bold text-green-600">2% cashback</span>
+             </div>
+           </div>
+           <div class="space-y-2">
+             <div class="flex justify-between">
+               <span>GAB gratuits :</span>
+               <span class="font-bold">Scotiabank</span>
+             </div>
+             <div class="flex justify-between">
+               <span>Virement Interac :</span>
+               <span class="font-bold">Illimités</span>
+             </div>
+             <div class="flex justify-between">
+               <span>Service français :</span>
+               <span class="font-bold text-green-600">✅ Complet</span>
+             </div>
+           </div>
+         </div>
+         
+         <div class="bg-white rounded-lg p-3 border border-orange-200 mb-4">
+           <h4 class="font-semibold text-orange-700 mb-2">🎁 Offre actuelle :</h4>
+           <ul class="text-sm text-gray-700 space-y-1">
+             <li>• <strong>50$ bonus</strong> à l'ouverture + dépôt 250$</li>
+             <li>• <strong>2.25% d'intérêt</strong> pendant 5 mois (épargne)</li>
+             <li>• <strong>Carte gratuite</strong> première année</li>
+           </ul>
+         </div>
+         
+         <div class="flex gap-3">
+           <!-- Lien d'affiliation principal -->
+           <a href="https://tangerine.ca/fr/?utm_source=expliquemoi&utm_medium=referral&utm_campaign=newcomers" 
+              target="_blank" 
+              rel="noopener sponsored"
+              class="flex-1 bg-orange-500 text-white text-center py-3 rounded-lg hover:bg-orange-600 transition-colors font-semibold">
+             🚀 Ouvrir un compte
+           </a>
+           <button class="px-4 py-3 border border-orange-300 rounded-lg hover:bg-orange-50 transition-colors">
+             ℹ️
+           </button>
+         </div>
+         
+         <p class="text-xs text-gray-500 mt-2">⚡ Approbation en 10 minutes • Aucune visite en succursale</p>
+       </div>
+
+       <!-- Simplii (Spot affiliation secondaire) -->
+       <div class="card bg-gradient-to-br from-red-50 to-blue-50 rounded-xl shadow-lg p-6 border border-red-200">
+         <div class="flex items-center mb-4">
+           <div class="w-12 h-12 bg-red-500 rounded-lg flex items-center justify-center text-white font-bold text-xl">
+             S
+           </div>
+           <div class="ml-3">
+             <h3 class="font-bold text-red-700 text-xl">Simplii Financial</h3>
+             <p class="text-sm text-gray-600">Banque numérique de CIBC</p>
+           </div>
+         </div>
+         
+         <div class="grid grid-cols-2 gap-4 mb-4 text-sm">
+           <div class="space-y-2">
+             <div class="flex justify-between">
+               <span>Compte chèques :</span>
+               <span class="font-bold text-green-600">GRATUIT</span>
+             </div>
+             <div class="flex justify-between">
+               <span>Épargne :</span>
+               <span class="font-bold text-green-600">2.00%</span>
+             </div>
+             <div class="flex justify-between">
+               <span>Carte de crédit :</span>
+               <span class="font-bold text-green-600">1.25% cashback</span>
+             </div>
+           </div>
+           <div class="space-y-2">
+             <div class="flex justify-between">
+               <span>GAB gratuits :</span>
+               <span class="font-bold">CIBC + partenaires</span>
+             </div>
+             <div class="flex justify-between">
+               <span>Chèques :</span>
+               <span class="font-bold">Gratuits</span>
+             </div>
+             <div class="flex justify-between">
+               <span>Service français :</span>
+               <span class="font-bold text-green-600">✅ Disponible</span>
+             </div>
+           </div>
+         </div>
+         
+         <div class="bg-white rounded-lg p-3 border border-red-200 mb-4">
+           <h4 class="font-semibold text-red-700 mb-2">🎁 Promotion :</h4>
+           <ul class="text-sm text-gray-700 space-y-1">
+             <li>• <strong>300$ bonus</strong> avec conditions</li>
+             <li>• <strong>Frais waivés</strong> 12 premiers mois</li>
+           </ul>
+         </div>
+         
+         <div class="flex gap-3">
+           <!-- Lien d'affiliation -->
+           <a href="https://simplii.com/fr/?utm_source=expliquemoi&utm_medium=referral" 
+              target="_blank" 
+              rel="noopener sponsored"
+              class="flex-1 bg-red-500 text-white text-center py-3 rounded-lg hover:bg-red-600 transition-colors font-semibold">
+             🚀 Commencer
+           </a>
+           <button class="px-4 py-3 border border-red-300 rounded-lg hover:bg-red-50 transition-colors">
+             ℹ️
+           </button>
+         </div>
+       </div>
+     </div>
+   </section>
+
+   <!-- Big 5 Banks -->
+   <section id="big5" class="mb-8">
+     <h2 class="text-2xl font-semibold text-gray-800 mb-6">🏛️ Les Big 5 (Banques Traditionnelles)</h2>
+     
+     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+       <!-- RBC -->
+       <div class="card bg-white rounded-xl shadow-lg p-6 border border-gray-200">
+         <div class="flex items-center mb-4">
+           <div class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-xl">
+             R
+           </div>
+           <div class="ml-3">
+             <h3 class="font-bold text-blue-700 text-lg">RBC Banque Royale</h3>
+             <p class="text-xs text-gray-500">Plus grande banque du Canada</p>
+           </div>
+         </div>
+         
+         <div class="space-y-2 text-sm mb-4">
+           <div class="flex justify-between">
+             <span>Compte jour :</span>
+             <span class="font-bold">12.95$/mois</span>
+           </div>
+           <div class="flex justify-between">
+             <span>Compte étudiant :</span>
+             <span class="font-bold text-green-600">GRATUIT</span>
+           </div>
+           <div class="flex justify-between">
+             <span>Succursales :</span>
+             <span class="font-bold">1200+</span>
+           </div>
+           <div class="flex justify-between">
+             <span>Service français :</span>
+             <span class="font-bold text-green-600">✅ Partout</span>
+           </div>
+         </div>
+         
+         <div class="bg-blue-50 rounded-lg p-3 mb-4">
+           <h4 class="font-semibold text-blue-700 text-sm mb-1">👑 Points forts :</h4>
+           <ul class="text-xs text-gray-700 space-y-1">
+             <li>• Réseau le plus étendu</li>
+             <li>• Excellent pour hypothèques</li>
+             <li>• Cartes de crédit variées</li>
+           </ul>
+         </div>
+         
+         <a href="https://rbc.com/fr/?utm_source=expliquemoi" 
+            target="_blank" 
+            rel="noopener"
+            class="block bg-blue-600 text-white text-center py-2 rounded-lg hover:bg-blue-700 transition-colors font-medium text-sm">
+           Voir les comptes RBC
+         </a>
+       </div>
+
+       <!-- TD Bank -->
+       <div class="card bg-white rounded-xl shadow-lg p-6 border border-gray-200">
+         <div class="flex items-center mb-4">
+           <div class="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center text-white font-bold text-xl">
+             T
+           </div>
+           <div class="ml-3">
+             <h3 class="font-bold text-green-700 text-lg">TD Bank</h3>
+             <p class="text-xs text-gray-500">Forte aux États-Unis aussi</p>
+           </div>
+         </div>
+         
+         <div class="space-y-2 text-sm mb-4">
+           <div class="flex justify-between">
+             <span>Compte courant :</span>
+             <span class="font-bold">16.95$/mois</span>
+           </div>
+           <div class="flex justify-between">
+             <span>Compte minimum :</span>
+             <span class="font-bold">4.95$/mois</span>
+           </div>
+           <div class="flex justify-between">
+             <span>Heures étendues :</span>
+             <span class="font-bold text-green-600">✅ 8h-20h</span>
+           </div>
+           <div class="flex justify-between">
+             <span>Service français :</span>
+             <span class="font-bold text-green-600">✅ Québec++</span>
+           </div>
+         </div>
+         
+         <div class="bg-green-50 rounded-lg p-3 mb-4">
+           <h4 class="font-semibold text-green-700 text-sm mb-1">👑 Points forts :</h4>
+           <ul class="text-xs text-gray-700 space-y-1">
+             <li>• Horaires prolongés</li>
+             <li>• Cross-border banking (US)</li>
+             <li>• Innovation technologique</li>
+           </ul>
+         </div>
+         
+         <a href="https://td.com/fr-ca/?utm_source=expliquemoi" 
+            target="_blank" 
+            rel="noopener"
+            class="block bg-green-600 text-white text-center py-2 rounded-lg hover:bg-green-700 transition-colors font-medium text-sm">
+           Explorer TD Bank
+         </a>
+       </div>
+
+       <!-- BMO -->
+       <div class="card bg-white rounded-xl shadow-lg p-6 border border-gray-200">
+         <div class="flex items-center mb-4">
+           <div class="w-12 h-12 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-bold text-xl">
+             B
+           </div>
+           <div class="ml-3">
+             <h3 class="font-bold text-indigo-700 text-lg">BMO</h3>
+             <p class="text-xs text-gray-500">Plus ancienne banque du Canada</p>
+           </div>
+         </div>
+         
+         <div class="space-y-2 text-sm mb-4">
+           <div class="flex justify-between">
+             <span>Compte Plus :</span>
+             <span class="font-bold">14.95$/mois</span>
+           </div>
+           <div class="flex justify-between">
+             <span>Smart Advantage :</span>
+             <span class="font-bold text-green-600">GRATUIT*</span>
+           </div>
+           <div class="flex justify-between">
+             <span>Investissements :</span>
+             <span class="font-bold text-green-600">✅ Excellents</span>
+           </div>
+           <div class="flex justify-between">
+             <span>Service français :</span>
+             <span class="font-bold text-yellow-600">⚠️ Limité</span>
+           </div>
+         </div>
+         
+         <div class="bg-indigo-50 rounded-lg p-3 mb-4">
+           <h4 class="font-semibold text-indigo-700 text-sm mb-1">👑 Points forts :</h4>
+           <ul class="text-xs text-gray-700 space-y-1">
+             <li>• Expertise investissements</li>
+             <li>• Bons taux hypothécaires</li>
+             <li>• InvestorLine gratuit</li>
+           </ul>
+         </div>
+         
+         <a href="https://bmo.com/fr-ca/?utm_source=expliquemoi" 
+            target="_blank" 
+            rel="noopener"
+            class="block bg-indigo-600 text-white text-center py-2 rounded-lg hover:bg-indigo-700 transition-colors font-medium text-sm">
+           Découvrir BMO
+         </a>
+       </div>
+
+       <!-- Scotiabank -->
+       <div class="card bg-white rounded-xl shadow-lg p-6 border border-gray-200">
+         <div class="flex items-center mb-4">
+           <div class="w-12 h-12 bg-red-600 rounded-lg flex items-center justify-center text-white font-bold text-xl">
+             S
+           </div>
+           <div class="ml-3">
+             <h3 class="font-bold text-red-700 text-lg">Scotiabank</h3>
+             <p class="text-xs text-gray-500">Forte à l'international</p>
+           </div>
+         </div>
+         
+         <div class="space-y-2 text-sm mb-4">
+           <div class="flex justify-between">
+             <span>Compte complet :</span>
+             <span class="font-bold">15.95$/mois</span>
+           </div>
+           <div class="flex justify-between">
+             <span>Compte de base :</span>
+             <span class="font-bold">4.95$/mois</span>
+           </div>
+           <div class="flex justify-between">
+             <span>SCENE+ :</span>
+             <span class="font-bold text-green-600">✅ Récompenses</span>
+           </div>
+           <div class="flex justify-between">
+             <span>Service français :</span>
+             <span class="font-bold text-green-600">✅ Québec</span>
+           </div>
+         </div>
+         
+         <div class="bg-red-50 rounded-lg p-3 mb-4">
+           <h4 class="font-semibold text-red-700 text-sm mb-1">👑 Points forts :</h4>
+           <ul class="text-xs text-gray-700 space-y-1">
+             <li>• Partenariat Tangerine</li>
+             <li>• Programme SCENE+</li>
+             <li>• Forte en Amérique latine</li>
+           </ul>
+         </div>
+         
+         <a href="https://scotiabank.com/fr/?utm_source=expliquemoi" 
+            target="_blank" 
+            rel="noopener"
+            class="block bg-red-600 text-white text-center py-2 rounded-lg hover:bg-red-700 transition-colors font-medium text-sm">
+           Voir Scotiabank
+         </a>
+       </div>
+
+       <!-- CIBC -->
+       <div class="card bg-white rounded-xl shadow-lg p-6 border border-gray-200">
+         <div class="flex items-center mb-4">
+           <div class="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center text-white font-bold text-xl">
+             C
+           </div>
+           <div class="ml-3">
+             <h3 class="font-bold text-purple-700 text-lg">CIBC</h3>
+             <p class="text-xs text-gray-500">Parent de Simplii</p>
+           </div>
+         </div>
+         
+         <div class="space-y-2 text-sm mb-4">
+           <div class="flex justify-between">
+             <span>Smart Plus :</span>
+             <span class="font-bold">16.95$/mois</span>
+           </div>
+           <div class="flex justify-between">
+             <span>Smart :</span>
+             <span class="font-bold">7.95$/mois</span>
+           </div>
+           <div class="flex justify-between">
+             <span>Mobile first :</span>
+             <span class="font-bold text-green-600">✅ Leader</span>
+           </div>
+           <div class="flex justify-between">
+             <span>Service français :</span>
+             <span class="font-bold text-yellow-600">⚠️ Québec</span>
+           </div>
+         </div>
+         
+         <div class="bg-purple-50 rounded-lg p-3 mb-4">
+           <h4 class="font-semibold text-purple-700 text-sm mb-1">👑 Points forts :</h4>
+           <ul class="text-xs text-gray-700 space-y-1">
+             <li>• App mobile excellente</li>
+             <li>• Simplii (numérique)</li>
+             <li>• Innovation fintech</li>
+           </ul>
+         </div>
+         
+         <a href="https://cibc.com/fr/?utm_source=expliquemoi" 
+            target="_blank" 
+            rel="noopener"
+            class="block bg-purple-600 text-white text-center py-2 rounded-lg hover:bg-purple-700 transition-colors font-medium text-sm">
+           Explorer CIBC
+         </a>
+       </div>
+
+       <!-- Desjardins (pour le Québec) -->
+       <div class="card bg-white rounded-xl shadow-lg p-6 border border-gray-200 relative">
+         <div class="absolute -top-2 -right-2 bg-blue-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+           🍁 QUÉBEC
+         </div>
+         
+         <div class="flex items-center mb-4">
+           <div class="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center text-white font-bold text-xl">
+             D
+           </div>
+           <div class="ml-3">
+             <h3 class="font-bold text-blue-700 text-lg">Desjardins</h3>
+             <p class="text-xs text-gray-500">Coopérative québécoise</p>
+           </div>
+         </div>
+         
+         <div class="space-y-2 text-sm mb-4">
+           <div class="flex justify-between">
+             <span>Compte courant :</span>
+             <span class="font-bold">14.50$/mois</span>
+           </div>
+           <div class="flex justify-between">
+             <span>Compte Épargne+ :</span>
+             <span class="font-bold text-green-600">GRATUIT</span>
+           </div>
+           <div class="flex justify-between">
+             <span>Taux épargne :</span>
+             <span class="font-bold text-green-600">Compétitifs</span>
+           </div>
+           <div class="flex justify-between">
+             <span>Service français :</span>
+             <span class="font-bold text-green-600">✅ 100%</span>
+           </div>
+         </div>
+         
+         <div class="bg-blue-50 rounded-lg p-3 mb-4">
+           <h4 class="font-semibold text-blue-700 text-sm mb-1">👑 Points forts :</h4>
+           <ul class="text-xs text-gray-700 space-y-1">
+             <li>• 100% français au Québec</li>
+             <li>• Valeurs coopératives</li>
+             <li>• Ristournes aux membres</li>
+           </ul>
+         </div>
+         
+         <a href="https://desjardins.com/?utm_source=expliquemoi" 
+            target="_blank" 
+            rel="noopener"
+            class="block bg-blue-500 text-white text-center py-2 rounded-lg hover:bg-blue-600 transition-colors font-medium text-sm">
+           Découvrir Desjardins
+         </a>
+       </div>
+     </div>
+   </section>
+
+   <!-- Tableau comparatif des frais -->
+   <section class="card bg-white rounded-xl shadow-lg p-6 mb-8 border border-gray-200">
+     <h2 class="text-2xl font-semibold text-gray-800 mb-6">💰 Comparateur de frais</h2>
+     
+     <div class="overflow-x-auto">
+       <table class="w-full text-sm">
+         <thead class="bg-gray-50">
+           <tr>
+             <th class="px-4 py-3 text-left font-medium text-gray-700">Banque</th>
+             <th class="px-4 py-3 text-center font-medium text-gray-700">Compte de base</th>
+             <th class="px-4 py-3 text-center font-medium text-gray-700">Compte premium</th>
+             <th class="px-4 py-3 text-center font-medium text-gray-700">Virements</th>
+             <th class="px-4 py-3 text-center font-medium text-gray-700">GAB</th>
+             <th class="px-4 py-3 text-center font-medium text-gray-700">Action</th>
+           </tr>
+         </thead>
+         <tbody class="divide-y divide-gray-200">
+           <tr class="bg-orange-50">
+             <td class="px-4 py-3 font-medium text-orange-700">Tangerine ⭐</td>
+<td class="px-4 py-3 text-center text-green-600 font-bold">GRATUIT</td>
+            <td class="px-4 py-3 text-center">-</td>
+            <td class="px-4 py-3 text-center text-green-600">Illimités</td>
+            <td class="px-4 py-3 text-center">Scotiabank</td>
+            <td class="px-4 py-3 text-center">
+              <a href="https://tangerine.ca/fr/?utm_source=expliquemoi&utm_medium=table" 
+                 target="_blank" 
+                 rel="noopener sponsored"
+                 class="bg-orange-500 text-white px-3 py-1 rounded text-xs hover:bg-orange-600">
+                Ouvrir
+              </a>
+            </td>
+          </tr>
+          <tr class="bg-red-50">
+            <td class="px-4 py-3 font-medium text-red-700">Simplii ⭐</td>
+            <td class="px-4 py-3 text-center text-green-600 font-bold">GRATUIT</td>
+            <td class="px-4 py-3 text-center">-</td>
+            <td class="px-4 py-3 text-center text-green-600">Illimités</td>
+            <td class="px-4 py-3 text-center">CIBC + Partenaires</td>
+            <td class="px-4 py-3 text-center">
+              <a href="https://simplii.com/fr/?utm_source=expliquemoi&utm_medium=table" 
+                 target="_blank" 
+                 rel="noopener sponsored"
+                 class="bg-red-500 text-white px-3 py-1 rounded text-xs hover:bg-red-600">
+                Ouvrir
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 font-medium">RBC</td>
+            <td class="px-4 py-3 text-center">4.95$/mois</td>
+            <td class="px-4 py-3 text-center">12.95$/mois</td>
+            <td class="px-4 py-3 text-center">1.50$/each</td>
+            <td class="px-4 py-3 text-center">RBC + Partenaires</td>
+            <td class="px-4 py-3 text-center">
+              <a href="https://rbc.com/fr/?utm_source=expliquemoi" 
+                 target="_blank" 
+                 rel="noopener"
+                 class="bg-blue-600 text-white px-3 py-1 rounded text-xs hover:bg-blue-700">
+                Voir
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 font-medium">TD Bank</td>
+            <td class="px-4 py-3 text-center">4.95$/mois</td>
+            <td class="px-4 py-3 text-center">16.95$/mois</td>
+            <td class="px-4 py-3 text-center">1.25$/each</td>
+            <td class="px-4 py-3 text-center">TD + Green Machine</td>
+            <td class="px-4 py-3 text-center">
+              <a href="https://td.com/fr-ca/?utm_source=expliquemoi" 
+                 target="_blank" 
+                 rel="noopener"
+                 class="bg-green-600 text-white px-3 py-1 rounded text-xs hover:bg-green-700">
+                Voir
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 font-medium">BMO</td>
+            <td class="px-4 py-3 text-center text-green-600">GRATUIT*</td>
+            <td class="px-4 py-3 text-center">14.95$/mois</td>
+            <td class="px-4 py-3 text-center">1.25$/each</td>
+            <td class="px-4 py-3 text-center">BMO + Échange</td>
+            <td class="px-4 py-3 text-center">
+              <a href="https://bmo.com/fr-ca/?utm_source=expliquemoi" 
+                 target="_blank" 
+                 rel="noopener"
+                 class="bg-indigo-600 text-white px-3 py-1 rounded text-xs hover:bg-indigo-700">
+                Voir
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 font-medium">Scotiabank</td>
+            <td class="px-4 py-3 text-center">4.95$/mois</td>
+            <td class="px-4 py-3 text-center">15.95$/mois</td>
+            <td class="px-4 py-3 text-center">1.25$/each</td>
+            <td class="px-4 py-3 text-center">Scotia + Exchange</td>
+            <td class="px-4 py-3 text-center">
+              <a href="https://scotiabank.com/fr/?utm_source=expliquemoi" 
+                 target="_blank" 
+                 rel="noopener"
+                 class="bg-red-600 text-white px-3 py-1 rounded text-xs hover:bg-red-700">
+                Voir
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 font-medium">CIBC</td>
+            <td class="px-4 py-3 text-center">7.95$/mois</td>
+            <td class="px-4 py-3 text-center">16.95$/mois</td>
+            <td class="px-4 py-3 text-center">1.50$/each</td>
+            <td class="px-4 py-3 text-center">CIBC + Plus</td>
+            <td class="px-4 py-3 text-center">
+              <a href="https://cibc.com/fr/?utm_source=expliquemoi" 
+                 target="_blank" 
+                 rel="noopener"
+                 class="bg-purple-600 text-white px-3 py-1 rounded text-xs hover:bg-purple-700">
+                Voir
+              </a>
+            </td>
+          </tr>
+          <tr class="bg-blue-50">
+            <td class="px-4 py-3 font-medium text-blue-700">Desjardins 🍁</td>
+            <td class="px-4 py-3 text-center text-green-600 font-bold">GRATUIT</td>
+            <td class="px-4 py-3 text-center">14.50$/mois</td>
+            <td class="px-4 py-3 text-center">1.25$/each</td>
+            <td class="px-4 py-3 text-center">Desjardins + AccèsD</td>
+            <td class="px-4 py-3 text-center">
+              <a href="https://desjardins.com/?utm_source=expliquemoi" 
+                 target="_blank" 
+                 rel="noopener"
+                 class="bg-blue-500 text-white px-3 py-1 rounded text-xs hover:bg-blue-600">
+                Voir
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="mt-4 text-xs text-gray-600">
+      <p><strong>⭐ = Recommandé pour nouveaux arrivants</strong> • <strong>🍁 = Québec seulement</strong> • *Conditions s'appliquent</p>
+    </div>
+  </section>
+
+  <!-- Guide par profil -->
+  <section id="budget" class="card bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl shadow-lg p-6 mb-8 border border-green-200">
+    <h2 class="text-2xl font-semibold text-green-700 mb-6">🎯 Recommandations par profil</h2>
+    
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Nouveau arrivant -->
+      <div class="bg-white rounded-lg p-4 border border-green-200">
+        <h3 class="font-semibold text-green-600 mb-3">🛬 Nouveau arrivant</h3>
+        <div class="space-y-2 text-sm">
+          <div class="font-medium text-gray-700">✅ Recommandé :</div>
+          <ul class="text-gray-600 space-y-1 ml-4">
+            <li>• <a href="#tangerine" class="text-orange-600 hover:underline">Tangerine</a> (accès rapide)</li>
+            <li>• <a href="#simplii" class="text-red-600 hover:underline">Simplii</a> (CIBC backing)</li>
+            <li>• RBC (si budget permet)</li>
+          </ul>
+          <div class="font-medium text-gray-700 mt-3">💡 Stratégie :</div>
+          <p class="text-xs text-gray-600">Commence par numérique → upgrade vers Big 5 après 6-12 mois</p>
+        </div>
+      </div>
+
+      <!-- Étudiant -->
+      <div class="bg-white rounded-lg p-4 border border-green-200">
+        <h3 class="font-semibold text-green-600 mb-3">🎓 Étudiant</h3>
+        <div class="space-y-2 text-sm">
+          <div class="font-medium text-gray-700">✅ Gratuit garanti :</div>
+          <ul class="text-gray-600 space-y-1 ml-4">
+            <li>• RBC Compte étudiant</li>
+            <li>• TD Student Banking</li>
+            <li>• BMO Smart Advantage</li>
+            <li>• Tangerine (toujours gratuit)</li>
+          </ul>
+          <div class="font-medium text-gray-700 mt-3">🎁 Bonus :</div>
+          <p class="text-xs text-gray-600">Cartes étudiantes + programmes de récompenses</p>
+        </div>
+      </div>
+
+      <!-- Professionnel -->
+      <div class="bg-white rounded-lg p-4 border border-green-200">
+        <h3 class="font-semibold text-green-600 mb-3">💼 Professionnel</h3>
+        <div class="space-y-2 text-sm">
+          <div class="font-medium text-gray-700">🏆 Prestige :</div>
+          <ul class="text-gray-600 space-y-1 ml-4">
+            <li>• RBC (réseau + services)</li>
+            <li>• TD (horaires étendus)</li>
+            <li>• BMO (investissements)</li>
+          </ul>
+          <div class="font-medium text-gray-700 mt-3">💳 Avantages :</div>
+          <p class="text-xs text-gray-600">Cartes premium, privilèges, gestionnaire dédié</p>
+        </div>
+      </div>
+
+      <!-- Famille -->
+      <div class="bg-white rounded-lg p-4 border border-green-200">
+        <h3 class="font-semibold text-green-600 mb-3">👨‍👩‍👧‍👦 Famille</h3>
+        <div class="space-y-2 text-sm">
+          <div class="font-medium text-gray-700">💰 Économiques :</div>
+          <ul class="text-gray-600 space-y-1 ml-4">
+            <li>• Tangerine (tous gratuits)</li>
+            <li>• Desjardins (ristournes)</li>
+            <li>• Comptes joints Big 5</li>
+          </ul>
+          <div class="font-medium text-gray-700 mt-3">🏠 Services :</div>
+          <p class="text-xs text-gray-600">Épargne enfants, hypothèques, assurances</p>
+        </div>
+      </div>
+
+      <!-- Entrepreneur -->
+      <div class="bg-white rounded-lg p-4 border border-green-200">
+        <h3 class="font-semibold text-green-600 mb-3">🚀 Entrepreneur</h3>
+        <div class="space-y-2 text-sm">
+          <div class="font-medium text-gray-700">🏢 Business-friendly :</div>
+          <ul class="text-gray-600 space-y-1 ml-4">
+            <li>• RBC (expertise business)</li>
+            <li>• TD (financement)</li>
+            <li>• BMO (investissements)</li>
+          </ul>
+          <div class="font-medium text-gray-700 mt-3">💼 Services :</div>
+          <p class="text-xs text-gray-600">Comptes corporatifs, crédit commercial, conseils</p>
+        </div>
+      </div>
+
+      <!-- Budget serré -->
+      <div class="bg-white rounded-lg p-4 border border-green-200">
+        <h3 class="font-semibold text-green-600 mb-3">💸 Budget serré</h3>
+        <div class="space-y-2 text-sm">
+          <div class="font-medium text-gray-700">🆓 Toujours gratuit :</div>
+          <ul class="text-gray-600 space-y-1 ml-4">
+            <li>• <strong>Tangerine</strong> (notre #1)</li>
+            <li>• <strong>Simplii</strong> (très bon aussi)</li>
+            <li>• Desjardins Épargne+ (QC)</li>
+          </ul>
+          <div class="font-medium text-gray-700 mt-3">⚡ Conseil :</div>
+          <p class="text-xs text-gray-600">Évite les Big 5 sauf si étudiant</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Guide d'ouverture de compte -->
+  <section class="card bg-white rounded-xl shadow-lg p-6 mb-8 border border-gray-200">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-6">📋 Guide d'ouverture de compte</h2>
+    
+    <div class="grid md:grid-cols-2 gap-8">
+      <div>
+        <h3 class="font-semibold text-blue-600 mb-4">📄 Documents requis</h3>
+        <div class="space-y-3">
+          <div class="bg-blue-50 rounded-lg p-3 border border-blue-200">
+            <h4 class="font-medium text-blue-700 mb-2">✅ Pièces d'identité (2 pièces)</h4>
+            <ul class="text-sm text-gray-700 space-y-1">
+              <li>• Passeport + permis de travail/RP</li>
+              <li>• Permis de conduire canadien</li>
+              <li>• Carte d'assurance maladie</li>
+            </ul>
+          </div>
+          
+          <div class="bg-green-50 rounded-lg p-3 border border-green-200">
+            <h4 class="font-medium text-green-700 mb-2">🏠 Preuve d'adresse</h4>
+            <ul class="text-sm text-gray-700 space-y-1">
+              <li>• Bail de logement</li>
+              <li>• Facture d'utilités</li>
+              <li>• Relevé d'une autre banque</li>
+            </ul>
+          </div>
+          
+          <div class="bg-orange-50 rounded-lg p-3 border border-orange-200">
+            <h4 class="font-medium text-orange-700 mb-2">💰 Dépôt initial</h4>
+            <ul class="text-sm text-gray-700 space-y-1">
+              <li>• Numérique : souvent 0$</li>
+              <li>• Big 5 : 25-100$ généralement</li>
+              <li>• Chèque, cash ou virement</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <div>
+        <h3 class="font-semibold text-indigo-600 mb-4">⏱️ Processus étape par étape</h3>
+        <div class="space-y-4">
+          <div class="flex items-start">
+            <div class="bg-indigo-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold mr-3 flex-shrink-0">1</div>
+            <div>
+              <h4 class="font-medium text-gray-800">Choisis ta banque</h4>
+              <p class="text-sm text-gray-600">Utilise nos critères ci-dessus</p>
+            </div>
+          </div>
+          
+          <div class="flex items-start">
+            <div class="bg-indigo-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold mr-3 flex-shrink-0">2</div>
+            <div>
+              <h4 class="font-medium text-gray-800">Prépare tes documents</h4>
+              <p class="text-sm text-gray-600">Scanne tout en avance</p>
+            </div>
+          </div>
+          
+          <div class="flex items-start">
+            <div class="bg-indigo-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold mr-3 flex-shrink-0">3</div>
+            <div>
+              <h4 class="font-medium text-gray-800">Demande en ligne OU en succursale</h4>
+              <p class="text-sm text-gray-600">Numérique = plus rapide</p>
+            </div>
+          </div>
+          
+          <div class="flex items-start">
+            <div class="bg-indigo-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold mr-3 flex-shrink-0">4</div>
+            <div>
+              <h4 class="font-medium text-gray-800">Reçois tes cartes par courrier</h4>
+              <p class="text-sm text-gray-600">5-10 jours ouvrables</p>
+            </div>
+          </div>
+          
+          <div class="flex items-start">
+            <div class="bg-green-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold mr-3 flex-shrink-0">5</div>
+            <div>
+              <h4 class="font-medium text-gray-800">Active et profite !</h4>
+              <p class="text-sm text-gray-600">Configure l'app mobile</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cross-selling vers autres services -->
+  <section class="grid md:grid-cols-3 gap-6 mb-8">
+    
+    <!-- Credit Score -->
+    <div class="card bg-gradient-to-br from-green-500 to-emerald-600 text-white rounded-xl shadow-lg p-6 border-0">
+      <div class="text-3xl mb-4">📈</div>
+      <h3 class="text-xl font-bold mb-2">Construis ta cote de crédit</h3>
+      <p class="text-green-100 mb-4 text-sm">Avec ta première carte, commence à bâtir ton historique de crédit dès maintenant.</p>
+      <a href="/credit-score" class="inline-flex items-center bg-white text-emerald-600 px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors font-medium text-sm">
+        Comprendre le crédit
+        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </a>
+    </div>
+
+    <!-- Hypothèque -->
+    <div class="card bg-gradient-to-br from-indigo-500 to-blue-600 text-white rounded-xl shadow-lg p-6 border-0">
+      <div class="text-3xl mb-4">🏠</div>
+      <h3 class="text-xl font-bold mb-2">Prêt(e) pour l'hypothèque ?</h3>
+      <p class="text-indigo-100 mb-4 text-sm">Compare les taux hypothécaires et calcule ta capacité d'emprunt.</p>
+      <a href="/hypotheque" class="inline-flex items-center bg-white text-indigo-600 px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors font-medium text-sm">
+        Guide hypothèque
+        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </a>
+    </div>
+
+    <!-- Assurance -->
+    <div class="card bg-gradient-to-br from-purple-500 to-pink-600 text-white rounded-xl shadow-lg p-6 border-0">
+      <div class="text-3xl mb-4">🛡️</div>
+      <h3 class="text-xl font-bold mb-2">Protège tes finances</h3>
+      <p class="text-purple-100 mb-4 text-sm">Assurance vie, invalidité, biens... Comprends ce qui est essentiel.</p>
+      <a href="/assurance-sante" class="inline-flex items-center bg-white text-purple-600 px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors font-medium text-sm">
+        Guide assurances
+        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="mb-8">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-6 text-center">❓ Questions fréquentes</h2>
+    
+    <div class="grid md:grid-cols-2 gap-4 text-sm">
+      <div class="bg-white rounded-lg p-4 shadow border border-gray-200">
+        <h3 class="font-semibold text-gray-700 mb-2">🏦 Quelle différence entre Big 5 et banques numériques ?</h3>
+        <p class="text-gray-600">Big 5 = plus de services, succursales physiques, frais plus élevés. Numériques = moins cher, tout en ligne, services de base excellents.</p>
+      </div>
+      
+      <div class="bg-white rounded-lg p-4 shadow border border-gray-200">
+        <h3 class="font-semibold text-gray-700 mb-2">📱 Puis-je tout faire par mobile ?</h3>
+        <p class="text-gray-600">Oui ! Tangerine et Simplii sont 100% numériques. Les Big 5 ont d'excellentes apps aussi. Seules certaines opérations complexes nécessitent un appel.</p>
+      </div>
+      
+      <div class="bg-white rounded-lg p-4 shadow border border-gray-200">
+        <h3 class="font-semibold text-gray-700 mb-2">💳 Combien de comptes puis-je avoir ?</h3>
+        <p class="text-gray-600">Autant que tu veux ! Beaucoup ont Tangerine pour le quotidien + Big 5 pour les services avancés (hypothèque, investissements).</p>
+      </div>
+      
+      <div class="bg-white rounded-lg p-4 shadow border border-gray-200">
+        <h3 class="font-semibold text-gray-700 mb-2">🔄 Facile de changer de banque ?</h3>
+        <p class="text-gray-600">Oui mais fastidieux. Il faut transférer tous les prélèvements automatiques. Mieux vaut bien choisir dès le départ ou garder les deux quelques mois.</p>
+      </div>
+      
+      <div class="bg-white rounded-lg p-4 shadow border border-gray-200">
+        <h3 class="font-semibold text-gray-700 mb-2">🇫🇷 Service en français garanti où ?</h3>
+        <p class="text-gray-600">Partout au Québec par loi. Ailleurs : Tangerine, RBC, TD ont du français. Desjardins = 100% français mais Québec seulement.</p>
+      </div>
+      
+      <div class="bg-white rounded-lg p-4 shadow border border-gray-200">
+        <h3 class="font-semibold text-gray-700 mb-2">💰 Comment négocier les frais ?</h3>
+        <p class="text-gray-600">Mentionne la concurrence, menace de partir, demande un superviseur. Marche mieux avec les Big 5 qu'avec les banques numériques (déjà pas cher).</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA final avec affiliation -->
+  <section class="card bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-xl shadow-xl p-8 text-center">
+    <h2 class="text-3xl font-bold mb-4">🚀 Prêt(e) à ouvrir ton compte ?</h2>
+    <p class="text-xl text-orange-100 mb-6 max-w-3xl mx-auto">
+      Nos 2 recommandations top pour débuter au Canada :
+    </p>
+    
+    <div class="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto mb-6">
+      <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+        <h3 class="font-bold text-lg mb-2">🥇 Tangerine</h3>
+        <p class="text-orange-100 text-sm mb-4">Gratuit, cashback 2%, service français</p>
+        <a href="https://tangerine.ca/fr/?utm_source=expliquemoi&utm_medium=cta&utm_campaign=final" 
+           target="_blank" 
+           rel="noopener sponsored"
+           class="block bg-orange-600 text-white py-2 rounded-lg hover:bg-orange-700 transition-colors font-medium">
+          Ouvrir chez Tangerine
+        </a>
+      </div>
+      
+      <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+        <h3 class="font-bold text-lg mb-2">🥈 Simplii</h3>
+        <p class="text-orange-100 text-sm mb-4">Gratuit, bonus 300$, backing CIBC</p>
+        <a href="https://simplii.com/fr/?utm_source=expliquemoi&utm_medium=cta&utm_campaign=final" 
+           target="_blank" 
+           rel="noopener sponsored"
+           class="block bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 transition-colors font-medium">
+          Ouvrir chez Simplii
+        </a>
+      </div>
+    </div>
+    
+    <div class="flex justify-center items-center space-x-8 text-orange-200 text-sm">
+      <div class="flex items-center space-x-2">
+        <span>⚡</span>
+        <span>Ouverture en 10 min</span>
+      </div>
+      <div class="flex items-center space-x-2">
+        <span>🎁</span>
+        <span>Bonus de bienvenue</span>
+      </div>
+      <div class="flex items-center space-x-2">
+        <span>🆓</span>
+        <span>Aucuns frais cachés</span>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- Script pour les filtres -->
+<script is:inline>
+  // Base de données simplifiée des banques
+  const banksData = [
+    {
+      name: "Tangerine",
+      type: "digital",
+      profile: ["newcomer", "student", "budget"],
+      budget: "free",
+      services: ["credit", "french"],
+      fees_basic: 0,
+      featured: true
+    },
+    {
+      name: "Simplii",
+      type: "digital", 
+      profile: ["newcomer", "student", "budget"],
+      budget: "free",
+      services: ["credit", "french"],
+      fees_basic: 0,
+      featured: true
+    },
+    {
+      name: "RBC",
+      type: "big5",
+      profile: ["professional", "family", "business"],
+      budget: "mid",
+      services: ["credit", "mortgage", "investment", "french"],
+      fees_basic: 4.95
+    },
+    {
+      name: "TD Bank",
+      type: "big5",
+      profile: ["professional", "family", "business"], 
+budget: "mid",
+      services: ["credit", "mortgage", "investment", "french"],
+      fees_basic: 4.95
+    },
+    {
+      name: "BMO",
+      type: "big5",
+      profile: ["professional", "family", "business"],
+      budget: "free", // Smart Advantage
+      services: ["credit", "mortgage", "investment"],
+      fees_basic: 0
+    },
+    {
+      name: "Scotiabank",
+      type: "big5",
+      profile: ["professional", "family", "business"],
+      budget: "mid",
+      services: ["credit", "mortgage", "investment", "french"],
+      fees_basic: 4.95
+    },
+    {
+      name: "CIBC",
+      type: "big5",
+      profile: ["professional", "family", "business"],
+      budget: "mid",
+      services: ["credit", "mortgage", "investment"],
+      fees_basic: 7.95
+    },
+    {
+      name: "Desjardins",
+      type: "credit_union",
+      profile: ["newcomer", "family", "budget"],
+      budget: "free",
+      services: ["credit", "mortgage", "investment", "french"],
+      fees_basic: 0,
+      region: "QC"
+    }
+  ];
+
+  function filterBanks() {
+    const profile = document.getElementById('profile_filter').value;
+    const budget = document.getElementById('budget_filter').value;
+    const services = document.getElementById('services_filter').value;
+    const type = document.getElementById('type_filter').value;
+    
+    let filtered = banksData.filter(bank => {
+      // Filtre profil
+      if (profile !== 'all' && !bank.profile.includes(profile)) return false;
+      
+      // Filtre budget
+      if (budget !== 'all') {
+        if (budget === 'free' && bank.budget !== 'free') return false;
+        if (budget === 'low' && !['free', 'low'].includes(bank.budget)) return false;
+        if (budget === 'mid' && bank.budget === 'premium') return false;
+      }
+      
+      // Filtre services
+      if (services !== 'all' && !bank.services.includes(services)) return false;
+      
+      // Filtre type
+      if (type !== 'all' && bank.type !== type) return false;
+      
+      return true;
+    });
+    
+    document.getElementById('results_count').textContent = 
+      `${filtered.length} banque${filtered.length > 1 ? 's' : ''} correspondent à tes critères`;
+    
+    // Highlight des banques qui matchent
+    highlightMatchingBanks(filtered);
+  }
+
+  function highlightMatchingBanks(filteredBanks) {
+    // Reset all highlights
+    document.querySelectorAll('.card').forEach(card => {
+      card.style.opacity = '1';
+      card.style.transform = 'scale(1)';
+    });
+    
+    if (filteredBanks.length === banksData.length) return; // Tous affichés
+    
+    const matchingNames = filteredBanks.map(bank => bank.name.toLowerCase());
+    
+    // Highlight only matching ones
+    document.querySelectorAll('.card').forEach(card => {
+      const bankName = card.querySelector('h3')?.textContent.toLowerCase().split(' ')[0];
+      if (bankName && !matchingNames.includes(bankName)) {
+        card.style.opacity = '0.3';
+        card.style.transform = 'scale(0.95)';
+      }
+    });
+  }
+
+  // Fonction pour calculateur d'économies
+  function calculateSavings() {
+    const currentBank = document.getElementById('current_bank')?.value;
+    const newBank = document.getElementById('new_bank')?.value;
+    
+    if (!currentBank || !newBank) return;
+    
+    const currentFees = banksData.find(b => b.name === currentBank)?.fees_basic || 0;
+    const newFees = banksData.find(b => b.name === newBank)?.fees_basic || 0;
+    
+    const monthlySavings = currentFees - newFees;
+    const yearlySavings = monthlySavings * 12;
+    
+    if (monthlySavings > 0) {
+      document.getElementById('savings_result').innerHTML = `
+        <div class="text-green-600 font-bold">
+          💰 Tu économiserais ${monthlySavings.toFixed(2)}$/mois
+          <br><small>(${yearlySavings.toFixed(2)}$ par année)</small>
+        </div>
+      `;
+    } else if (monthlySavings < 0) {
+      document.getElementById('savings_result').innerHTML = `
+        <div class="text-red-600 font-bold">
+          ⚠️ Ça coûterait ${Math.abs(monthlySavings).toFixed(2)}$/mois de plus
+        </div>
+      `;
+    } else {
+      document.getElementById('savings_result').innerHTML = `
+        <div class="text-gray-600">
+          Même coût mensuel
+        </div>
+      `;
+    }
+  }
+
+  // Event listeners
+  document.addEventListener('DOMContentLoaded', function() {
+    // Filtres
+    document.getElementById('profile_filter').addEventListener('change', filterBanks);
+    document.getElementById('budget_filter').addEventListener('change', filterBanks);
+    document.getElementById('services_filter').addEventListener('change', filterBanks);
+    document.getElementById('type_filter').addEventListener('change', filterBanks);
+    
+    // Animation des cartes au scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    });
+    
+    document.querySelectorAll('.card').forEach(card => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(20px)';
+      card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(card);
+    });
+
+    // Tracking des clics sur liens d'affiliation
+    document.querySelectorAll('a[rel*="sponsored"]').forEach(link => {
+      link.addEventListener('click', function() {
+        // Analytics tracking
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'affiliate_click', {
+            'bank_name': this.textContent.trim(),
+            'position': this.closest('.card')?.querySelector('h3')?.textContent || 'unknown'
+          });
+        }
+      });
+    });
+  });
+
+  // Fonction pour smooth scroll vers sections
+  function scrollToSection(sectionId) {
+    document.getElementById(sectionId)?.scrollIntoView({ 
+      behavior: 'smooth', 
+      block: 'start' 
+    });
+  }
+</script>
+
+<!-- Styles personnalisés -->
+<style>
+  /* Smooth transitions pour les filtres */
+  .card {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  
+  /* Badge styles */
+  .badge-featured {
+    background: linear-gradient(45deg, #f59e0b, #d97706);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    animation: pulse 2s infinite;
+  }
+  
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+  
+  /* Hover effects pour les boutons d'affiliation */
+  a[rel*="sponsored"]:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+  
+  /* Responsive table */
+  @media (max-width: 768px) {
+    .overflow-x-auto table {
+      font-size: 0.75rem;
+    }
+  }
+  
+  /* Highlight effects */
+  .highlight-match {
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+    border-color: #3b82f6;
+  }
+</style>
+</Layout>

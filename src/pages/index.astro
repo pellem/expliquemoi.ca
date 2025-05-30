@@ -2,73 +2,74 @@
 // src/pages/index.astro
 import Layout from '../layouts/Default.astro';
 
-const title = "🍁 NouvelArrivant.ca | Guide Ultime pour Français au Canada";
-const description = "Le guide complet pour réussir ton installation au Canada : convertisseurs, salaires, formulaires, jours fériés. Créé par un Français expatrié pour les nouveaux arrivants.";
+const title = "🤔 ExpliqueMoi.ca | Le Guide Francophone de Référence pour le Canada";
+const description = "ExpliqueMoi.ca - LE site de référence francophone pour comprendre la vie au Canada. Convertisseurs, salaires, formulaires, jours fériés. Simple, précis, efficace.";
 ---
 
 <Layout title={title} description={description}>
  <!-- Hero Section Ultra-Sexy -->
- <section class="relative bg-gradient-to-br from-red-600 via-red-500 to-orange-500 text-white overflow-hidden">
-   <!-- Motif de fond -->
+ <section class="relative bg-gradient-to-br from-indigo-600 via-blue-600 to-indigo-800 text-white overflow-hidden">
+   <!-- Motif de fond animé -->
    <div class="absolute inset-0 opacity-10">
-     <div class="absolute top-20 left-10 text-6xl">🍁</div>
-     <div class="absolute top-40 right-20 text-4xl">🇨🇦</div>
-     <div class="absolute bottom-20 left-1/4 text-5xl">🇫🇷</div>
-     <div class="absolute bottom-40 right-1/3 text-3xl">📏</div>
-     <div class="absolute top-1/3 left-1/2 text-4xl">💰</div>
+     <div class="absolute top-20 left-10 text-6xl animate-float">🤔</div>
+     <div class="absolute top-40 right-20 text-4xl animate-float" style="animation-delay: 0.5s;">🇨🇦</div>
+     <div class="absolute bottom-20 left-1/4 text-5xl animate-float" style="animation-delay: 1s;">💡</div>
+     <div class="absolute bottom-40 right-1/3 text-3xl animate-float" style="animation-delay: 1.5s;">📏</div>
+     <div class="absolute top-1/3 left-1/2 text-4xl animate-float" style="animation-delay: 2s;">💰</div>
    </div>
+   
+   <!-- Gradient overlay pour plus de profondeur -->
+   <div class="absolute inset-0 bg-gradient-to-t from-indigo-900/20 to-transparent"></div>
    
    <div class="relative max-w-6xl mx-auto px-4 py-20">
      <div class="text-center">
        <!-- Badge nouveau -->
-       <div class="inline-flex items-center bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 mb-6">
-         <span class="text-sm font-medium">✨ Nouveau site pour les Français expatriés</span>
+       <div class="inline-flex items-center bg-white/20 backdrop-blur-sm rounded-full px-6 py-3 mb-8 border border-white/30">
+         <span class="text-sm font-medium">✨ Le site de référence francophone pour le Canada</span>
        </div>
        
        <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-         <span class="bg-gradient-to-r from-yellow-300 to-orange-200 bg-clip-text text-transparent">
-           NouvelArrivant.ca
+         <span class="bg-gradient-to-r from-yellow-300 via-green-300 to-blue-300 bg-clip-text text-transparent">
+           ExpliqueMoi.ca
          </span>
        </h1>
        
-       <p class="text-xl md:text-2xl mb-8 text-red-100 max-w-3xl mx-auto leading-relaxed">
-         Le guide ultime pour réussir ton installation au Canada.<br>
-         <strong class="text-white">Fini les galères avec les pieds, livres, °F et formulaires !</strong>
+       <p class="text-xl md:text-2xl mb-8 text-indigo-100 max-w-4xl mx-auto leading-relaxed">
+         <strong class="text-white">On t'explique tout ce qu'il faut savoir pour réussir au Canada.</strong><br>
+         Convertisseurs, salaires, formulaires, conseils... Simple, précis, efficace.
        </p>
        
        <!-- CTA Buttons -->
        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-         <a href="#outils" class="bg-white text-red-600 font-bold px-8 py-4 rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg">
+         <a href="#outils" class="bg-white text-indigo-600 font-bold px-8 py-4 rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg">
            🚀 Découvrir les outils
          </a>
-         <a href="https://salairenet.ca" target="_blank" rel="noopener" class="bg-transparent border-2 border-white text-white font-bold px-8 py-4 rounded-full hover:bg-white hover:text-red-600 transition-all duration-300">
+         <a href="https://salairenet.ca" target="_blank" rel="noopener" class="bg-transparent border-2 border-white text-white font-bold px-8 py-4 rounded-full hover:bg-white hover:text-indigo-600 transition-all duration-300">
            💰 Calculer mon salaire net
          </a>
        </div>
        
-       <!-- Stats visuelles -->
-       <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-2xl mx-auto">
-         <div class="text-center">
-           <div class="text-3xl font-bold text-yellow-300">6</div>
-           <div class="text-sm text-red-100">Outils essentiels</div>
+<!-- Stats visuelles -->
+       <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto">
+         <div class="text-center bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+           <div class="text-3xl font-bold text-green-300">10+</div>
+           <div class="text-sm text-indigo-100">Outils pratiques</div>
          </div>
-         <div class="text-center">
-           <div class="text-3xl font-bold text-yellow-300">100%</div>
-           <div class="text-sm text-red-100">Gratuit</div>
+         <div class="text-center bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+           <div class="text-3xl font-bold text-green-300">100%</div>
+           <div class="text-sm text-indigo-100">Gratuit</div>
          </div>
-         <div class="text-center">
-           <div class="text-3xl font-bold text-yellow-300">🇫🇷</div>
-           <div class="text-sm text-red-100">Made by Français</div>
+         <div class="text-center bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+           <div class="text-3xl font-bold text-green-300">🌍</div>
+           <div class="text-sm text-indigo-100">Francophone</div>
          </div>
-         <div class="text-center">
-           <div class="text-3xl font-bold text-yellow-300">⚡</div>
-           <div class="text-sm text-red-100">Instant</div>
+         <div class="text-center bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+           <div class="text-3xl font-bold text-green-300">⚡</div>
+           <div class="text-sm text-indigo-100">Instantané</div>
          </div>
        </div>
-     </div>
-   </div>
 
-   <!-- Scroll indicator -->
+   <!-- Scroll indicator animé -->
    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
      <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
@@ -76,32 +77,59 @@ const description = "Le guide complet pour réussir ton installation au Canada :
    </div>
  </section>
 
- <!-- Section Outils Principaux -->
+<!-- Section Outils Principaux -->
  <section id="outils" class="py-20 bg-gray-50">
    <div class="max-w-6xl mx-auto px-4">
      <div class="text-center mb-16">
        <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
-         Tes <span class="text-red-600">super-pouvoirs</span> d'expatrié
+         Tes <span class="text-indigo-600">outils essentiels</span> pour le Canada
        </h2>
-       <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-         Tous les outils indispensables pour maîtriser la vie canadienne comme un boss
+       <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+         Tout ce dont tu as besoin pour comprendre et maîtriser la vie canadienne, 
+         expliqué simplement et accessible en un clic.
        </p>
      </div>
 
      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-       <!-- Convertisseur Mesures -->
-       <div class="group">
-         <a href="/mesures" class="block bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden">
-           <div class="bg-gradient-to-br from-blue-500 to-purple-600 p-6 text-white">
-             <div class="text-4xl mb-4">📏</div>
-             <h3 class="text-2xl font-bold mb-2">Mesures</h3>
-             <p class="text-blue-100">Pieds, livres, °F, miles... Convertis tout en un clic !</p>
+       <!-- Credit Score (NOUVEAU - priorité) -->
+       <div class="group relative">
+         <a href="/credit-score" class="block bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden border border-gray-100">
+           <div class="bg-gradient-to-br from-green-500 to-emerald-600 p-6 text-white relative">
+             <div class="absolute top-2 right-2 bg-yellow-400 text-yellow-900 text-xs font-bold px-2 py-1 rounded-full animate-pulse">
+               NOUVEAU
+             </div>
+             <div class="text-4xl mb-4">💳</div>
+             <h3 class="text-2xl font-bold mb-2">Cote de Crédit</h3>
+             <p class="text-green-100">Construis ton crédit de 0 à 750+ en 24 mois</p>
            </div>
            <div class="p-6">
              <div class="flex items-center justify-between">
                <div>
-                 <div class="text-sm text-gray-600 mb-1">Exemples :</div>
-                 <div class="text-xs text-gray-500">5'8" = 173cm • 150lbs = 68kg</div>
+                 <div class="text-sm text-gray-600 mb-1">Essential :</div>
+                 <div class="text-xs text-gray-500">Simulateur • Timeline • Cartes débutants</div>
+               </div>
+               <div class="text-green-500 group-hover:translate-x-1 transition-transform">→</div>
+             </div>
+           </div>
+         </a>
+       </div>
+
+       <!-- Banques (NOUVEAU - priorité) -->
+       <div class="group relative">
+         <a href="/banques" class="block bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden border border-gray-100">
+           <div class="bg-gradient-to-br from-blue-500 to-indigo-600 p-6 text-white relative">
+             <div class="absolute top-2 right-2 bg-yellow-400 text-yellow-900 text-xs font-bold px-2 py-1 rounded-full animate-pulse">
+               NOUVEAU
+             </div>
+             <div class="text-4xl mb-4">🏦</div>
+             <h3 class="text-2xl font-bold mb-2">Banques</h3>
+             <p class="text-blue-100">Compare et choisis la banque parfaite</p>
+           </div>
+           <div class="p-6">
+             <div class="flex items-center justify-between">
+               <div>
+                 <div class="text-sm text-gray-600 mb-1">Gratuit :</div>
+                 <div class="text-xs text-gray-500">Tangerine • Simplii • Comparateur</div>
                </div>
                <div class="text-blue-500 group-hover:translate-x-1 transition-transform">→</div>
              </div>
@@ -109,31 +137,54 @@ const description = "Le guide complet pour réussir ton installation au Canada :
          </a>
        </div>
 
-       <!-- Cuisine -->
-       <div class="group">
-         <a href="/cuisine" class="block bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden">
-           <div class="bg-gradient-to-br from-orange-500 to-red-600 p-6 text-white">
-             <div class="text-4xl mb-4">🍳</div>
-             <h3 class="text-2xl font-bold mb-2">Cuisine</h3>
-             <p class="text-orange-100">Cups, °F, portions... Cuisine comme un chef !</p>
+       <!-- Forfaits Mobile (NOUVEAU) -->
+       <div class="group relative">
+         <a href="/forfaits-mobile" class="block bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden border border-gray-100">
+           <div class="bg-gradient-to-br from-purple-500 to-pink-600 p-6 text-white relative">
+             <div class="absolute top-2 right-2 bg-yellow-400 text-yellow-900 text-xs font-bold px-2 py-1 rounded-full animate-pulse">
+               NOUVEAU
+             </div>
+             <div class="text-4xl mb-4">📱</div>
+             <h3 class="text-2xl font-bold mb-2">Forfaits Mobile</h3>
+             <p class="text-purple-100">Compare Bell, Rogers, Fizz, Freedom</p>
            </div>
            <div class="p-6">
              <div class="flex items-center justify-between">
                <div>
-                 <div class="text-sm text-gray-600 mb-1">Exemples :</div>
-                 <div class="text-xs text-gray-500">1 cup farine = 125g • 350°F = 180°C</div>
+                 <div class="text-sm text-gray-600 mb-1">Économies :</div>
+                 <div class="text-xs text-gray-500">Fizz 45$ • Freedom 50$ • Négociation</div>
                </div>
-               <div class="text-orange-500 group-hover:translate-x-1 transition-transform">→</div>
+               <div class="text-purple-500 group-hover:translate-x-1 transition-transform">→</div>
              </div>
            </div>
          </a>
        </div>
 
-       <!-- Salaire Net -->
+       <!-- Mesures (existant) -->
+       <div class="group">
+         <a href="/mesures" class="block bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden border border-gray-100">
+           <div class="bg-gradient-to-br from-indigo-500 to-blue-600 p-6 text-white">
+             <div class="text-4xl mb-4">📏</div>
+             <h3 class="text-2xl font-bold mb-2">Mesures</h3>
+             <p class="text-indigo-100">Pieds, livres, °F, miles... Convertis tout !</p>
+           </div>
+           <div class="p-6">
+             <div class="flex items-center justify-between">
+               <div>
+                 <div class="text-sm text-gray-600 mb-1">Exemples :</div>
+                 <div class="text-xs text-gray-500">5'8" = 173cm • 150lbs = 68kg</div>
+               </div>
+               <div class="text-indigo-500 group-hover:translate-x-1 transition-transform">→</div>
+             </div>
+           </div>
+         </a>
+       </div>
+
+       <!-- Salaire Net (existant - update) -->
        <div class="group relative">
-         <a href="/salaire" class="block bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden">
+         <a href="/salaire" class="block bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden border border-gray-100">
            <div class="bg-gradient-to-br from-green-500 to-emerald-600 p-6 text-white relative">
-             <div class="absolute top-2 right-2 bg-yellow-400 text-yellow-900 text-xs font-bold px-2 py-1 rounded-full">
+             <div class="absolute top-2 right-2 bg-yellow-400 text-yellow-900 text-xs font-bold px-2 py-1 rounded-full animate-pulse">
                POPULAIRE
              </div>
              <div class="text-4xl mb-4">💰</div>
@@ -152,13 +203,33 @@ const description = "Le guide complet pour réussir ton installation au Canada :
          </a>
        </div>
 
-       <!-- Jours Fériés -->
+       <!-- Cuisine (existant) -->
        <div class="group">
-         <a href="/jours-feries" class="block bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden">
-           <div class="bg-gradient-to-br from-indigo-500 to-purple-600 p-6 text-white">
+         <a href="/cuisine" class="block bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden border border-gray-100">
+           <div class="bg-gradient-to-br from-orange-500 to-red-600 p-6 text-white">
+             <div class="text-4xl mb-4">🍳</div>
+             <h3 class="text-2xl font-bold mb-2">Cuisine</h3>
+             <p class="text-orange-100">Cups, °F, portions... Cuisine comme un chef !</p>
+           </div>
+           <div class="p-6">
+             <div class="flex items-center justify-between">
+               <div>
+                 <div class="text-sm text-gray-600 mb-1">Exemples :</div>
+                 <div class="text-xs text-gray-500">1 cup farine = 125g • 350°F = 180°C</div>
+               </div>
+               <div class="text-orange-500 group-hover:translate-x-1 transition-transform">→</div>
+             </div>
+           </div>
+         </a>
+       </div>
+
+       <!-- Jours Fériés (existant) -->
+       <div class="group">
+         <a href="/jours-feries" class="block bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden border border-gray-100">
+           <div class="bg-gradient-to-br from-purple-500 to-indigo-600 p-6 text-white">
              <div class="text-4xl mb-4">📅</div>
              <h3 class="text-2xl font-bold mb-2">Jours Fériés</h3>
-             <p class="text-indigo-100">Calendrier complet par province</p>
+             <p class="text-purple-100">Calendrier complet par province</p>
            </div>
            <div class="p-6">
              <div class="flex items-center justify-between">
@@ -166,19 +237,19 @@ const description = "Le guide complet pour réussir ton installation au Canada :
                  <div class="text-sm text-gray-600 mb-1">Info :</div>
                  <div class="text-xs text-gray-500">Québec = 11 jours • Ontario = 9 jours</div>
                </div>
-               <div class="text-indigo-500 group-hover:translate-x-1 transition-transform">→</div>
+               <div class="text-purple-500 group-hover:translate-x-1 transition-transform">→</div>
              </div>
            </div>
          </a>
        </div>
 
-       <!-- Formulaires -->
+       <!-- Formulaires (existant) -->
        <div class="group">
-         <a href="/formulaires" class="block bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden">
-           <div class="bg-gradient-to-br from-purple-500 to-pink-600 p-6 text-white">
+         <a href="/formulaires" class="block bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden border border-gray-100">
+           <div class="bg-gradient-to-br from-blue-500 to-cyan-600 p-6 text-white">
              <div class="text-4xl mb-4">📋</div>
              <h3 class="text-2xl font-bold mb-2">Formulaires</h3>
-             <p class="text-purple-100">NAS, RAMQ, impôts... Tous les liens officiels</p>
+             <p class="text-blue-100">NAS, RAMQ, impôts... Liens officiels</p>
            </div>
            <div class="p-6">
              <div class="flex items-center justify-between">
@@ -186,28 +257,28 @@ const description = "Le guide complet pour réussir ton installation au Canada :
                  <div class="text-sm text-gray-600 mb-1">Essentiels :</div>
                  <div class="text-xs text-gray-500">NAS • RAMQ • Permis • Impôts</div>
                </div>
-               <div class="text-purple-500 group-hover:translate-x-1 transition-transform">→</div>
+               <div class="text-blue-500 group-hover:translate-x-1 transition-transform">→</div>
              </div>
            </div>
          </a>
        </div>
 
-       <!-- Coming Soon -->
+       <!-- Coming Soon (update) -->
        <div class="group relative">
          <div class="block bg-white rounded-2xl shadow-lg border-2 border-dashed border-gray-300 overflow-hidden opacity-75">
            <div class="bg-gradient-to-br from-gray-400 to-gray-500 p-6 text-white">
              <div class="absolute top-2 right-2 bg-yellow-400 text-yellow-900 text-xs font-bold px-2 py-1 rounded-full">
                BIENTÔT
              </div>
-             <div class="text-4xl mb-4">📱</div>
-             <h3 class="text-2xl font-bold mb-2">Télécoms</h3>
-             <p class="text-gray-100">Forfaits mobile, internet, comparaisons</p>
+             <div class="text-4xl mb-4">🏠</div>
+             <h3 class="text-2xl font-bold mb-2">Hypothèque</h3>
+             <p class="text-gray-100">Taux, calculateurs, pré-approbation</p>
            </div>
            <div class="p-6">
              <div class="flex items-center justify-between">
                <div>
                  <div class="text-sm text-gray-600 mb-1">Prochainement :</div>
-                 <div class="text-xs text-gray-500">Rogers • Bell • Fizz • Comparaisons</div>
+                 <div class="text-xs text-gray-500">Calculateurs • Courtiers • Stress test</div>
                </div>
                <div class="text-gray-400">...</div>
              </div>
@@ -218,69 +289,73 @@ const description = "Le guide complet pour réussir ton installation au Canada :
    </div>
  </section>
 
- <!-- Section Témoignages/Stats Fun -->
+
+ <!-- Section Pourquoi ExpliqueMoi -->
  <section class="py-20 bg-white">
    <div class="max-w-6xl mx-auto px-4">
      <div class="text-center mb-16">
-       <h2 class="text-4xl font-bold text-gray-800 mb-4">
-         Rejoint la communauté des <span class="text-red-600">Français qui réussissent</span> au Canada
+       <h2 class="text-4xl font-bold text-gray-800 mb-6">
+         Pourquoi <span class="text-indigo-600">ExpliqueMoi.ca</span> ?
        </h2>
+       <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+         Parce que comprendre le système nord Américain ne devrait pas être un casse-tête.
+       </p>
      </div>
 
      <div class="grid md:grid-cols-3 gap-8 mb-16">
-       <!-- Stat 1 -->
-       <div class="text-center p-8 bg-red-50 rounded-2xl">
-         <div class="text-4xl mb-4">🤯</div>
-         <div class="text-3xl font-bold text-red-600 mb-2">73%</div>
-         <p class="text-gray-700">des Français galèrent avec les mesures canadiennes la première année</p>
-       </div>
-
-       <!-- Stat 2 -->
-       <div class="text-center p-8 bg-blue-50 rounded-2xl">
-         <div class="text-4xl mb-4">⏰</div>
-         <div class="text-3xl font-bold text-blue-600 mb-2">2h</div>
-         <p class="text-gray-700">économisées en moyenne par semaine grâce aux convertisseurs</p>
-       </div>
-
-       <!-- Stat 3 -->
-       <div class="text-center p-8 bg-green-50 rounded-2xl">
+       <!-- Raison 1 -->
+       <div class="text-center p-8 bg-indigo-50 rounded-2xl border border-indigo-100">
          <div class="text-4xl mb-4">🎯</div>
-         <div class="text-3xl font-bold text-green-600 mb-2">100%</div>
-         <p class="text-gray-700">des outils créés par un Français expatrié depuis 5 ans</p>
+         <div class="text-2xl font-bold text-indigo-600 mb-3">Simple</div>
+         <p class="text-gray-700">On explique tout en français, sans jargon compliqué. Direct et efficace.</p>
+       </div>
+
+       <!-- Raison 2 -->
+       <div class="text-center p-8 bg-green-50 rounded-2xl border border-green-100">
+         <div class="text-4xl mb-4">⚡</div>
+         <div class="text-2xl font-bold text-green-600 mb-3">Rapide</div>
+         <p class="text-gray-700">Convertisseurs instantanés, réponses immédiates, liens directs vers les bonnes pages.</p>
+       </div>
+
+       <!-- Raison 3 -->
+       <div class="text-center p-8 bg-blue-50 rounded-2xl border border-blue-100">
+         <div class="text-4xl mb-4">🔄</div>
+         <div class="text-2xl font-bold text-blue-600 mb-3">À jour</div>
+         <p class="text-gray-700">Informations vérifiées régulièrement. Taux 2025, nouvelles lois, liens officiels.</p>
        </div>
      </div>
 
      <!-- Témoignages -->
      <div class="grid md:grid-cols-2 gap-8">
-       <div class="bg-gray-50 p-8 rounded-2xl">
+       <div class="bg-gray-50 p-8 rounded-2xl border border-gray-100">
          <div class="flex items-center mb-4">
-           <div class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center text-white font-bold">
-             M
+           <div class="w-12 h-12 bg-indigo-500 rounded-full flex items-center justify-center text-white font-bold">
+             S
            </div>
            <div class="ml-4">
-             <div class="font-semibold text-gray-800">Marie, 28 ans</div>
-             <div class="text-sm text-gray-600">Arrivée à Montréal en 2023</div>
+             <div class="font-semibold text-gray-800">Sophie, 31 ans</div>
+             <div class="text-sm text-gray-600">Montréal</div>
            </div>
          </div>
          <p class="text-gray-700 italic">
-           "Enfin un site qui parle français ! J'ai économisé tellement de temps pour mes démarches. 
-           Le convertisseur de salaire m'a aidée à négocier mon contrat."
+           "Enfin un site qui explique tout clairement ! Plus besoin de chercher pendant des heures 
+           pour comprendre comment calculer mon salaire net ou convertir les mesures."
          </p>
        </div>
 
-       <div class="bg-gray-50 p-8 rounded-2xl">
+       <div class="bg-gray-50 p-8 rounded-2xl border border-gray-100">
          <div class="flex items-center mb-4">
-           <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold">
-             T
+           <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white font-bold">
+             A
            </div>
            <div class="ml-4">
-             <div class="font-semibold text-gray-800">Thomas, 32 ans</div>
-             <div class="text-sm text-gray-600">Développeur à Toronto</div>
+             <div class="font-semibold text-gray-800">Alexandre, 28 ans</div>
+             <div class="text-sm text-gray-600">Vancouver</div>
            </div>
          </div>
          <p class="text-gray-700 italic">
-           "Les conversions de mesures me sauvent la vie ! Plus besoin de galérer avec les °F 
-           pour la météo ou les pieds carrés pour mon appart."
+           "Les convertisseurs me sauvent la vie au quotidien ! Plus de prise de tête avec 
+           les pieds carrés, les °F ou les livres. Tout est là, simple et efficace."
          </p>
        </div>
      </div>
@@ -288,28 +363,44 @@ const description = "Le guide complet pour réussir ton installation au Canada :
  </section>
 
  <!-- Section CTA Final -->
- <section class="py-20 bg-gradient-to-r from-red-500 to-orange-500 text-white">
+ <section class="py-20 bg-gradient-to-r from-indigo-600 to-blue-600 text-white">
    <div class="max-w-4xl mx-auto px-4 text-center">
      <h2 class="text-4xl md:text-5xl font-bold mb-6">
-       Prêt(e) à maîtriser ta vie canadienne ?
+       Prêt(e) à tout comprendre sur le Canada ?
      </h2>
-     <p class="text-xl text-red-100 mb-8 max-w-2xl mx-auto">
-       Commence par calculer ton salaire net, puis explore tous nos outils. 
-       C'est gratuit et ça va te changer la vie !
+     <p class="text-xl text-indigo-100 mb-8 max-w-3xl mx-auto">
+       Commence par nos outils les plus populaires et découvre à quel point 
+       la vie canadienne peut être simple quand c'est bien expliqué.
      </p>
      
-     <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-       <a href="https://salairenet.ca" target="_blank" rel="noopener" class="bg-white text-red-600 font-bold px-8 py-4 rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg">
+     <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+       <a href="https://salairenet.ca" target="_blank" rel="noopener" class="bg-white text-indigo-600 font-bold px-8 py-4 rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg">
          💰 Calculer mon salaire net
        </a>
-       <a href="/mesures" class="bg-transparent border-2 border-white text-white font-bold px-8 py-4 rounded-full hover:bg-white hover:text-red-600 transition-all duration-300">
+       <a href="/mesures" class="bg-transparent border-2 border-white text-white font-bold px-8 py-4 rounded-full hover:bg-white hover:text-indigo-600 transition-all duration-300">
          📏 Convertir mes mesures
        </a>
      </div>
      
-     <div class="mt-12 text-center">
-       <p class="text-red-100 text-sm">
-         Made with ❤️ by un Français expatrié • Tous droits réservés 2025
+     <!-- Social proof subtil -->
+     <div class="flex justify-center items-center space-x-8 text-indigo-200 text-sm">
+       <div class="flex items-center space-x-2">
+         <span>🌟</span>
+         <span>100% gratuit</span>
+       </div>
+       <div class="flex items-center space-x-2">
+         <span>⚡</span>
+         <span>Résultats instantanés</span>
+       </div>
+       <div class="flex items-center space-x-2">
+         <span>🔒</span>
+         <span>Aucune inscription</span>
+       </div>
+     </div>
+     
+     <div class="mt-8 text-center">
+       <p class="text-indigo-200 text-sm">
+         © 2025 ExpliqueMoi.ca - On t'explique tout avec ❤️
        </p>
      </div>
    </div>
@@ -324,14 +415,19 @@ const description = "Le guide complet pour réussir ton installation au Canada :
  }
  
  .animate-float {
-   animation: float 3s ease-in-out infinite;
+   animation: float 4s ease-in-out infinite;
  }
  
- /* Gradient text pour les navigateurs qui ne supportent pas bg-clip-text */
+ /* Gradient text fallback */
  .gradient-text {
-   background: linear-gradient(45deg, #fbbf24, #fb923c);
+   background: linear-gradient(45deg, #fbbf24, #34d399, #60a5fa);
    -webkit-background-clip: text;
    -webkit-text-fill-color: transparent;
    background-clip: text;
+ }
+ 
+ /* Amélioration des transitions */
+ .group:hover .group-hover\:translate-x-1 {
+   transform: translateX(0.25rem);
  }
 </style>

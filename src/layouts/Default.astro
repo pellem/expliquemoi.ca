@@ -8,13 +8,58 @@ import "../styles/global.css";
  <head>
    <meta charset="UTF-8" />
    <meta name="viewport" content="width=device-width, initial-scale=1" />
-   <meta name="description" content={description || 'Guide ultime pour nouveaux arrivants au Canada. Convertisseurs, salaires, formulaires, jours fériés. Outils pratiques créés par des expatriés francophones.'} />
+   <meta name="description" content={description || 'ExpliqueMoi.ca - On t\'explique tout sur la vie au Canada. Convertisseurs, salaires, formulaires, guide complet pour Français expatriés et nouveaux arrivants.'} />
    <meta name="robots" content="index, follow" />
-   <meta name="keywords" content="nouveaux arrivants Canada, francophones expatriés, convertisseur mesures, salaire net Canada, immigration Québec, guide expatriation" />
-   <meta name="author" content="NouvelArrivant.ca" />
-   <title>{title || '🍁 NouvelArrivant.ca | Guide Ultime pour Francophones au Canada'}</title>
-   <link rel="canonical" href="https://nouvelarrivant.ca/" />
-   <link rel="icon" type="image/png" href="/favicon.png" />
+   <meta name="keywords" content="explique moi ca, guide Canada francophone, convertisseur mesures Canada, salaire net Canada, immigration Québec, formulaires gouvernementaux, nouveaux arrivants" />
+   <meta name="author" content="ExpliqueMoi.ca" />
+   
+   <!-- SEO amélioré -->
+   <title>{title || '🤔 ExpliqueMoi.ca | On t\'explique tout sur la vie au Canada'}</title>
+   <link rel="canonical" href="https://expliquemoi.ca/" />
+   
+   <!-- Open Graph / Facebook -->
+   <meta property="og:type" content="website" />
+   <meta property="og:url" content="https://expliquemoi.ca/" />
+   <meta property="og:title" content={title || 'ExpliqueMoi.ca - Guide ultime pour vivre au Canada'} />
+   <meta property="og:description" content={description || 'Convertisseurs, salaires, formulaires... On t\'explique tout ce qu\'il faut savoir pour réussir ta vie au Canada !'} />
+   <meta property="og:image" content="https://expliquemoi.ca/og-image.jpg" />
+   <meta property="og:site_name" content="ExpliqueMoi.ca" />
+   <meta property="og:locale" content="fr_CA" />
+   
+   <!-- Twitter -->
+   <meta property="twitter:card" content="summary_large_image" />
+   <meta property="twitter:url" content="https://expliquemoi.ca/" />
+   <meta property="twitter:title" content={title || 'ExpliqueMoi.ca - Guide ultime pour vivre au Canada'} />
+   <meta property="twitter:description" content={description || 'On t\'explique tout ce qu\'il faut savoir pour réussir ta vie au Canada !'} />
+   <meta property="twitter:image" content="https://expliquemoi.ca/og-image.jpg" />
+   
+   <!-- Favicons -->
+   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+   <link rel="manifest" href="/site.webmanifest" />
+   
+   <!-- Schema.org markup -->
+   <script type="application/ld+json">
+   {
+     "@context": "https://schema.org",
+     "@type": "WebSite",
+     "name": "ExpliqueMoi.ca",
+     "description": "Guide complet pour la vie au Canada - Convertisseurs, salaires, formulaires et conseils pour francophones",
+     "url": "https://expliquemoi.ca",
+     "potentialAction": {
+       "@type": "SearchAction",
+       "target": "https://expliquemoi.ca/search?q={search_term_string}",
+       "query-input": "required name=search_term_string"
+     },
+     "inLanguage": "fr-CA",
+     "publisher": {
+       "@type": "Organization",
+       "name": "ExpliqueMoi.ca"
+     }
+   }
+   </script>
+   
    <slot name="head" />
  </head>
 
@@ -25,10 +70,10 @@ import "../styles/global.css";
        <!-- Header Mobile -->
        <div class="flex items-center justify-between md:hidden">
          <a href="/" class="flex items-center space-x-2">
-           <div class="w-8 h-8 bg-gradient-to-br from-red-500 to-orange-500 rounded-lg flex items-center justify-center text-white text-lg">
-             🍁
+           <div class="w-8 h-8 bg-gradient-to-br from-indigo-600 to-blue-600 rounded-lg flex items-center justify-center text-white text-lg">
+             🤔
            </div>
-           <span class="font-bold text-lg text-gray-800">NouvelArrivant</span>
+           <span class="font-bold text-lg text-gray-800">ExpliqueMoi</span>
          </a>
          
          <button id="mobile-menu-toggle" class="p-2 rounded-lg hover:bg-gray-100 transition-colors">
@@ -41,22 +86,22 @@ import "../styles/global.css";
        <!-- Header Desktop -->
        <div class="hidden md:flex items-center justify-between max-w-6xl mx-auto">
          <a href="/" class="flex items-center space-x-3 group">
-           <div class="w-10 h-10 bg-gradient-to-br from-red-500 to-orange-500 rounded-xl flex items-center justify-center text-white text-xl group-hover:scale-105 transition-transform">
-             🍁
+           <div class="w-10 h-10 bg-gradient-to-br from-indigo-600 to-blue-600 rounded-xl flex items-center justify-center text-white text-xl group-hover:scale-105 transition-transform">
+             🤔
            </div>
            <div>
-             <div class="font-bold text-xl text-gray-800 group-hover:text-red-600 transition-colors">
-               NouvelArrivant.ca
+             <div class="font-bold text-xl text-gray-800 group-hover:text-indigo-600 transition-colors">
+               ExpliqueMoi.ca
              </div>
-             <div class="text-xs text-gray-500">Guide pour francophones</div>
+             <div class="text-xs text-gray-500">On t'explique tout, simplement</div>
            </div>
          </a>
 
          <!-- Navigation Desktop avec badges -->
          <nav class="flex items-center space-x-2">
-           <a href="/mesures" class="nav-item group flex items-center space-x-2 px-3 py-2 rounded-lg hover:bg-blue-50 transition-colors relative">
+           <a href="/mesures" class="nav-item group flex items-center space-x-2 px-3 py-2 rounded-lg hover:bg-indigo-50 transition-colors relative">
              <span class="text-xl">📏</span>
-             <span class="font-medium text-gray-700 group-hover:text-blue-700">Mesures</span>
+             <span class="font-medium text-gray-700 group-hover:text-indigo-700">Mesures</span>
            </a>
            
            <a href="/cuisine" class="nav-item group flex items-center space-x-2 px-3 py-2 rounded-lg hover:bg-orange-50 transition-colors">
@@ -67,7 +112,7 @@ import "../styles/global.css";
            <a href="/salaire" class="nav-item group flex items-center space-x-2 px-3 py-2 rounded-lg hover:bg-green-50 transition-colors relative">
              <span class="text-xl">💰</span>
              <span class="font-medium text-gray-700 group-hover:text-green-700">Salaire</span>
-             <span class="absolute -top-1 -right-1 bg-green-500 text-white text-xs px-1.5 py-0.5 rounded-full font-bold">HOT</span>
+             <span class="absolute -top-1 -right-1 bg-green-500 text-white text-xs px-1.5 py-0.5 rounded-full font-bold">NOUVEAU</span>
            </a>
            
            <a href="/jours-feries" class="nav-item group flex items-center space-x-2 px-3 py-2 rounded-lg hover:bg-purple-50 transition-colors">
@@ -75,13 +120,13 @@ import "../styles/global.css";
              <span class="font-medium text-gray-700 group-hover:text-purple-700">Jours Fériés</span>
            </a>
            
-           <a href="/formulaires" class="nav-item group flex items-center space-x-2 px-3 py-2 rounded-lg hover:bg-indigo-50 transition-colors">
+           <a href="/formulaires" class="nav-item group flex items-center space-x-2 px-3 py-2 rounded-lg hover:bg-blue-50 transition-colors">
              <span class="text-xl">📋</span>
-             <span class="font-medium text-gray-700 group-hover:text-indigo-700">Formulaires</span>
+             <span class="font-medium text-gray-700 group-hover:text-blue-700">Formulaires</span>
            </a>
 
            <!-- CTA Principal -->
-           <a href="https://salairenet.ca" target="_blank" rel="noopener" class="ml-4 bg-gradient-to-r from-red-500 to-orange-500 text-white px-4 py-2 rounded-lg hover:from-red-600 hover:to-orange-600 transition-all duration-300 font-medium shadow-lg hover:shadow-xl transform hover:scale-105">
+           <a href="https://salairenet.ca" target="_blank" rel="noopener" class="ml-4 bg-gradient-to-r from-indigo-600 to-blue-600 text-white px-4 py-2 rounded-lg hover:from-indigo-700 hover:to-blue-700 transition-all duration-300 font-medium shadow-lg hover:shadow-xl transform hover:scale-105">
              💰 Salaire Net
            </a>
          </nav>
@@ -92,13 +137,13 @@ import "../styles/global.css";
      <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
        <div class="px-4 py-4 space-y-1">
          <!-- Navigation Mobile avec cards visuelles -->
-         <a href="/mesures" class="mobile-nav-card flex items-center space-x-3 p-3 rounded-xl bg-blue-50 border border-blue-100 hover:bg-blue-100 transition-colors">
-           <div class="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center text-white text-lg">📏</div>
+         <a href="/mesures" class="mobile-nav-card flex items-center space-x-3 p-3 rounded-xl bg-indigo-50 border border-indigo-100 hover:bg-indigo-100 transition-colors">
+           <div class="w-10 h-10 bg-indigo-500 rounded-lg flex items-center justify-center text-white text-lg">📏</div>
            <div class="flex-1">
-             <div class="font-semibold text-blue-700">Mesures</div>
-             <div class="text-xs text-blue-600">Pieds, livres, °F...</div>
+             <div class="font-semibold text-indigo-700">Mesures</div>
+             <div class="text-xs text-indigo-600">Pieds, livres, °F...</div>
            </div>
-           <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+           <svg class="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
            </svg>
          </a>
@@ -139,20 +184,20 @@ import "../styles/global.css";
            </svg>
          </a>
 
-         <a href="/formulaires" class="mobile-nav-card flex items-center space-x-3 p-3 rounded-xl bg-indigo-50 border border-indigo-100 hover:bg-indigo-100 transition-colors">
-           <div class="w-10 h-10 bg-indigo-500 rounded-lg flex items-center justify-center text-white text-lg">📋</div>
+         <a href="/formulaires" class="mobile-nav-card flex items-center space-x-3 p-3 rounded-xl bg-blue-50 border border-blue-100 hover:bg-blue-100 transition-colors">
+           <div class="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center text-white text-lg">📋</div>
            <div class="flex-1">
-             <div class="font-semibold text-indigo-700">Formulaires</div>
-             <div class="text-xs text-indigo-600">NAS, RAMQ, impôts</div>
+             <div class="font-semibold text-blue-700">Formulaires</div>
+             <div class="text-xs text-blue-600">NAS, RAMQ, impôts</div>
            </div>
-           <svg class="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+           <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
            </svg>
          </a>
 
          <!-- CTA Mobile -->
          <div class="pt-4 border-t border-gray-200 mt-4">
-           <a href="https://salairenet.ca" target="_blank" rel="noopener" class="flex items-center justify-center space-x-2 w-full bg-gradient-to-r from-red-500 to-orange-500 text-white p-4 rounded-xl hover:from-red-600 hover:to-orange-600 transition-all duration-300 font-semibold shadow-lg">
+           <a href="https://salairenet.ca" target="_blank" rel="noopener" class="flex items-center justify-center space-x-2 w-full bg-gradient-to-r from-indigo-600 to-blue-600 text-white p-4 rounded-xl hover:from-indigo-700 hover:to-blue-700 transition-all duration-300 font-semibold shadow-lg">
              <span class="text-xl">💰</span>
              <span>Calculer mon Salaire Net</span>
              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -182,13 +227,13 @@ import "../styles/global.css";
          <span class="text-xs font-medium text-gray-600">Accueil</span>
        </a>
        
-       <a href="/mesures" class="bottom-nav-item flex flex-col items-center justify-center space-y-1 hover:bg-blue-50 transition-colors">
+       <a href="/mesures" class="bottom-nav-item flex flex-col items-center justify-center space-y-1 hover:bg-indigo-50 transition-colors">
          <span class="text-lg">📏</span>
          <span class="text-xs font-medium text-gray-600">Mesures</span>
        </a>
        
        <a href="/salaire" class="bottom-nav-item flex flex-col items-center justify-center space-y-1 hover:bg-green-50 transition-colors relative">
-         <div class="absolute -top-1 right-2 w-2 h-2 bg-red-500 rounded-full"></div>
+         <div class="absolute -top-1 right-2 w-2 h-2 bg-green-500 rounded-full"></div>
          <span class="text-lg">💰</span>
          <span class="text-xs font-medium text-gray-600">Salaire</span>
        </a>
@@ -198,7 +243,7 @@ import "../styles/global.css";
          <span class="text-xs font-medium text-gray-600">Cuisine</span>
        </a>
        
-       <a href="/formulaires" class="bottom-nav-item flex flex-col items-center justify-center space-y-1 hover:bg-indigo-50 transition-colors">
+       <a href="/formulaires" class="bottom-nav-item flex flex-col items-center justify-center space-y-1 hover:bg-blue-50 transition-colors">
          <span class="text-lg">📋</span>
          <span class="text-xs font-medium text-gray-600">Plus</span>
        </a>
@@ -212,29 +257,29 @@ import "../styles/global.css";
          <!-- À propos -->
          <div class="md:col-span-2">
            <div class="flex items-center space-x-3 mb-4">
-             <div class="w-10 h-10 bg-gradient-to-br from-red-500 to-orange-500 rounded-xl flex items-center justify-center text-white text-xl">
-               🍁
+             <div class="w-10 h-10 bg-gradient-to-br from-indigo-600 to-blue-600 rounded-xl flex items-center justify-center text-white text-xl">
+               🤔
              </div>
              <div>
-               <div class="font-bold text-lg">NouvelArrivant.ca</div>
-               <div class="text-sm text-gray-400">Par des francophones, pour des francophones</div>
+               <div class="font-bold text-lg">ExpliqueMoi.ca</div>
+               <div class="text-sm text-gray-400">On t'explique tout, simplement</div>
              </div>
            </div>
            <p class="text-gray-300 text-sm max-w-md">
-             Le guide ultime pour réussir ton installation au Canada. 
-             Tous les outils pratiques créés par des expatriés qui sont passés par là.
+             Le guide ultime pour comprendre et réussir ta vie au Canada. 
+             Tous les outils pratiques créés par des francophones qui sont passés par là.
            </p>
          </div>
 
-         <!-- Services Partenaires -->
+         <!-- Services Recommandés -->
          <div>
-           <h3 class="font-semibold mb-4 text-orange-400">💼 Services Recommandés</h3>
+           <h3 class="font-semibold mb-4 text-blue-400">💼 Outils Recommandés</h3>
            <ul class="space-y-2 text-sm">
              <li><a href="https://salairenet.ca" target="_blank" rel="noopener" class="text-gray-300 hover:text-white transition-colors flex items-center space-x-2">
                <span>💰</span><span>Calculateur Salaire Net</span>
              </a></li>
              <li><a href="#" class="text-gray-300 hover:text-white transition-colors flex items-center space-x-2">
-               <span>🏦</span><span>Banques (Bientôt)</span>
+               <span>🏦</span><span>Guide Banques (Bientôt)</span>
              </a></li>
              <li><a href="#" class="text-gray-300 hover:text-white transition-colors flex items-center space-x-2">
                <span>📱</span><span>Forfaits Mobile (Bientôt)</span>
@@ -244,7 +289,7 @@ import "../styles/global.css";
 
          <!-- Contact -->
          <div>
-           <h3 class="font-semibold mb-4 text-red-400">📧 Contact</h3>
+           <h3 class="font-semibold mb-4 text-green-400">📧 Contact</h3>
            <ul class="space-y-2 text-sm text-gray-300">
              <li>🇨🇦 Créé au Canada</li>
              <li>❤️ Made with love</li>
@@ -255,13 +300,13 @@ import "../styles/global.css";
 
        <div class="border-t border-gray-700 mt-8 pt-6 text-center">
          <p class="text-gray-400 text-sm">
-           © 2025 NouvelArrivant.ca - Fait avec ❤️ par des expatriés francophones
+           © 2025 ExpliqueMoi.ca - On t'explique tout avec ❤️
          </p>
        </div>
      </div>
    </footer>
 
-   <!-- Scripts -->
+<!-- Scripts -->
    <script is:inline>
      document.addEventListener('DOMContentLoaded', function() {
        // Menu mobile toggle
@@ -274,9 +319,11 @@ import "../styles/global.css";
          });
        }
 
+       // Get current path once
+       const currentPath = window.location.pathname;
+
        // Breadcrumb intelligent
        const breadcrumbContainer = document.getElementById('breadcrumb-container');
-       const currentPath = window.location.pathname;
        
        if (currentPath !== '/' && breadcrumbContainer) {
          const pathSegments = currentPath.split('/').filter(segment => segment);
@@ -306,12 +353,11 @@ import "../styles/global.css";
 
        // Active states pour bottom navigation
        const bottomNavItems = document.querySelectorAll('.bottom-nav-item');
-       const currentPath = window.location.pathname;
        
        bottomNavItems.forEach(item => {
          const href = item.getAttribute('href');
          if ((currentPath === '/' && href === '/') || (currentPath !== '/' && href !== '/' && currentPath.startsWith(href))) {
-           item.classList.add('text-red-600');
+           item.classList.add('text-indigo-600');
            item.classList.remove('text-gray-600');
          }
        });

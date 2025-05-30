@@ -1,0 +1,756 @@
+---
+// src/pages/forfaits-mobile.astro
+import Layout from '../layouts/Default.astro';
+
+const title = "📱 Forfaits Mobile Canada | Comparateur Bell, Rogers, Telus, Fizz";
+const description = "Compare les forfaits mobile au Canada : Bell, Rogers, Telus, Fizz, Freedom. Guide complet avec prix, couverture et conseils pour choisir le meilleur forfait selon ta province.";
+---
+
+<Layout title={title} description={description}>
+ <div class="max-w-6xl mx-auto">
+   <!-- Header -->
+   <div class="text-center mb-8">
+     <h1 class="text-4xl font-bold text-blue-700 mb-4">📱 Forfaits Mobile Canada</h1>
+     <p class="text-lg text-gray-600 mb-6">Compare et choisis le meilleur forfait selon tes besoins !</p>
+     
+     <!-- Sélecteur province -->
+     <div class="bg-white rounded-xl shadow-md p-4 inline-block border border-gray-200">
+       <label class="text-blue-700 font-medium mr-3">Ta province :</label>
+       <select id="province_selector" class="border border-blue-300 p-2 rounded-lg">
+         <option value="QC">🍁 Québec</option>
+         <option value="ON">🏢 Ontario</option>
+         <option value="BC">🏔️ Colombie-Britannique</option>
+         <option value="AB">🛢️ Alberta</option>
+         <option value="MB">🌾 Manitoba</option>
+         <option value="SK">🌻 Saskatchewan</option>
+         <option value="NB">🦞 Nouveau-Brunswick</option>
+         <option value="NS">⛵ Nouvelle-Écosse</option>
+         <option value="PE">🦐 Île-du-Prince-Édouard</option>
+         <option value="NL">🐧 Terre-Neuve-et-Labrador</option>
+       </select>
+     </div>
+   </div>
+
+   <!-- Filtres de recherche -->
+   <section class="card bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl shadow-lg p-6 mb-8 border border-blue-200">
+     <h2 class="text-2xl font-semibold text-blue-700 mb-4">🔍 Trouve ton forfait idéal</h2>
+     
+     <div class="grid md:grid-cols-4 gap-4">
+       <div class="space-y-2">
+         <label class="text-blue-700 font-medium">Données mensuelles</label>
+         <select id="data_filter" class="border border-blue-300 p-3 rounded-lg w-full">
+           <option value="all">Toutes les options</option>
+           <option value="unlimited">Données illimitées</option>
+           <option value="20gb">20 GB et plus</option>
+           <option value="10gb">10-20 GB</option>
+           <option value="5gb">5-10 GB</option>
+           <option value="low">Moins de 5 GB</option>
+         </select>
+       </div>
+       
+       <div class="space-y-2">
+         <label class="text-blue-700 font-medium">Budget maximum</label>
+         <select id="budget_filter" class="border border-blue-300 p-3 rounded-lg w-full">
+           <option value="all">Tous les prix</option>
+           <option value="budget">Moins de 40$/mois</option>
+           <option value="mid">40-70$/mois</option>
+           <option value="premium">70$/mois et plus</option>
+         </select>
+       </div>
+       
+       <div class="space-y-2">
+         <label class="text-blue-700 font-medium">Type d'usage</label>
+         <select id="usage_filter" class="border border-blue-300 p-3 rounded-lg w-full">
+           <option value="all">Tous les usages</option>
+           <option value="basic">Usage léger (appels/SMS)</option>
+           <option value="social">Réseaux sociaux</option>
+           <option value="streaming">Streaming vidéo</option>
+           <option value="business">Professionnel</option>
+         </select>
+       </div>
+       
+       <div class="space-y-2">
+         <label class="text-blue-700 font-medium">Opérateur</label>
+         <select id="carrier_filter" class="border border-blue-300 p-3 rounded-lg w-full">
+           <option value="all">Tous les opérateurs</option>
+           <option value="big3">Big 3 seulement</option>
+           <option value="flanker">Marques discount</option>
+           <option value="regional">Opérateurs régionaux</option>
+         </select>
+       </div>
+     </div>
+   </section>
+
+   <!-- Tableau comparatif des forfaits -->
+   <section class="mb-8">
+     <div class="flex justify-between items-center mb-6">
+       <h2 class="text-2xl font-semibold text-gray-800">📊 Comparateur de forfaits</h2>
+       <div class="text-sm text-gray-500">
+         <span id="results_count">12</span> forfaits trouvés
+       </div>
+     </div>
+     
+     <div class="overflow-x-auto">
+       <div id="plans_grid" class="grid gap-4">
+         <!-- Généré dynamiquement par JavaScript -->
+       </div>
+     </div>
+   </section>
+
+   <!-- Guide des opérateurs -->
+   <section class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+     
+     <!-- Bell -->
+     <div class="card bg-white rounded-xl shadow-lg p-6 border border-gray-200">
+       <div class="flex items-center mb-4">
+         <div class="w-12 h-12 bg-red-500 rounded-lg flex items-center justify-center text-white font-bold text-xl">
+           B
+         </div>
+         <div class="ml-3">
+           <h3 class="font-semibold text-red-600 text-lg">Bell</h3>
+           <p class="text-xs text-gray-500">Réseau premium</p>
+         </div>
+       </div>
+       <div class="space-y-2 text-sm">
+         <div class="flex justify-between">
+           <span>Couverture :</span>
+           <span class="font-medium text-green-600">⭐⭐⭐⭐⭐</span>
+         </div>
+         <div class="flex justify-between">
+           <span>Prix :</span>
+           <span class="font-medium text-red-600">$$$$</span>
+         </div>
+         <div class="flex justify-between">
+           <span>5G :</span>
+           <span class="font-medium text-green-600">Excellent</span>
+         </div>
+       </div>
+       <div class="mt-4 text-xs text-gray-600">
+         <strong>Marques :</strong> Bell, Virgin Plus
+       </div>
+     </div>
+
+     <!-- Rogers -->
+     <div class="card bg-white rounded-xl shadow-lg p-6 border border-gray-200">
+       <div class="flex items-center mb-4">
+         <div class="w-12 h-12 bg-red-600 rounded-lg flex items-center justify-center text-white font-bold text-xl">
+           R
+         </div>
+         <div class="ml-3">
+           <h3 class="font-semibold text-red-600 text-lg">Rogers</h3>
+           <p class="text-xs text-gray-500">Leader national</p>
+         </div>
+       </div>
+       <div class="space-y-2 text-sm">
+         <div class="flex justify-between">
+           <span>Couverture :</span>
+           <span class="font-medium text-green-600">⭐⭐⭐⭐⭐</span>
+         </div>
+         <div class="flex justify-between">
+           <span>Prix :</span>
+           <span class="font-medium text-red-600">$$$$</span>
+         </div>
+         <div class="flex justify-between">
+           <span>5G :</span>
+           <span class="font-medium text-green-600">Excellent</span>
+         </div>
+       </div>
+       <div class="mt-4 text-xs text-gray-600">
+         <strong>Marques :</strong> Rogers, Fido, Chatr
+       </div>
+     </div>
+
+     <!-- Telus -->
+     <div class="card bg-white rounded-xl shadow-lg p-6 border border-gray-200">
+       <div class="flex items-center mb-4">
+         <div class="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center text-white font-bold text-xl">
+           T
+         </div>
+         <div class="ml-3">
+           <h3 class="font-semibold text-purple-600 text-lg">Telus</h3>
+           <p class="text-xs text-gray-500">Forte dans l'Ouest</p>
+         </div>
+       </div>
+       <div class="space-y-2 text-sm">
+         <div class="flex justify-between">
+           <span>Couverture :</span>
+           <span class="font-medium text-green-600">⭐⭐⭐⭐⭐</span>
+         </div>
+         <div class="flex justify-between">
+           <span>Prix :</span>
+           <span class="font-medium text-red-600">$$$$</span>
+         </div>
+         <div class="flex justify-between">
+           <span>5G :</span>
+           <span class="font-medium text-green-600">Excellent</span>
+         </div>
+       </div>
+       <div class="mt-4 text-xs text-gray-600">
+         <strong>Marques :</strong> Telus, Koodo, Public Mobile
+       </div>
+     </div>
+
+     <!-- Fizz -->
+     <div class="card bg-white rounded-xl shadow-lg p-6 border border-gray-200">
+       <div class="flex items-center mb-4">
+         <div class="w-12 h-12 bg-orange-500 rounded-lg flex items-center justify-center text-white font-bold text-xl">
+           F
+         </div>
+         <div class="ml-3">
+           <h3 class="font-semibold text-orange-600 text-lg">Fizz</h3>
+           <p class="text-xs text-gray-500">Québec/Ontario</p>
+         </div>
+       </div>
+       <div class="space-y-2 text-sm">
+         <div class="flex justify-between">
+           <span>Couverture :</span>
+           <span class="font-medium text-yellow-600">⭐⭐⭐</span>
+         </div>
+         <div class="flex justify-between">
+           <span>Prix :</span>
+           <span class="font-medium text-green-600">$$</span>
+         </div>
+         <div class="flex justify-between">
+           <span>5G :</span>
+           <span class="font-medium text-yellow-600">Limité</span>
+         </div>
+       </div>
+       <div class="mt-4 text-xs text-gray-600">
+         <strong>Points :</strong> Plans flexibles, communauté
+       </div>
+     </div>
+
+     <!-- Freedom -->
+     <div class="card bg-white rounded-xl shadow-lg p-6 border border-gray-200">
+       <div class="flex items-center mb-4">
+         <div class="w-12 h-12 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-bold text-xl">
+           F
+         </div>
+         <div class="ml-3">
+           <h3 class="font-semibold text-indigo-600 text-lg">Freedom</h3>
+           <p class="text-xs text-gray-500">Urbain seulement</p>
+         </div>
+       </div>
+       <div class="space-y-2 text-sm">
+         <div class="flex justify-between">
+           <span>Couverture :</span>
+           <span class="font-medium text-yellow-600">⭐⭐</span>
+         </div>
+         <div class="flex justify-between">
+           <span>Prix :</span>
+           <span class="font-medium text-green-600">$$</span>
+         </div>
+         <div class="flex justify-between">
+           <span>5G :</span>
+           <span class="font-medium text-yellow-600">Moyen</span>
+         </div>
+       </div>
+       <div class="mt-4 text-xs text-gray-600">
+         <strong>Zone :</strong> Toronto, Vancouver, Calgary
+       </div>
+     </div>
+
+     <!-- Lucky Mobile -->
+     <div class="card bg-white rounded-xl shadow-lg p-6 border border-gray-200">
+       <div class="flex items-center mb-4">
+         <div class="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center text-white font-bold text-xl">
+           L
+         </div>
+         <div class="ml-3">
+           <h3 class="font-semibold text-green-600 text-lg">Lucky</h3>
+           <p class="text-xs text-gray-500">Budget friendly</p>
+         </div>
+       </div>
+       <div class="space-y-2 text-sm">
+         <div class="flex justify-between">
+           <span>Couverture :</span>
+           <span class="font-medium text-yellow-600">⭐⭐⭐</span>
+         </div>
+         <div class="flex justify-between">
+           <span>Prix :</span>
+           <span class="font-medium text-green-600">$</span>
+         </div>
+         <div class="flex justify-between">
+           <span>5G :</span>
+           <span class="font-medium text-red-600">Non</span>
+         </div>
+       </div>
+       <div class="mt-4 text-xs text-gray-600">
+         <strong>Réseau :</strong> Bell (3G/4G seulement)
+       </div>
+     </div>
+   </section>
+
+   <!-- Guide pratique -->
+   <section class="card bg-gradient-to-r from-green-50 to-blue-50 rounded-xl shadow-lg p-6 mb-8 border border-green-200">
+     <h2 class="text-2xl font-semibold text-green-700 mb-6">💡 Guide pratique pour choisir</h2>
+     
+     <div class="grid md:grid-cols-2 gap-8">
+       <div>
+         <h3 class="font-semibold text-green-600 mb-4">🎯 Selon ton profil :</h3>
+         <div class="space-y-3 text-sm">
+           <div class="bg-white rounded-lg p-3 border border-green-200">
+             <strong class="text-green-700">🧑‍💼 Professionnel urbain :</strong>
+             <p>Bell/Rogers/Telus premium. Couverture fiable, roaming international.</p>
+           </div>
+           <div class="bg-white rounded-lg p-3 border border-green-200">
+             <strong class="text-green-700">🎓 Étudiant/Budget serré :</strong>
+             <p>Fizz, Public Mobile, Lucky. Plans flexibles et économiques.</p>
+           </div>
+           <div class="bg-white rounded-lg p-3 border border-green-200">
+             <strong class="text-green-700">👨‍👩‍👧‍👦 Famille :</strong>
+             <p>Plans familiaux Bell/Rogers/Telus. Partage de données.</p>
+           </div>
+           <div class="bg-white rounded-lg p-3 border border-green-200">
+             <strong class="text-green-700">🏞️ Vie rurale :</strong>
+             <p>Bell ou Telus obligatoire. Rogers en 2e choix.</p>
+           </div>
+         </div>
+       </div>
+       
+       <div>
+         <h3 class="font-semibold text-green-600 mb-4">⚠️ Pièges à éviter :</h3>
+         <div class="space-y-3 text-sm">
+           <div class="bg-white rounded-lg p-3 border border-yellow-200">
+             <strong class="text-yellow-700">📅 Contrats 2 ans :</strong>
+             <p>Évite si possible. Les prix montent après la promo.</p>
+           </div>
+           <div class="bg-white rounded-lg p-3 border border-yellow-200">
+             <strong class="text-yellow-700">💸 Frais cachés :</strong>
+             <p>+taxes (~15%) + frais d'activation + assurances optionnelles.</p>
+           </div>
+           <div class="bg-white rounded-lg p-3 border border-yellow-200">
+             <strong class="text-yellow-700">📱 Téléphone "gratuit" :</strong>
+             <p>Jamais gratuit ! Le prix est inclus dans l'abonnement.</p>
+           </div>
+           <div class="bg-white rounded-lg p-3 border border-yellow-200">
+             <strong class="text-yellow-700">🌐 Roaming :</strong>
+             <p>Hors de prix ! Achète un forfait local si tu voyages.</p>
+           </div>
+         </div>
+       </div>
+     </div>
+   </section>
+
+   <!-- Négociation et conseils -->
+   <section class="card bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl shadow-lg p-6 mb-8 border border-purple-200">
+     <h2 class="text-2xl font-semibold text-purple-700 mb-6">🤝 Conseils de négociation</h2>
+     
+     <div class="grid md:grid-cols-3 gap-6">
+       <div>
+         <h3 class="font-semibold text-purple-600 mb-3">💬 Techniques qui marchent :</h3>
+         <ul class="space-y-2 text-sm text-gray-700">
+           <li class="flex items-start">
+             <span class="text-purple-500 mr-2">•</span>
+             <span>Appelle le service de <strong>rétention</strong> (dis que tu veux annuler)</span>
+           </li>
+           <li class="flex items-start">
+             <span class="text-purple-500 mr-2">•</span>
+             <span>Mentionne les offres de <strong>la concurrence</strong></span>
+           </li>
+           <li class="flex items-start">
+             <span class="text-purple-500 mr-2">•</span>
+             <span>Demande à parler à un <strong>superviseur</strong></span>
+           </li>
+           <li class="flex items-start">
+             <span class="text-purple-500 mr-2">•</span>
+             <span>Négocie en <strong>fin de mois/trimestre</strong></span>
+           </li>
+         </ul>
+       </div>
+       
+       <div>
+         <h3 class="font-semibold text-purple-600 mb-3">🎁 Ce qu'on peut obtenir :</h3>
+         <ul class="space-y-2 text-sm text-gray-700">
+           <li class="flex items-start">
+             <span class="text-purple-500 mr-2">•</span>
+             <span><strong>Réduction</strong> 10-20$/mois pendant 12 mois</span>
+           </li>
+           <li class="flex items-start">
+             <span class="text-purple-500 mr-2">•</span>
+             <span><strong>Données bonus</strong> gratuites</span>
+           </li>
+           <li class="flex items-start">
+             <span class="text-purple-500 mr-2">•</span>
+             <span><strong>Frais d'activation</strong> supprimés</span>
+           </li>
+           <li class="flex items-start">
+             <span class="text-purple-500 mr-2">•</span>
+             <span><strong>Services premium</strong> inclus temporairement</span>
+           </li>
+         </ul>
+       </div>
+       
+       <div>
+         <h3 class="font-semibold text-purple-600 mb-3">📞 Numéros utiles :</h3>
+         <ul class="space-y-2 text-sm text-gray-700">
+           <li class="flex items-start">
+             <span class="text-purple-500 mr-2">•</span>
+             <span><strong>Bell :</strong> 1-866-310-2355</span>
+           </li>
+           <li class="flex items-start">
+             <span class="text-purple-500 mr-2">•</span>
+             <span><strong>Rogers :</strong> 1-888-764-3771</span>
+           </li>
+           <li class="flex items-start">
+             <span class="text-purple-500 mr-2">•</span>
+             <span><strong>Telus :</strong> 1-866-558-2273</span>
+           </li>
+           <li class="flex items-start">
+             <span class="text-purple-500 mr-2">•</span>
+             <span><strong>Fizz :</strong> Chat en ligne seulement</span>
+           </li>
+         </ul>
+       </div>
+     </div>
+   </section>
+
+   <!-- FAQ -->
+   <section class="mb-8">
+     <h2 class="text-2xl font-semibold text-gray-800 mb-6 text-center">❓ Questions fréquentes</h2>
+     
+     <div class="grid md:grid-cols-2 gap-4 text-sm">
+       <div class="bg-white rounded-lg p-4 shadow border border-gray-200">
+         <h3 class="font-semibold text-gray-700 mb-2">📱 Puis-je garder mon téléphone français ?</h3>
+         <p class="text-gray-600">Oui si débloqué et compatible avec les fréquences nord-américaines. Vérifie sur kimovil.com</p>
+       </div>
+       
+       <div class="bg-white rounded-lg p-4 shadow border border-gray-200">
+         <h3 class="font-semibold text-gray-700 mb-2">💰 Combien coûte vraiment un forfait ?</h3>
+         <p class="text-gray-600">Ajoute ~15% de taxes + frais éventuels. Un forfait à 50$ coûte ~57-60$ réellement.</p>
+       </div>
+       
+       <div class="bg-white rounded-lg p-4 shadow border border-gray-200">
+         <h3 class="font-semibold text-gray-700 mb-2">🌐 Le WiFi calling marche-t-il ?</h3>
+         <p class="text-gray-600">Oui avec les Big 3. Pratique pour économiser en voyage ou dans les zones de faible signal.</p>
+       </div>
+       
+       <div class="bg-white rounded-lg p-4 shadow border border-gray-200">
+         <h3 class="font-semibold text-gray-700 mb-2">🔄 Puis-je changer facilement d'opérateur ?</h3>
+         <p class="text-gray-600">Oui, sauf si sous contrat. Le transfert de numéro prend 2-4h généralement.</p>
+       </div>
+     </div>
+   </section>
+ </div>
+
+ <!-- Script pour les filtres et comparaisons -->
+ <script is:inline>
+   // Base de données des forfaits (exemple)
+   const mobileData = {
+     plans: [
+       {
+         carrier: "Bell",
+         brand: "Bell",
+         name: "Unlimited Ultimate",
+         price: 95,
+         data: "unlimited",
+         category: "premium",
+         provinces: ["QC", "ON", "BC", "AB", "MB", "SK", "NB", "NS", "PE", "NL"],
+         features: ["5G", "Roaming USA", "Streaming premium"],
+         network: "5G Premium"
+       },
+       {
+         carrier: "Rogers",
+         brand: "Rogers",
+         name: "Infinite Premium",
+         price: 90,
+         data: "unlimited",
+         category: "premium", 
+         provinces: ["QC", "ON", "BC", "AB", "MB", "SK", "NB", "NS", "PE", "NL"],
+         features: ["5G", "Roaming", "Netflix inclus"],
+         network: "5G+"
+       },
+       {
+         carrier: "Telus",
+         brand: "Telus",
+         name: "Peace of Mind XL",
+         price: 85,
+         data: "25gb",
+         category: "mid",
+         provinces: ["QC", "ON", "BC", "AB", "MB", "SK", "NB", "NS", "PE", "NL"],
+         features: ["5G", "Données bonus", "Famille"],
+         network: "5G"
+       },
+       {
+         carrier: "Fizz",
+         brand: "Fizz",
+         name: "Plan flexible",
+         price: 45,
+         data: "10gb",
+         category: "budget",
+         provinces: ["QC", "ON"],
+         features: ["4G", "Rollover données", "Communauté"],
+         network: "4G LTE"
+       },
+       {
+         carrier: "Freedom",
+         brand: "Freedom",
+         name: "Big Gig Unlimited",
+         price: 50,
+         data: "unlimited",
+         category: "mid",
+         provinces: ["ON", "BC", "AB"],
+         features: ["5G", "Zone limitée", "Prix fixe"],
+         network: "5G (zones urbaines)"
+       },
+       {
+         carrier: "Telus",
+         brand: "Public Mobile",
+         name: "25GB Plan",
+         price: 40,
+         data: "25gb",
+         category: "budget",
+         provinces: ["QC", "ON", "BC", "AB", "MB", "SK", "NB", "NS", "PE", "NL"],
+         features: ["4G", "Prépayé", "Récompenses"],
+         network: "4G LTE"
+       }
+       // ... plus de forfaits
+     ]
+   };
+
+   function filterPlans() {
+     const province = document.getElementById('province_selector').value;
+     const dataFilter = document.getElementById('data_filter').value;
+     const budgetFilter = document.getElementById('budget_filter').value;
+     const carrierFilter = document.getElementById('carrier_filter').value;
+     
+     let filtered = mobileData.plans.filter(plan => {
+       // Filtre province
+       if (!plan.provinces.includes(province)) return false;
+       
+       // Filtre données
+       if (dataFilter !== 'all') {
+         if (dataFilter === 'unlimited' && plan.data !== 'unlimited') return false;
+         if (dataFilter === '20gb' && plan.data !== 'unlimited' && parseInt(plan.data) < 20) return false;
+         // ... autres filtres données
+       }
+       
+       // Filtre budget
+       if (budgetFilter !== 'all') {
+         if (budgetFilter === 'budget' && plan.price >= 40) return false;
+         if (budgetFilter === 'mid' && (plan.price < 40 || plan.price > 70)) return false;
+         if (budgetFilter === 'premium' && plan.price < 70) return false;
+       }
+       
+       return true;
+     });
+     
+     displayPlans(filtered);
+     document.getElementById('results_count').textContent = filtered.length;
+   }
+
+   function displayPlans(plans) {
+     const grid = document.getElementById('plans_grid');
+     
+     if (plans.length === 0) {
+       grid.innerHTML = '<div class="col-span-full text-center py-8 text-gray-500">Aucun forfait trouvé avec ces critères</div>';
+       return;
+     }
+     
+     grid.className = 'grid md:grid-cols-2 lg:grid-cols-3 gap-4';
+     grid.innerHTML = plans.map(plan => `
+       <div class="bg-white rounded-lg shadow p-4 border border-gray-200 hover:shadow-lg transition-shadow">
+         <div class="flex justify-between items-start mb-3">
+           <div>
+             <h3 class="font-semibold text-gray-800">${plan.brand}</h3>
+             <p class="text-sm text-gray-600">${plan.name}</p>
+           </div>
+           <div class="text-right">
+             <div class="text-2xl font-bold text-indigo-600">$${plan.price}</div>
+             <div class="text-xs text-gray-500">/mois</div>
+           </div>
+         </div>
+         
+         <div class="space-y-2 text-sm">
+           <div class="flex justify-between">
+             <span>Données :</span>
+             <span class="font-medium">${plan.data === 'unlimited' ? 'Illimitées' : plan.data}</span>
+           </div>
+           <div class="flex justify-between">
+             <span>Réseau :</span>
+             <span class="font-medium">${plan.network}</span>
+           </div>
+         </div>
+         
+         <div class="mt-3 flex flex-wrap gap-1">
+           ${plan.features.map(feature => `
+             <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">${feature}</span>
+           `).join('')}
+         </div>
+         
+         <button class="w-full mt-4 bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700 transition-colors text-sm font-medium">
+           Voir les détails
+         </button>
+       </div>
+     `).join('');
+   }
+
+   // Event listeners
+   document.addEventListener('DOMContentLoaded', function() {
+     document.getElementById('province_selector').addEventListener('change', filterPlans);
+document.getElementById('budget_filter').addEventListener('change', filterPlans);
+    document.getElementById('usage_filter').addEventListener('change', filterPlans);
+    document.getElementById('carrier_filter').addEventListener('change', filterPlans);
+    
+    // Initialisation
+    filterPlans();
+  });
+
+  // Fonction pour comparer les forfaits
+  function comparePlans(plan1, plan2) {
+    // Logique de comparaison
+    const comparison = {
+      price: plan1.price - plan2.price,
+      data: compareData(plan1.data, plan2.data),
+      network: compareNetwork(plan1.network, plan2.network)
+    };
+    return comparison;
+  }
+
+  function compareData(data1, data2) {
+    if (data1 === 'unlimited' && data2 === 'unlimited') return 0;
+    if (data1 === 'unlimited') return 1;
+    if (data2 === 'unlimited') return -1;
+    return parseInt(data1) - parseInt(data2);
+  }
+
+  function compareNetwork(network1, network2) {
+    const networkScore = {
+      '5G Premium': 5,
+      '5G+': 4,
+      '5G': 3,
+      '4G LTE': 2,
+      '3G': 1
+    };
+    return (networkScore[network1] || 0) - (networkScore[network2] || 0);
+  }
+
+  // Calculateur de coût total
+  function calculateTotalCost(basePlan, addons = {}) {
+    let total = basePlan.price;
+    
+    // Taxes provinciales
+    const province = document.getElementById('province_selector').value;
+    const taxRates = {
+      'QC': 0.14975, // GST + QST
+      'ON': 0.13,    // HST
+      'BC': 0.12,    // GST + PST
+      'AB': 0.05,    // GST seulement
+      'MB': 0.12,    // GST + PST
+      'SK': 0.11,    // GST + PST
+      'NB': 0.15,    // HST
+      'NS': 0.15,    // HST
+      'PE': 0.15,    // HST
+      'NL': 0.15     // HST
+    };
+    
+    total *= (1 + (taxRates[province] || 0.13));
+    
+    // Frais supplémentaires
+    if (addons.activation) total += 50;
+    if (addons.device_protection) total += 12;
+    if (addons.international) total += 15;
+    
+    return Math.round(total * 100) / 100;
+  }
+
+  // Fonction pour afficher les conseils personnalisés
+  function showPersonalizedTips(province, budget, usage) {
+    const tips = [];
+    
+    if (province === 'QC') {
+      tips.push("💡 Fizz est très populaire au Québec pour les budgets serrés");
+      tips.push("🇫🇷 Service client en français garanti chez tous les opérateurs");
+    }
+    
+    if (budget === 'budget') {
+      tips.push("💰 Regarde Public Mobile, Lucky ou Chatr pour les meilleurs prix");
+      tips.push("📱 Évite les contrats avec téléphone, achète ton appareil séparément");
+    }
+    
+    if (usage === 'streaming') {
+      tips.push("📺 Prends au minimum 20GB, mieux vaut illimité");
+      tips.push("🏠 Utilise le WiFi à la maison pour économiser tes données");
+    }
+    
+    return tips;
+  }
+
+  // Animation des cartes au scroll
+  function animateOnScroll() {
+    const cards = document.querySelectorAll('.card');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    });
+    
+    cards.forEach(card => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(20px)';
+      card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(card);
+    });
+  }
+
+  // Initialisation des animations
+  document.addEventListener('DOMContentLoaded', function() {
+    animateOnScroll();
+  });
+</script>
+
+<!-- Styles pour les animations -->
+<style>
+  /* Animation float pour les icônes */
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+  
+  .animate-float {
+    animation: float 4s ease-in-out infinite;
+  }
+  
+  /* Hover effects pour les cartes */
+  .card:hover {
+    transform: translateY(-2px);
+    transition: transform 0.2s ease;
+  }
+  
+  /* Style pour les badges de prix */
+  .price-badge {
+    background: linear-gradient(45deg, #10b981, #059669);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+  
+  /* Animation des résultats */
+  #plans_grid > div {
+    animation: fadeInUp 0.5s ease forwards;
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Responsive table */
+  @media (max-width: 768px) {
+    #plans_grid {
+      grid-template-columns: 1fr !important;
+    }
+  }
+</style>
+</Layout>
