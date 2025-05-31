@@ -1,0 +1,52 @@
+---
+// src/components/SuccessStories.astro
+const stories = [
+  {
+    initial: "M",
+    name: "Maxime L.",
+    status: "Développeur, Montréal",
+    year: "2024",
+    story: "PVT qui finissait dans 8 mois. Toutes les banques m'ont dit non. Grâce à eux, j'ai eu ma pré-approbation en 1 semaine. Condo acheté à Villeray !",
+    color: "emerald"
+  },
+  {
+    initial: "S",
+    name: "Sophie & Marc",
+    status: "CSQ, Québec",
+    year: "2024", 
+    story: "On nous disait 'attendez votre RP'. Résultat : on a acheté notre maison 6 mois avant de l'avoir. Les enfants ont enfin leur jardin.",
+    color: "blue"
+  },
+  {
+    initial: "A",
+    name: "Amélie T.",
+    status: "Étudiante, Toronto",
+    year: "2024",
+    story: "Permis d'études + job à temps partiel. 'Impossible' selon 4 banques. Leur courtier a trouvé la solution. Studio acheté près de l'université.",
+    color: "purple"
+  }
+];
+---
+
+<section class="mb-16">
+  <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Ils l'ont fait (tu peux aussi)</h2>
+  
+  <div class="grid md:grid-cols-3 gap-6">
+    {stories.map(story => (
+      <div class="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
+        <div class="flex items-center mb-4">
+          <div class={`w-12 h-12 bg-${story.color}-100 rounded-full flex items-center justify-center`}>
+            <span class={`text-${story.color}-600 font-bold`}>{story.initial}</span>
+          </div>
+          <div class="ml-3">
+            <p class="font-semibold text-gray-900">{story.name}</p>
+            <p class="text-sm text-gray-500">{story.status} • {story.year}</p>
+          </div>
+        </div>
+        <p class="text-gray-700 text-sm italic">
+          "{story.story}"
+        </p>
+      </div>
+    ))}
+  </div>
+</section>

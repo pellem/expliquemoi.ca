@@ -1,0 +1,25 @@
+---
+// src/components/PretImmobilierCTA.astro
+const { source = "article" } = Astro.props;
+---
+
+<div class="my-8 p-6 bg-gradient-to-r from-emerald-50 to-blue-50 border border-emerald-200 rounded-xl">
+  <div class="flex items-start">
+    <div class="text-2xl mr-4 mt-1">🏡</div>
+    <div class="flex-1">
+      <h3 class="text-lg font-semibold text-emerald-800 mb-2">
+        Tu es nouveau au Canada et tu veux acheter ?
+      </h3>
+      <p class="text-emerald-700 mb-4 text-sm">
+        On t’explique comment faire financer ton projet immobilier au Québec ou ailleurs, quelle que soit ta situation.
+      </p>
+      <a href={`/pret-immobilier-expatrie-canada?utm_source=${source}&utm_medium=article_footer`}
+         class="inline-flex items-center bg-emerald-600 text-white font-medium px-4 py-2 rounded-lg hover:bg-emerald-700 transition-colors text-sm">
+        Voir les options
+        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </a>
+    </div>
+  </div>
+</div>

@@ -217,6 +217,46 @@ import "../styles/global.css";
          </div>
        </div>
      </div>
+
+     <!-- Dans src/layouts/Default.astro, avant la fermeture du </head> -->
+{title.includes('Prêt immobilier') && (
+  <script is:inline>
+    // Enhanced tracking pour les pages de prêt immobilier
+    window.dataLayer = window.dataLayer || [];
+    
+    // Track page view avec catégorie
+    gtag('config', 'GA_TRACKING_ID', {
+      custom_map: {
+        'page_category': 'Lead Generation',
+        'service_type': 'Pret Immobilier'
+      }
+    });
+    
+    // Track formulaire interactions
+    document.addEventListener('DOMContentLoaded', function() {
+      // Track focus sur champs du formulaire
+      document.querySelectorAll('#leadForm input, #leadForm select, #leadForm textarea').forEach(field => {
+        field.addEventListener('focus', function() {
+          gtag('event', 'form_field_focus', {
+            'event_category': 'Form Interaction',
+            'event_label': this.name || this.id
+          });
+        });
+      });
+      
+      // Track clics sur CTA
+      document.querySelectorAll('a[href*="pret-immobilier"]').forEach(link => {
+        link.addEventListener('click', function() {
+          gtag('event', 'cta_click', {
+            'event_category': 'Navigation',
+            'event_label': this.textContent.trim(),
+            'utm_source': new URLSearchParams(this.href.split('?')[1] || '').get('utm_source') || 'direct'
+          });
+        });
+      });
+    });
+  </script>
+)}
    </header>
 
    <!-- Breadcrumb Mobile/Desktop -->

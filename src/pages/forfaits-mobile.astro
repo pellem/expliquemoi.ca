@@ -1,6 +1,8 @@
 ---
 // src/pages/forfaits-mobile.astro
 import Layout from '../layouts/Default.astro';
+import PretImmobilierCTA from '../components/PretImmobilierCTA.astro';
+
 
 const title = "📱 Forfaits Mobile Canada | Comparateur Bell, Rogers, Telus, Fizz";
 const description = "Compare les forfaits mobile au Canada : Bell, Rogers, Telus, Fizz, Freedom. Guide complet avec prix, couverture et conseils pour choisir le meilleur forfait selon ta province.";
@@ -431,6 +433,8 @@ const description = "Compare les forfaits mobile au Canada : Bell, Rogers, Telus
        </div>
      </div>
    </section>
+   <PretImmobilierCTA source="formulaires" />
+
  </div>
 
  <!-- Script pour les filtres et comparaisons -->
@@ -583,6 +587,8 @@ const description = "Compare les forfaits mobile au Canada : Bell, Rogers, Telus
          </button>
        </div>
      `).join('');
+
+     
    }
 
    // Event listeners

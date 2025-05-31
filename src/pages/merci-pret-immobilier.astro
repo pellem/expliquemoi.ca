@@ -1,0 +1,109 @@
+---
+// src/pages/merci-pret-immobilier.astro
+import Layout from '../layouts/Default.astro';
+
+const title = "Merci ! Votre demande a été transmise | ExpliqueMoi.ca";
+const description = "Votre demande de pré-évaluation pour un prêt immobilier a été transmise à nos courtiers partenaires.";
+---
+
+<Layout title={title} description={description}>
+  <div class="max-w-3xl mx-auto px-4 py-16 text-center">
+    <div class="bg-gradient-to-br from-emerald-50 to-blue-50 rounded-2xl p-12">
+      <!-- Animation de succès -->
+      <div class="flex justify-center mb-6">
+        <div class="bg-emerald-600 rounded-full p-4 animate-pulse">
+          <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+          </svg>
+        </div>
+      </div>
+      
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">
+        Demande transmise avec succès !
+      </h1>
+      
+      <p class="text-xl text-gray-600 mb-8">
+        Votre dossier a été envoyé à nos courtiers spécialisés expatriés.
+      </p>
+      
+      <div class="bg-white rounded-lg p-6 mb-8 text-left max-w-lg mx-auto">
+        <h2 class="font-semibold text-gray-900 mb-4 text-center">📅 Prochaines étapes :</h2>
+        <ul class="space-y-3 text-sm text-gray-700">
+          <li class="flex items-start">
+            <span class="bg-blue-100 text-blue-800 rounded-full text-xs px-2 py-1 mr-3 mt-0.5">1</span>
+            <span><strong>Sous 2h :</strong> Confirmation par email de réception</span>
+          </li>
+          <li class="flex items-start">
+            <span class="bg-blue-100 text-blue-800 rounded-full text-xs px-2 py-1 mr-3 mt-0.5">2</span>
+            <span><strong>Sous 24h :</strong> Appel/email du courtier assigné</span>
+          </li>
+          <li class="flex items-start">
+            <span class="bg-blue-100 text-blue-800 rounded-full text-xs px-2 py-1 mr-3 mt-0.5">3</span>
+            <span><strong>Sous 48h :</strong> Première évaluation de faisabilité</span>
+          </li>
+        </ul>
+      </div>
+      
+      <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-8">
+        <p class="text-yellow-800 text-sm">
+          <strong>📧 Vérifiez vos spams !</strong> L'email de confirmation peut parfois s'y glisser.
+        </p>
+      </div>
+      
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/" class="bg-gray-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-gray-700 transition-colors">
+          ← Retour à l'accueil
+        </a>
+        <a href="/formulaires" class="bg-emerald-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-emerald-700 transition-colors">
+          Autres démarches expatriés
+        </a>
+      </div>
+    </div>
+    
+    <!-- Section bonus : pendant qu'ils attendent -->
+    <div class="mt-16 text-left">
+      <h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">🔥 En attendant, préparez votre dossier</h2>
+      
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <h3 class="font-semibold text-gray-900 mb-3">📄 Documents à rassembler</h3>
+          <ul class="text-sm text-gray-600 space-y-2">
+            <li>• Relevés de paie (3 derniers mois)</li>
+            <li>• Contrat de travail</li>
+            <li>• Relevés bancaires (3 mois)</li>
+            <li>• Permis de travail en cours</li>
+            <li>• Déclaration d'impôts (si disponible)</li>
+          </ul>
+        </div>
+        
+        <div class="bg-white border border-gray-200 rounded-lg p-6">
+          <h3 class="font-semibold text-gray-900 mb-3">💰 Questions fréquentes</h3>
+          <ul class="text-sm text-gray-600 space-y-2">
+            <li>• Combien puis-je emprunter ?</li>
+            <li>• Quel taux puis-je obtenir ?</li>
+            <li>• Quelle mise de fonds minimum ?</li>
+            <li>• Quels sont les frais à prévoir ?</li>
+            <li>• Combien de temps pour l'approbation ?</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Analytics pour page de conversion -->
+  <script is:inline>
+    // Événement de conversion pour tracking
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'conversion', {
+        'send_to': 'YOUR_CONVERSION_ID', // À remplacer
+        'event_category': 'Lead Generation',
+        'event_label': 'Pret Immobilier Success'
+      });
+    }
+    
+    // Pixel Facebook si applicable
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'Lead');
+    }
+  </script>
+</Layout>
