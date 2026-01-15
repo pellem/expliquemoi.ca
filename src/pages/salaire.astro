@@ -1,309 +1,406 @@
 ---
 // src/pages/salaire.astro
-import Layout from '../layouts/Default.astro';
+// Page "Comprendre votre salaire au Québec"
+// STRATÉGIE SEO: Guide textuel informatif + CTA massif vers SalaireNet.ca
 
-const title = "💰 Calculateur Salaire Net Canada | Impôts Québec & Fédéral 2025";
-const description = "Calcule ton salaire net après impôts au Québec et Canada. Simulateur précis incluant RRQ, RQAP, assurance-emploi. Idéal pour Français expatriés et nouveaux arrivants.";
+import Layout from '../layouts/Layout.astro';
+import CTASalaireNet from '../components/CTASalaireNet.astro';
+import RecommendationCard from '../components/RecommendationCard.astro';
+
+const title = "Comprendre votre salaire net au Québec";
+const description = "Guide complet pour comprendre votre fiche de paie québécoise : impôts fédéral et provincial, RRQ, RQAP, assurance-emploi. Tout ce qu'un nouvel arrivant doit savoir.";
 ---
 
-<Layout title={title} description={description}>
- <div class="max-w-4xl mx-auto">
-   <!-- Header principal -->
-   <div class="text-center mb-8">
-     <h1 class="text-4xl font-bold text-green-700 mb-4">💰 Calculateur Salaire Net Canada</h1>
-     <p class="text-lg text-gray-600 mb-6">Découvre ton vrai salaire après impôts au Québec !</p>
-     
-     <!-- CTA principal vers ton site -->
-     <div class="bg-gradient-to-r from-green-500 to-blue-500 rounded-xl p-6 text-white mb-8">
-       <h2 class="text-2xl font-bold mb-3">🚀 Calculateur Complet & Gratuit</h2>
-       <p class="mb-4 text-green-50">Calcule précisément ton salaire net avec toutes les déductions 2025 :</p>
-       <ul class="text-left text-green-50 mb-6 max-w-2xl mx-auto">
-         <li class="mb-1">✅ <strong>Impôts fédéral & provincial</strong> (taux 2025)</li>
-         <li class="mb-1">✅ <strong>RRQ, RQAP, assurance-emploi</strong></li>
-         <li class="mb-1">✅ <strong>Comparaison par ville</strong> (Montréal, Québec, Toronto...)</li>
-         <li class="mb-1">✅ <strong>Simulation bonus, heures sup, freelance</strong></li>
-       </ul>
-       
-       <a 
-         href="https://salairenet.ca" 
-         target="_blank"
-         rel="noopener"
-         class="inline-flex items-center bg-white text-green-600 font-bold px-8 py-4 rounded-lg hover:shadow-lg transition-all duration-300 text-lg"
-       >
-         🧮 Calculer mon salaire net
-         <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-         </svg>
-       </a>
-     </div>
-   </div>
+<Layout title={title} description={description} type="article">
+  <article class="max-w-4xl mx-auto px-4 py-12">
+    
+    <!-- Hero Section -->
+    <header class="text-center mb-12">
+      <div class="inline-flex items-center gap-2 bg-gov-100 text-gov-700 rounded-full px-4 py-2 text-sm font-medium mb-6">
+        <span>📄</span>
+        <span>Phase 3 : S'installer</span>
+      </div>
+      
+      <h1 class="text-4xl md:text-5xl font-bold text-gov-800 mb-6">
+        💰 Comprendre votre salaire net au Québec
+      </h1>
+      
+      <p class="text-xl text-trust-text max-w-3xl mx-auto leading-relaxed">
+        Quand vous recevez votre première fiche de paie au Québec, le choc peut être rude ! 
+        Voici tout ce que vous devez savoir pour comprendre où va votre argent.
+      </p>
+    </header>
 
-   <!-- Aperçu rapide intégré -->
-   <section class="card bg-white rounded-xl shadow-lg p-6 mb-8 border border-gray-200">
-     <h2 class="text-2xl font-semibold text-green-700 mb-4">⚡ Aperçu rapide</h2>
-     <p class="text-gray-600 mb-6">Estimation basique pour te donner une idée (calcul détaillé sur SalaireNet.ca)</p>
-     
-     <div class="grid md:grid-cols-3 gap-6">
-       <div class="space-y-2">
-         <label class="text-green-700 font-medium">Salaire brut annuel</label>
-         <input type="number" id="gross_salary" class="border border-green-300 p-3 rounded-lg w-full" placeholder="65000" />
-         <small class="text-gray-500">Ex: 65 000$ pour développeur junior</small>
-       </div>
-       
-       <div class="space-y-2">
-         <label class="text-green-700 font-medium">Province</label>
-         <select id="province" class="border border-green-300 p-3 rounded-lg w-full">
-           <option value="QC">🍁 Québec</option>
-           <option value="ON">🏢 Ontario</option>
-           <option value="BC">🏔️ Colombie-Britannique</option>
-           <option value="AB">🛢️ Alberta</option>
-         </select>
-       </div>
-       
-       <div class="space-y-2">
-         <label class="text-green-700 font-medium">Estimation salaire net</label>
-         <div class="border border-green-300 p-3 rounded-lg bg-green-50">
-           <div id="net_result" class="font-bold text-green-700 text-lg">-</div>
-           <small class="text-green-600">par année</small>
-         </div>
-       </div>
-     </div>
-     
-     <div id="breakdown" class="mt-6 p-4 bg-gray-50 rounded-lg hidden">
-       <h3 class="font-semibold text-gray-700 mb-2">📊 Répartition approximative :</h3>
-       <div id="breakdown_content" class="text-sm text-gray-600 space-y-1"></div>
-       <p class="text-xs text-gray-500 mt-3">💡 <strong>Calcul précis avec toutes les déductions disponible sur <a href="https://salairenet.ca" class="text-green-600 underline">SalaireNet.ca</a></strong></p>
-     </div>
-   </section>
+    <!-- CTA Principal en haut -->
+    <CTASalaireNet variant="compact" 
+      title="Besoin de calculer votre salaire net exact ?" 
+      subtitle="Utilisez notre calculateur gratuit avec les taux 2025"
+    />
 
-   <!-- Grilles d'exemples -->
-   <section class="grid md:grid-cols-2 gap-6 mb-8">
-     <!-- Exemples salaires tech -->
-     <div class="card bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl shadow-lg p-6 border border-blue-200">
-       <h3 class="text-xl font-semibold text-blue-700 mb-4">💻 Salaires Tech au Québec</h3>
-       <div class="space-y-3 text-sm">
-         <div class="flex justify-between bg-white rounded p-2">
-           <span>Développeur Junior</span>
-           <span class="font-semibold">45-65k$ → <span class="text-green-600">~38-50k$ net</span></span>
-         </div>
-         <div class="flex justify-between bg-white rounded p-2">
-           <span>Développeur Senior</span>
-           <span class="font-semibold">75-95k$ → <span class="text-green-600">~55-70k$ net</span></span>
-         </div>
-         <div class="flex justify-between bg-white rounded p-2">
-           <span>Lead/Architect</span>
-           <span class="font-semibold">95-120k$ → <span class="text-green-600">~68-85k$ net</span></span>
-         </div>
-         <div class="flex justify-between bg-white rounded p-2">
-           <span>Manager Tech</span>
-           <span class="font-semibold">100-140k$ → <span class="text-green-600">~70-95k$ net</span></span>
-         </div>
-       </div>
-     </div>
+    <!-- Contenu principal -->
+    <div class="article-content">
+      
+      <!-- Section 1: Vue d'ensemble -->
+      <section>
+        <h2>🏛️ Le système fiscal canadien en bref</h2>
+        
+        <p>
+          Au Canada, et particulièrement au Québec, votre salaire est soumis à une 
+          <strong>double imposition</strong> : fédérale (Canada) et provinciale (Québec). 
+          C'est ce qui explique pourquoi les déductions peuvent sembler importantes 
+          comparées à d'autres pays.
+        </p>
+        
+        <div class="info-box info-box-info">
+          <h4 class="font-semibold text-gov-700 mb-2">💡 Bon à savoir</h4>
+          <p class="text-trust-text">
+            Contrairement à la France où les impôts sont prélevés à la source depuis récemment, 
+            le Canada pratique le prélèvement à la source depuis toujours. 
+            Vous recevez donc un salaire "net" sur votre compte chaque mois.
+          </p>
+        </div>
+        
+        <h3>Les principales déductions sur votre paie</h3>
+        
+        <p>Voici ce qui sera automatiquement déduit de votre salaire brut :</p>
+        
+        <div class="grid md:grid-cols-2 gap-4 my-6">
+          <div class="card p-4">
+            <h4 class="font-semibold text-gov-700 mb-2">🇨🇦 Impôt fédéral</h4>
+            <p class="text-sm text-trust-text">
+              Prélevé par le gouvernement du Canada. Les taux varient de 15% à 33% 
+              selon vos revenus (paliers progressifs).
+            </p>
+          </div>
+          
+          <div class="card p-4">
+            <h4 class="font-semibold text-gov-700 mb-2">🍁 Impôt provincial (Québec)</h4>
+            <p class="text-sm text-trust-text">
+              Prélevé par Revenu Québec. Les taux varient de 14% à 25.75% 
+              selon vos revenus.
+            </p>
+          </div>
+          
+          <div class="card p-4">
+            <h4 class="font-semibold text-gov-700 mb-2">👴 RRQ (Régime des rentes)</h4>
+            <p class="text-sm text-trust-text">
+              L'équivalent de la retraite. Cotisation de ~6.4% jusqu'à un plafond 
+              de revenus (~68 500$ en 2025).
+            </p>
+          </div>
+          
+          <div class="card p-4">
+            <h4 class="font-semibold text-gov-700 mb-2">👶 RQAP (Régime parental)</h4>
+            <p class="text-sm text-trust-text">
+              Pour les congés parentaux. Cotisation de ~0.49% sur vos revenus 
+              (très généreux comparé à d'autres pays !).
+            </p>
+          </div>
+          
+          <div class="card p-4">
+            <h4 class="font-semibold text-gov-700 mb-2">📉 Assurance-emploi (AE)</h4>
+            <p class="text-sm text-trust-text">
+              Protection en cas de perte d'emploi. Cotisation de ~1.2% jusqu'au 
+              maximum assurable.
+            </p>
+          </div>
+          
+          <div class="card p-4">
+            <h4 class="font-semibold text-gov-700 mb-2">🏥 Autres déductions possibles</h4>
+            <p class="text-sm text-trust-text">
+              REER (épargne-retraite), assurances collectives, syndicat... 
+              selon votre employeur.
+            </p>
+          </div>
+        </div>
+      </section>
 
-     <!-- Comparaison provinces -->
-     <div class="card bg-gradient-to-br from-orange-50 to-red-50 rounded-xl shadow-lg p-6 border border-orange-200">
-       <h3 class="text-xl font-semibold text-orange-700 mb-4">🗺️ Comparaison provinces</h3>
-       <div class="space-y-3 text-sm">
-         <div class="bg-white rounded p-2">
-           <div class="flex justify-between mb-1">
-             <span class="font-medium">🍁 Québec (70k$)</span>
-             <span class="text-green-600 font-semibold">~52k$ net</span>
-           </div>
-           <div class="text-xs text-gray-500">Impôts élevés mais services publics ++</div>
-         </div>
-         <div class="bg-white rounded p-2">
-           <div class="flex justify-between mb-1">
-             <span class="font-medium">🏢 Ontario (70k$)</span>
-             <span class="text-green-600 font-semibold">~54k$ net</span>
-           </div>
-           <div class="text-xs text-gray-500">Moins d'impôts, coût de la vie plus élevé</div>
-         </div>
-         <div class="bg-white rounded p-2">
-           <div class="flex justify-between mb-1">
-             <span class="font-medium">🛢️ Alberta (70k$)</span>
-             <span class="text-green-600 font-semibold">~56k$ net</span>
-           </div>
-           <div class="text-xs text-gray-500">Pas de taxe provinciale, pétrole king</div>
-         </div>
-         <div class="bg-white rounded p-2">
-           <div class="flex justify-between mb-1">
-             <span class="font-medium">🏔️ BC (70k$)</span>
-             <span class="text-green-600 font-semibold">~54k$ net</span>
-           </div>
-           <div class="text-xs text-gray-500">Météo ++, logement très cher</div>
-         </div>
-       </div>
-     </div>
-   </section>
+      <!-- CTA Milieu d'article -->
+      <CTASalaireNet variant="full" />
 
-   <!-- Guide pour nouveaux arrivants -->
-   <section class="card bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl shadow-lg p-6 mb-8 border border-purple-200">
-     <h2 class="text-2xl font-semibold text-purple-700 mb-4">🆕 Guide spécial nouveaux arrivants</h2>
-     
-     <div class="grid md:grid-cols-2 gap-6">
-       <div>
-         <h3 class="font-semibold text-purple-600 mb-3">💡 À savoir sur les impôts canadiens :</h3>
-         <ul class="space-y-2 text-sm text-gray-700">
-           <li class="flex items-start">
-             <span class="text-purple-500 mr-2">•</span>
-             <span><strong>Double taxation :</strong> Fédéral + Provincial</span>
-           </li>
-           <li class="flex items-start">
-             <span class="text-purple-500 mr-2">•</span>
-             <span><strong>Déductions automatiques :</strong> RRQ (retraite), RQAP (congés parentaux), AE (chômage)</span>
-           </li>
-           <li class="flex items-start">
-             <span class="text-purple-500 mr-2">•</span>
-             <span><strong>Retour d'impôts :</strong> Souvent un bonus au printemps !</span>
-           </li>
-           <li class="flex items-start">
-             <span class="text-purple-500 mr-2">•</span>
-             <span><strong>Crédits disponibles :</strong> Transport, garde d'enfants, dons</span>
-           </li>
-         </ul>
-       </div>
-       
-       <div>
-         <h3 class="font-semibold text-purple-600 mb-3">🎯 Négociation de salaire :</h3>
-         <ul class="space-y-2 text-sm text-gray-700">
-           <li class="flex items-start">
-             <span class="text-purple-500 mr-2">•</span>
-             <span><strong>Toujours négocier :</strong> Les employeurs s'y attendent</span>
-           </li>
-           <li class="flex items-start">
-             <span class="text-purple-500 mr-2">•</span>
-             <span><strong>Avantages non-fiscaux :</strong> REER, assurances, télétravail</span>
-           </li>
-           <li class="flex items-start">
-             <span class="text-purple-500 mr-2">•</span>
-             <span><strong>Bonus performance :</strong> Souvent 10-20% en tech</span>
-           </li>
-           <li class="flex items-start">
-             <span class="text-purple-500 mr-2">•</span>
-             <span><strong>Stock options :</strong> Très courantes dans les startups</span>
-           </li>
-         </ul>
-       </div>
-     </div>
-   </section>
+      <!-- Section 2: Exemples concrets -->
+      <section>
+        <h2>📊 Exemples concrets de salaires</h2>
+        
+        <p>
+          Pour vous donner une idée réaliste, voici quelques exemples de conversion 
+          brut → net au Québec (estimation 2025, célibataire, sans enfant) :
+        </p>
+        
+        <div class="overflow-x-auto my-6">
+          <table class="w-full text-sm">
+            <thead class="bg-gov-50">
+              <tr>
+                <th class="px-4 py-3 text-left font-semibold text-gov-700">Salaire brut annuel</th>
+                <th class="px-4 py-3 text-left font-semibold text-gov-700">Salaire net approximatif</th>
+                <th class="px-4 py-3 text-left font-semibold text-gov-700">Net mensuel</th>
+                <th class="px-4 py-3 text-left font-semibold text-gov-700">Taux d'imposition effectif</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-trust-border">
+              <tr>
+                <td class="px-4 py-3">45 000 $</td>
+                <td class="px-4 py-3 text-accent-success font-medium">~36 500 $</td>
+                <td class="px-4 py-3">~3 040 $</td>
+                <td class="px-4 py-3">~19%</td>
+              </tr>
+              <tr class="bg-gov-50/50">
+                <td class="px-4 py-3">60 000 $</td>
+                <td class="px-4 py-3 text-accent-success font-medium">~46 800 $</td>
+                <td class="px-4 py-3">~3 900 $</td>
+                <td class="px-4 py-3">~22%</td>
+              </tr>
+              <tr>
+                <td class="px-4 py-3">75 000 $</td>
+                <td class="px-4 py-3 text-accent-success font-medium">~56 250 $</td>
+                <td class="px-4 py-3">~4 690 $</td>
+                <td class="px-4 py-3">~25%</td>
+              </tr>
+              <tr class="bg-gov-50/50">
+                <td class="px-4 py-3">100 000 $</td>
+                <td class="px-4 py-3 text-accent-success font-medium">~71 000 $</td>
+                <td class="px-4 py-3">~5 920 $</td>
+                <td class="px-4 py-3">~29%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <div class="info-box info-box-warning">
+          <h4 class="font-semibold text-amber-700 mb-2">⚠️ Important</h4>
+          <p class="text-trust-text">
+            Ces chiffres sont des estimations. Votre situation personnelle (conjoint, enfants, 
+            REER, crédits d'impôt) peut significativement changer le résultat. 
+            <strong>Utilisez un calculateur précis pour votre cas.</strong>
+          </p>
+        </div>
+      </section>
 
-   <!-- CTA final vers ton site -->
-   <section class="card bg-gradient-to-r from-green-600 to-teal-600 rounded-xl shadow-xl p-8 text-white text-center">
-     <h2 class="text-3xl font-bold mb-4">🎯 Prêt(e) à calculer précisément ?</h2>
-     <p class="text-xl text-green-100 mb-6">
-       Utilise le calculateur complet avec tous les scénarios possibles
-     </p>
-     
-     <div class="flex flex-wrap justify-center gap-4 mb-6">
-       <span class="bg-white/20 rounded-full px-4 py-2 text-sm">Bonus & primes</span>
-       <span class="bg-white/20 rounded-full px-4 py-2 text-sm">Heures supplémentaires</span>
-       <span class="bg-white/20 rounded-full px-4 py-2 text-sm">Freelance & contrats</span>
-       <span class="bg-white/20 rounded-full px-4 py-2 text-sm">REER & épargne</span>
-     </div>
-     
-     <a 
-       href="https://salairenet.ca" 
-       target="_blank"
-       rel="noopener"
-       class="inline-flex items-center bg-white text-green-600 font-bold px-8 py-4 rounded-lg hover:shadow-2xl transition-all duration-300 text-xl"
-     >
-       🚀 Calculer sur SalaireNet.ca
-       <svg class="w-6 h-6 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-       </svg>
-     </a>
-     
-     <p class="text-green-100 text-sm mt-4">100% gratuit • Calculs officiels 2025 • Aucune inscription</p>
-   </section>
+      <!-- Section 3: Lire sa fiche de paie -->
+      <section>
+        <h2>📄 Comment lire votre fiche de paie</h2>
+        
+        <p>
+          Votre fiche de paie (ou "talon de paie") québécoise contient plusieurs sections importantes :
+        </p>
+        
+        <div class="space-y-4 my-6">
+          <div class="card p-5 border-l-4 border-l-gov-500">
+            <h4 class="font-semibold text-gov-700 mb-2">1. Revenus bruts</h4>
+            <p class="text-sm text-trust-text">
+              Votre salaire avant toute déduction, incluant les heures régulières, 
+              supplémentaires, primes, commissions, etc.
+            </p>
+          </div>
+          
+          <div class="card p-5 border-l-4 border-l-maple-500">
+            <h4 class="font-semibold text-maple-700 mb-2">2. Déductions obligatoires</h4>
+            <p class="text-sm text-trust-text">
+              Impôt fédéral, impôt provincial, RRQ, RQAP, AE. 
+              Ces montants sont calculés automatiquement par votre employeur.
+            </p>
+          </div>
+          
+          <div class="card p-5 border-l-4 border-l-amber-500">
+            <h4 class="font-semibold text-amber-700 mb-2">3. Déductions volontaires</h4>
+            <p class="text-sm text-trust-text">
+              REER, assurances collectives, cotisations syndicales, 
+              régime de retraite de l'employeur, etc.
+            </p>
+          </div>
+          
+          <div class="card p-5 border-l-4 border-l-accent-success">
+            <h4 class="font-semibold text-accent-success mb-2">4. Salaire net</h4>
+            <p class="text-sm text-trust-text">
+              Ce qui arrive réellement sur votre compte bancaire. 
+              C'est le montant après toutes les déductions.
+            </p>
+          </div>
+        </div>
+      </section>
 
-   <!-- FAQ rapide -->
-   <section class="mt-8">
-     <h2 class="text-2xl font-semibold text-gray-800 mb-6 text-center">❓ Questions fréquentes</h2>
-     
-     <div class="grid md:grid-cols-2 gap-4 text-sm">
-       <div class="bg-white rounded-lg p-4 shadow">
-         <h3 class="font-semibold text-gray-700 mb-2">💰 Pourquoi tant de déductions ?</h3>
-         <p class="text-gray-600">Le système canadien finance les services publics (santé gratuite, assurance-emploi, retraite) via les déductions salariales.</p>
-       </div>
-       
-       <div class="bg-white rounded-lg p-4 shadow">
-         <h3 class="font-semibold text-gray-700 mb-2">🏠 Combien prévoir pour le logement ?</h3>
-         <p class="text-gray-600">Maximum 30% du salaire net. À Montréal : ~1200-1800$/mois pour un 3½. Toronto/Vancouver : beaucoup plus cher !</p>
-       </div>
-       
-       <div class="bg-white rounded-lg p-4 shadow">
-         <h3 class="font-semibold text-gray-700 mb-2">📈 Le salaire augmente vite au Canada ?</h3>
-         <p class="text-gray-600">En tech oui ! 10-20% par an les premières années est courant. Changement d'employeur = meilleure stratégie.</p>
-       </div>
-       
-       <div class="bg-white rounded-lg p-4 shadow">
-         <h3 class="font-semibold text-gray-700 mb-2">🇫🇷 Comparaison avec la France ?</h3>
-         <p class="text-gray-600">Salaires bruts plus élevés, mais attention aux coûts (logement, transport, bouffe). Net-net souvent avantageux en tech.</p>
-       </div>
-     </div>
-   </section>
- </div>
+      <!-- Section 4: Astuces pour optimiser -->
+      <section>
+        <h2>💡 Astuces pour optimiser votre situation</h2>
+        
+        <div class="grid md:grid-cols-2 gap-6 my-6">
+          <div class="card p-5">
+            <div class="text-2xl mb-3">🏦</div>
+            <h4 class="font-semibold text-trust-dark mb-2">Cotisez au REER</h4>
+            <p class="text-sm text-trust-text">
+              Les cotisations REER réduisent votre revenu imposable. 
+              Vous payez moins d'impôt maintenant et épargnez pour la retraite.
+            </p>
+          </div>
+          
+          <div class="card p-5">
+            <div class="text-2xl mb-3">📝</div>
+            <h4 class="font-semibold text-trust-dark mb-2">Gardez vos reçus</h4>
+            <p class="text-sm text-trust-text">
+              Frais médicaux, dons, frais de garde... Plusieurs dépenses 
+              donnent droit à des crédits d'impôt.
+            </p>
+          </div>
+          
+          <div class="card p-5">
+            <div class="text-2xl mb-3">👨‍👩‍👧</div>
+            <h4 class="font-semibold text-trust-dark mb-2">Déclarez votre situation familiale</h4>
+            <p class="text-sm text-trust-text">
+              Conjoint(e), enfants, personne à charge... Informez votre employeur 
+              pour ajuster vos déductions à la source.
+            </p>
+          </div>
+          
+          <div class="card p-5">
+            <div class="text-2xl mb-3">🏠</div>
+            <h4 class="font-semibold text-trust-dark mb-2">Télétravail</h4>
+            <p class="text-sm text-trust-text">
+              Si vous travaillez de la maison, vous pouvez déduire 
+              une partie de vos frais (méthode simplifiée ou détaillée).
+            </p>
+          </div>
+        </div>
+      </section>
 
- <!-- Script pour l'aperçu rapide -->
- <script is:inline>
-   // Taux approximatifs simplifiés (pour l'aperçu seulement)
-   const taxRates = {
-     QC: { federal: 0.15, provincial: 0.16, other: 0.055 }, // RRQ, RQAP, AE
-     ON: { federal: 0.15, provincial: 0.095, other: 0.055 },
-     BC: { federal: 0.15, provincial: 0.0506, other: 0.055 },
-     AB: { federal: 0.15, provincial: 0.10, other: 0.055 }
-   };
+      <!-- Section 5: Comparaison avec la France -->
+      <section>
+        <h2>🇫🇷 vs 🇨🇦 Comparaison avec la France</h2>
+        
+        <p>
+          Si vous arrivez de France, voici les principales différences à comprendre :
+        </p>
+        
+        <div class="overflow-x-auto my-6">
+          <table class="w-full text-sm">
+            <thead class="bg-gov-50">
+              <tr>
+                <th class="px-4 py-3 text-left font-semibold text-gov-700">Aspect</th>
+                <th class="px-4 py-3 text-left font-semibold text-gov-700">🇫🇷 France</th>
+                <th class="px-4 py-3 text-left font-semibold text-gov-700">🇨🇦 Québec</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-trust-border">
+              <tr>
+                <td class="px-4 py-3 font-medium">Prélèvement à la source</td>
+                <td class="px-4 py-3">Depuis 2019</td>
+                <td class="px-4 py-3">Depuis toujours</td>
+              </tr>
+              <tr class="bg-gov-50/50">
+                <td class="px-4 py-3 font-medium">Niveaux d'imposition</td>
+                <td class="px-4 py-3">1 seul (national)</td>
+                <td class="px-4 py-3">2 (fédéral + provincial)</td>
+              </tr>
+              <tr>
+                <td class="px-4 py-3 font-medium">Cotisations retraite</td>
+                <td class="px-4 py-3">~11% salarié</td>
+                <td class="px-4 py-3">~6.4% (RRQ)</td>
+              </tr>
+              <tr class="bg-gov-50/50">
+                <td class="px-4 py-3 font-medium">Assurance maladie</td>
+                <td class="px-4 py-3">Via cotisations sociales</td>
+                <td class="px-4 py-3">Via impôts (RAMQ gratuit)</td>
+              </tr>
+              <tr>
+                <td class="px-4 py-3 font-medium">Déclaration annuelle</td>
+                <td class="px-4 py-3">Oui, obligatoire</td>
+                <td class="px-4 py-3">Oui, obligatoire (fédéral + provincial)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <div class="info-box info-box-success">
+          <h4 class="font-semibold text-accent-success mb-2">✨ Le côté positif</h4>
+          <p class="text-trust-text">
+            Au Québec, les services publics de santé sont gratuits (RAMQ), 
+            les congés parentaux sont parmi les plus généreux au monde (RQAP), 
+            et les garderies subventionnées coûtent seulement ~9$/jour.
+          </p>
+        </div>
+      </section>
+    </div>
 
-   function calculateQuickEstimate() {
-     const grossSalary = parseFloat(document.getElementById('gross_salary').value) || 0;
-     const province = document.getElementById('province').value;
-     
-     if (grossSalary <= 0) {
-       document.getElementById('net_result').textContent = '-';
-       document.getElementById('breakdown').classList.add('hidden');
-       return;
-     }
-     
-     const rates = taxRates[province];
-     const federalTax = grossSalary * rates.federal;
-     const provincialTax = grossSalary * rates.provincial;
-     const otherDeductions = grossSalary * rates.other;
-     
-     const totalDeductions = federalTax + provincialTax + otherDeductions;
-     const netSalary = grossSalary - totalDeductions;
-     
-     // Affichage
-     document.getElementById('net_result').textContent = 
-       new Intl.NumberFormat('fr-CA', { 
-         style: 'currency', 
-         currency: 'CAD',
-         maximumFractionDigits: 0 
-       }).format(netSalary);
-     
-     // Breakdown
-     const breakdownContent = document.getElementById('breakdown_content');
-     breakdownContent.innerHTML = `
-       <div class="flex justify-between"><span>Salaire brut :</span><span class="font-medium">${new Intl.NumberFormat('fr-CA', { style: 'currency', currency: 'CAD', maximumFractionDigits: 0 }).format(grossSalary)}</span></div>
-       <div class="flex justify-between"><span>- Impôt fédéral (~${(rates.federal*100).toFixed(1)}%) :</span><span class="text-red-600">-${new Intl.NumberFormat('fr-CA', { style: 'currency', currency: 'CAD', maximumFractionDigits: 0 }).format(federalTax)}</span></div>
-       <div class="flex justify-between"><span>- Impôt provincial (~${(rates.provincial*100).toFixed(1)}%) :</span><span class="text-red-600">-${new Intl.NumberFormat('fr-CA', { style: 'currency', currency: 'CAD', maximumFractionDigits: 0 }).format(provincialTax)}</span></div>
-       <div class="flex justify-between"><span>- RRQ/RQAP/AE (~${(rates.other*100).toFixed(1)}%) :</span><span class="text-red-600">-${new Intl.NumberFormat('fr-CA', { style: 'currency', currency: 'CAD', maximumFractionDigits: 0 }).format(otherDeductions)}</span></div>
-       <hr class="my-2">
-       <div class="flex justify-between font-semibold"><span>Net annuel :</span><span class="text-green-600">${new Intl.NumberFormat('fr-CA', { style: 'currency', currency: 'CAD', maximumFractionDigits: 0 }).format(netSalary)}</span></div>
-       <div class="flex justify-between text-xs"><span>Net mensuel :</span><span class="text-green-600">${new Intl.NumberFormat('fr-CA', { style: 'currency', currency: 'CAD', maximumFractionDigits: 0 }).format(netSalary/12)}</span></div>
-     `;
-     
-     document.getElementById('breakdown').classList.remove('hidden');
-   }
+    <!-- CTA Final Massif -->
+    <CTASalaireNet variant="full" 
+      title="🎯 Calculez votre salaire net exact maintenant"
+      subtitle="Entrez votre salaire brut et découvrez ce qui vous restera réellement chaque mois"
+    />
 
-   // Event listeners
-   document.addEventListener('DOMContentLoaded', function() {
-     document.getElementById('gross_salary').addEventListener('input', calculateQuickEstimate);
-     document.getElementById('province').addEventListener('change', calculateQuickEstimate);
-     
-     // Exemple par défaut
-     document.getElementById('gross_salary').value = '65000';
-     calculateQuickEstimate();
-   });
- </script>
+    <!-- Section FAQ -->
+    <section class="mt-16">
+      <h2 class="text-2xl font-bold text-gov-800 mb-8 text-center">❓ Questions fréquentes</h2>
+      
+      <div class="space-y-4">
+        <details class="card p-5 group">
+          <summary class="flex justify-between items-center cursor-pointer font-semibold text-gov-700">
+            <span>Quand dois-je faire ma déclaration d'impôts ?</span>
+            <svg class="w-5 h-5 transform group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <p class="mt-4 text-trust-text">
+            La date limite est généralement le 30 avril de chaque année pour l'année fiscale précédente. 
+            Par exemple, pour vos revenus de 2024, vous devez déclarer avant le 30 avril 2025. 
+            Vous devez faire DEUX déclarations : fédérale (Agence du revenu du Canada) et provinciale (Revenu Québec).
+          </p>
+        </details>
+        
+        <details class="card p-5 group">
+          <summary class="flex justify-between items-center cursor-pointer font-semibold text-gov-700">
+            <span>Vais-je recevoir un remboursement d'impôt ?</span>
+            <svg class="w-5 h-5 transform group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <p class="mt-4 text-trust-text">
+            Souvent oui, surtout la première année ! Les employeurs prélèvent généralement un peu plus 
+            que nécessaire pour éviter que vous ayez à payer. En déclarant vos crédits d'impôt 
+            (frais médicaux, dons, REER...), vous récupérez souvent quelques centaines voire milliers de dollars.
+          </p>
+        </details>
+        
+        <details class="card p-5 group">
+          <summary class="flex justify-between items-center cursor-pointer font-semibold text-gov-700">
+            <span>Qu'est-ce que le RRQ et le RQAP ?</span>
+            <svg class="w-5 h-5 transform group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <p class="mt-4 text-trust-text">
+            <strong>RRQ</strong> (Régime des rentes du Québec) : C'est votre retraite publique. 
+            Vous cotisez maintenant, vous recevrez une rente à partir de 65 ans (ou avant avec réduction).<br><br>
+            <strong>RQAP</strong> (Régime québécois d'assurance parentale) : Finance les congés de maternité/paternité. 
+            Le Québec est TRÈS généreux : jusqu'à 18 semaines à 70% du salaire pour la mère, 5 semaines pour le père.
+          </p>
+        </details>
+        
+        <details class="card p-5 group">
+          <summary class="flex justify-between items-center cursor-pointer font-semibold text-gov-700">
+            <span>Dois-je déclarer mes revenus français ?</span>
+            <svg class="w-5 h-5 transform group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <p class="mt-4 text-trust-text">
+            Oui, si vous êtes résident fiscal canadien, vous devez déclarer vos revenus mondiaux. 
+            Cependant, grâce à la convention fiscale France-Canada, vous ne serez pas doublement imposé. 
+            Consultez un comptable si vous avez des revenus significatifs en France.
+          </p>
+        </details>
+      </div>
+    </section>
+
+    <!-- Recommandation affiliation (si pertinent) -->
+    <RecommendationCard 
+      title="Wealthsimple"
+      description="Ouvrez un compte CELI ou REER facilement en ligne. Interface simple, frais très bas, idéal pour commencer à investir au Canada."
+      link="http://wealthsimple.com/invite/51KI5Q"
+      buttonText="Découvrir Wealthsimple"
+      highlight="Bonus de 25$ à l'inscription"
+      variant="premium"
+      pros={["Sans frais de gestion", "CELI + REER + crypto", "App mobile intuitive"]}
+      rating={5}
+    />
+
+  </article>
 </Layout>
