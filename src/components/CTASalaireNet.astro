@@ -1,7 +1,6 @@
 ---
 // src/components/CTASalaireNet.astro
 // CTA Massif et Animé pour rediriger vers SalaireNet.ca
-// Usage: <CTASalaireNet /> ou <CTASalaireNet variant="compact" />
 
 interface Props {
   variant?: 'full' | 'compact' | 'inline';
@@ -19,7 +18,7 @@ const {
 {variant === 'full' && (
   <div class="my-12 relative overflow-hidden">
     <!-- Background pattern -->
-    <div class="absolute inset-0 bg-gradient-to-br from-gov-600 via-gov-700 to-gov-800 rounded-2xl"></div>
+    <div class="absolute inset-0 bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 rounded-2xl"></div>
     <div class="absolute inset-0 opacity-10">
       <div class="absolute top-4 right-4 text-6xl">💰</div>
       <div class="absolute bottom-4 left-4 text-4xl">🧮</div>
@@ -37,7 +36,7 @@ const {
         {title}
       </h3>
       
-      <p class="text-xl text-gov-100 mb-8 max-w-2xl mx-auto">
+      <p class="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
         {subtitle}
       </p>
       
@@ -77,7 +76,7 @@ const {
         </svg>
       </a>
       
-      <p class="text-gov-200 text-sm mt-6">
+      <p class="text-blue-200 text-sm mt-6">
         100% gratuit • Aucune inscription • Résultats instantanés
       </p>
     </div>
@@ -85,14 +84,14 @@ const {
 )}
 
 {variant === 'compact' && (
-  <div class="my-8 bg-gradient-to-r from-gov-600 to-gov-700 rounded-xl p-6 text-center">
+  <div class="my-8 bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl p-6 text-center">
     <h4 class="text-xl font-bold text-white mb-2">{title}</h4>
-    <p class="text-gov-100 mb-4">{subtitle}</p>
+    <p class="text-blue-100 mb-4">{subtitle}</p>
     <a 
       href="https://salairenet.ca" 
       target="_blank" 
       rel="noopener"
-      class="inline-flex items-center gap-2 bg-white text-gov-700 font-bold px-6 py-3 rounded-lg hover:bg-gov-50 transition-colors"
+      class="inline-flex items-center gap-2 bg-white text-blue-700 font-bold px-6 py-3 rounded-lg hover:bg-blue-50 transition-colors"
     >
       <span>🧮</span>
       <span>Calculer mon salaire net</span>
@@ -108,7 +107,7 @@ const {
     href="https://salairenet.ca" 
     target="_blank" 
     rel="noopener"
-    class="inline-flex items-center gap-2 bg-gov-600 text-white font-semibold px-5 py-2.5 rounded-lg hover:bg-gov-700 transition-colors my-4"
+    class="inline-flex items-center gap-2 bg-blue-600 text-white font-semibold px-5 py-2.5 rounded-lg hover:bg-blue-700 transition-colors my-4"
   >
     <span>🧮</span>
     <span>Calculer sur SalaireNet.ca</span>
