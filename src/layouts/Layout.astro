@@ -1,7 +1,6 @@
 ---
 // src/layouts/Layout.astro
 // Layout Principal - ExpliqueMoi.ca
-// Design "Gouvernemental Moderne" avec navigation par Phase de Vie
 
 interface Props {
   title: string;
@@ -76,10 +75,10 @@ const phases = [
 
 // Outils rapides
 const quickTools = [
-  { name: "📏 Convertisseur", href: "/mesures", color: "blue" },
-  { name: "🍳 Cuisine", href: "/cuisine", color: "orange" },
-  { name: "📅 Jours fériés", href: "/jours-feries", color: "purple" },
-  { name: "📋 Formulaires", href: "/formulaires", color: "green" },
+  { name: "📏 Convertisseur", href: "/mesures" },
+  { name: "🍳 Cuisine", href: "/cuisine" },
+  { name: "📅 Jours fériés", href: "/jours-feries" },
+  { name: "📋 Formulaires", href: "/formulaires" },
 ];
 ---
 
@@ -149,30 +148,28 @@ const quickTools = [
 </head>
 
 <body class="min-h-screen flex flex-col">
-  <!-- ========================================
-       NAVBAR STICKY - Mobile First
-       ======================================== -->
+  <!-- NAVBAR STICKY - Mobile First -->
   <header class="navbar-sticky">
     <div class="max-w-7xl mx-auto px-4">
       <!-- Mobile Header -->
       <div class="flex items-center justify-between h-16 lg:hidden">
         <a href="/" class="flex items-center gap-2">
-          <div class="w-10 h-10 bg-gradient-to-br from-gov-600 to-gov-700 rounded-xl flex items-center justify-center">
+          <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl flex items-center justify-center">
             <span class="text-white text-xl">🍁</span>
           </div>
           <div>
-            <span class="font-bold text-gov-800">ExpliqueMoi</span>
-            <span class="text-gov-600">.ca</span>
+            <span class="font-bold text-slate-800">ExpliqueMoi</span>
+            <span class="text-blue-600">.ca</span>
           </div>
         </a>
         
         <button 
           id="mobile-menu-btn"
-          class="p-2 rounded-lg hover:bg-gov-50 transition-colors"
+          class="p-2 rounded-lg hover:bg-blue-50 transition-colors"
           aria-label="Menu"
           aria-expanded="false"
         >
-          <svg class="w-6 h-6 text-gov-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-6 h-6 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
           </svg>
         </button>
@@ -182,14 +179,14 @@ const quickTools = [
       <div class="hidden lg:flex items-center justify-between h-16">
         <!-- Logo -->
         <a href="/" class="flex items-center gap-3 group">
-          <div class="w-11 h-11 bg-gradient-to-br from-gov-600 to-gov-700 rounded-xl flex items-center justify-center transform group-hover:scale-105 transition-transform">
+          <div class="w-11 h-11 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl flex items-center justify-center transform group-hover:scale-105 transition-transform">
             <span class="text-white text-2xl">🍁</span>
           </div>
           <div>
-            <div class="font-bold text-xl text-gov-800 group-hover:text-gov-600 transition-colors">
-              ExpliqueMoi<span class="text-gov-600">.ca</span>
+            <div class="font-bold text-xl text-slate-800 group-hover:text-blue-600 transition-colors">
+              ExpliqueMoi<span class="text-blue-600">.ca</span>
             </div>
-            <div class="text-xs text-trust-text">Guide immigration Québec</div>
+            <div class="text-xs text-slate-500">Guide immigration Québec</div>
           </div>
         </a>
         
@@ -197,7 +194,7 @@ const quickTools = [
         <nav class="flex items-center gap-1">
           {phases.map((phase) => (
             <div class="relative group">
-              <button class="flex items-center gap-2 px-4 py-2 rounded-lg text-trust-text hover:bg-gov-50 hover:text-gov-700 transition-all font-medium">
+              <button class="flex items-center gap-2 px-4 py-2 rounded-lg text-slate-600 hover:bg-blue-50 hover:text-blue-700 transition-all font-medium">
                 <span>{phase.icon}</span>
                 <span>{phase.name}</span>
                 <svg class="w-4 h-4 transform group-hover:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -206,12 +203,12 @@ const quickTools = [
               </button>
               
               <!-- Dropdown -->
-              <div class="absolute top-full left-0 mt-1 w-64 bg-white rounded-xl shadow-lg border border-trust-border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+              <div class="absolute top-full left-0 mt-1 w-64 bg-white rounded-xl shadow-lg border border-slate-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                 <div class="p-2">
                   {phase.items.map((item) => (
                     <a 
                       href={item.href}
-                      class="block px-4 py-2.5 rounded-lg text-trust-text hover:bg-gov-50 hover:text-gov-700 transition-colors"
+                      class="block px-4 py-2.5 rounded-lg text-slate-600 hover:bg-blue-50 hover:text-blue-700 transition-colors"
                     >
                       {item.name}
                     </a>
@@ -223,7 +220,7 @@ const quickTools = [
           
           <!-- Outils -->
           <div class="relative group">
-            <button class="flex items-center gap-2 px-4 py-2 rounded-lg text-trust-text hover:bg-gov-50 hover:text-gov-700 transition-all font-medium">
+            <button class="flex items-center gap-2 px-4 py-2 rounded-lg text-slate-600 hover:bg-blue-50 hover:text-blue-700 transition-all font-medium">
               <span>🛠️</span>
               <span>Outils</span>
               <svg class="w-4 h-4 transform group-hover:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -231,12 +228,12 @@ const quickTools = [
               </svg>
             </button>
             
-            <div class="absolute top-full right-0 mt-1 w-56 bg-white rounded-xl shadow-lg border border-trust-border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+            <div class="absolute top-full right-0 mt-1 w-56 bg-white rounded-xl shadow-lg border border-slate-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
               <div class="p-2">
                 {quickTools.map((tool) => (
                   <a 
                     href={tool.href}
-                    class="block px-4 py-2.5 rounded-lg text-trust-text hover:bg-gov-50 hover:text-gov-700 transition-colors"
+                    class="block px-4 py-2.5 rounded-lg text-slate-600 hover:bg-blue-50 hover:text-blue-700 transition-colors"
                   >
                     {tool.name}
                   </a>
@@ -262,20 +259,20 @@ const quickTools = [
     </div>
     
     <!-- Mobile Menu Overlay -->
-    <div id="mobile-menu" class="lg:hidden hidden bg-white border-t border-trust-border">
+    <div id="mobile-menu" class="lg:hidden hidden bg-white border-t border-slate-200">
       <div class="max-w-7xl mx-auto px-4 py-4 space-y-4">
         <!-- Phases de vie -->
         {phases.map((phase) => (
-          <div class="border-b border-trust-border pb-4">
+          <div class="border-b border-slate-200 pb-4">
             <div class="flex items-center gap-3 mb-3">
               <div class="phase-number">{phase.id}</div>
-              <span class="font-semibold text-gov-800">{phase.icon} {phase.name}</span>
+              <span class="font-semibold text-slate-800">{phase.icon} {phase.name}</span>
             </div>
             <div class="grid grid-cols-2 gap-2 pl-11">
               {phase.items.map((item) => (
                 <a 
                   href={item.href}
-                  class="text-sm text-trust-text hover:text-gov-600 py-1"
+                  class="text-sm text-slate-600 hover:text-blue-600 py-1"
                 >
                   {item.name}
                 </a>
@@ -289,7 +286,7 @@ const quickTools = [
           {quickTools.map((tool) => (
             <a 
               href={tool.href}
-              class="flex items-center justify-center gap-2 p-3 bg-gov-50 rounded-lg text-gov-700 font-medium hover:bg-gov-100 transition-colors"
+              class="flex items-center justify-center gap-2 p-3 bg-blue-50 rounded-lg text-blue-700 font-medium hover:bg-blue-100 transition-colors"
             >
               {tool.name}
             </a>
@@ -312,16 +309,12 @@ const quickTools = [
   <!-- Spacer pour navbar sticky -->
   <div class="h-16"></div>
 
-  <!-- ========================================
-       CONTENU PRINCIPAL
-       ======================================== -->
+  <!-- CONTENU PRINCIPAL -->
   <main class="flex-1">
     <slot />
   </main>
 
-  <!-- ========================================
-       FOOTER OFFICIEL
-       ======================================== -->
+  <!-- FOOTER OFFICIEL -->
   <footer class="footer-official mt-auto">
     <div class="max-w-7xl mx-auto px-4">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
@@ -332,11 +325,11 @@ const quickTools = [
               <span class="text-2xl">🍁</span>
             </div>
             <div>
-              <div class="font-bold text-xl">ExpliqueMoi.ca</div>
-              <div class="text-gov-300 text-sm">Guide immigration Québec</div>
+              <div class="font-bold text-lg">ExpliqueMoi.ca</div>
+              <div class="text-slate-400 text-sm">Guide immigration Québec</div>
             </div>
           </div>
-          <p class="text-gov-200 max-w-md leading-relaxed">
+          <p class="text-slate-300 max-w-md leading-relaxed">
             Le guide complet et gratuit pour réussir votre immigration au Québec. 
             Créé par des immigrants, pour des immigrants.
           </p>
@@ -345,7 +338,7 @@ const quickTools = [
         <!-- Phases de vie -->
         <div>
           <h3 class="font-semibold text-lg mb-4 text-white">Par phase de vie</h3>
-          <ul class="space-y-2 text-gov-200">
+          <ul class="space-y-2 text-slate-300">
             {phases.map((phase) => (
               <li>
                 <a href={phase.slug} class="hover:text-white transition-colors flex items-center gap-2">
@@ -360,7 +353,7 @@ const quickTools = [
         <!-- Outils & Ressources -->
         <div>
           <h3 class="font-semibold text-lg mb-4 text-white">Outils pratiques</h3>
-          <ul class="space-y-2 text-gov-200">
+          <ul class="space-y-2 text-slate-300">
             {quickTools.map((tool) => (
               <li>
                 <a href={tool.href} class="hover:text-white transition-colors">
@@ -386,11 +379,11 @@ const quickTools = [
       </div>
       
       <!-- Barre légale -->
-      <div class="border-t border-gov-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-        <p class="text-gov-400 text-sm text-center md:text-left">
+      <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="text-slate-400 text-sm text-center md:text-left">
           © {new Date().getFullYear()} ExpliqueMoi.ca — Fait avec ❤️ au Québec
         </p>
-        <div class="flex items-center gap-6 text-sm text-gov-400">
+        <div class="flex items-center gap-6 text-sm text-slate-400">
           <a href="/mentions-legales" class="hover:text-white transition-colors">Mentions légales</a>
           <a href="/confidentialite" class="hover:text-white transition-colors">Confidentialité</a>
           <a href="/contact" class="hover:text-white transition-colors">Contact</a>
