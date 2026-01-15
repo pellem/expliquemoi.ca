@@ -1,0 +1,49 @@
+---
+// src/components/InfoBox.astro
+// Boîte d'information stylisée pour les articles
+// Usage: <InfoBox type="info" title="Important">Contenu...</InfoBox>
+
+interface Props {
+  type?: 'info' | 'warning' | 'success' | 'danger';
+  title?: string;
+}
+
+const { type = 'info', title } = Astro.props;
+
+const styles = {
+  info: {
+    box: 'bg-gov-50 border-l-gov-600',
+    icon: '💡',
+    titleColor: 'text-gov-700'
+  },
+  warning: {
+    box: 'bg-amber-50 border-l-amber-500',
+    icon: '⚠️',
+    titleColor: 'text-amber-700'
+  },
+  success: {
+    box: 'bg-emerald-50 border-l-emerald-500',
+    icon: '✅',
+    titleColor: 'text-emerald-700'
+  },
+  danger: {
+    box: 'bg-red-50 border-l-red-500',
+    icon: '🚨',
+    titleColor: 'text-red-700'
+  }
+};
+
+const s = styles[type];
+---
+
+<div class={`p-5 rounded-lg border-l-4 my-6 ${s.box}`}>
+  {title && (
+    <h4 class={`font-semibold mb-2 flex items-center gap-2 ${s.titleColor}`}>
+      <span>{s.icon}</span>
+      <span>{title}</span>
+    </h4>
+  )}
+  <div class="text-trust-text">
+    <slot />
+  </div>
+</div>
