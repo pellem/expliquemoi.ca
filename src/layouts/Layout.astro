@@ -1,0 +1,436 @@
+---
+// src/layouts/Layout.astro
+// Layout Principal - ExpliqueMoi.ca
+// Design "Gouvernemental Moderne" avec navigation par Phase de Vie
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  type?: 'website' | 'article';
+  publishedDate?: string;
+  modifiedDate?: string;
+  author?: string;
+  canonicalUrl?: string;
+  noIndex?: boolean;
+}
+
+const { 
+  title, 
+  description = "ExpliqueMoi.ca - Le guide officiel pour réussir votre immigration au Québec. Démarches, formulaires, conseils pratiques par phase de vie.",
+  image = "/og-image.png",
+  type = "website",
+  publishedDate,
+  modifiedDate,
+  author = "ExpliqueMoi.ca",
+  canonicalUrl,
+  noIndex = false
+} = Astro.props;
+
+const siteUrl = "https://expliquemoi.ca";
+const currentPath = Astro.url.pathname;
+const fullCanonicalUrl = canonicalUrl || `${siteUrl}${currentPath}`;
+const fullImageUrl = image.startsWith('http') ? image : `${siteUrl}${image}`;
+
+import "../styles/global.css";
+
+// Navigation par phases de vie
+const phases = [
+  {
+    id: 1,
+    name: "Avant de partir",
+    icon: "✈️",
+    slug: "/phase/avant-partir",
+    items: [
+      { name: "Visas & Permis", href: "/visa" },
+      { name: "Préparer sa valise", href: "/valise" },
+      { name: "Documents importants", href: "/documents" },
+      { name: "Budget prévoir", href: "/budget-depart" },
+    ]
+  },
+  {
+    id: 2,
+    name: "L'Arrivée",
+    icon: "🍁",
+    slug: "/phase/arrivee",
+    items: [
+      { name: "NAS (Numéro d'assurance sociale)", href: "/nas" },
+      { name: "Compte bancaire", href: "/banque" },
+      { name: "RAMQ (Carte soleil)", href: "/ramq" },
+      { name: "Téléphone & Internet", href: "/telecom" },
+    ]
+  },
+  {
+    id: 3,
+    name: "S'installer",
+    icon: "🏠",
+    slug: "/phase/installer",
+    items: [
+      { name: "Trouver un logement", href: "/logement" },
+      { name: "Comprendre votre salaire", href: "/salaire" },
+      { name: "Permis de conduire", href: "/permis-conduire" },
+      { name: "Impôts au Québec", href: "/impots" },
+    ]
+  }
+];
+
+// Outils rapides
+const quickTools = [
+  { name: "📏 Convertisseur", href: "/mesures", color: "blue" },
+  { name: "🍳 Cuisine", href: "/cuisine", color: "orange" },
+  { name: "📅 Jours fériés", href: "/jours-feries", color: "purple" },
+  { name: "📋 Formulaires", href: "/formulaires", color: "green" },
+];
+---
+
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- SEO Meta Tags -->
+  <title>{title} | ExpliqueMoi.ca</title>
+  <meta name="description" content={description} />
+  <meta name="author" content={author} />
+  <link rel="canonical" href={fullCanonicalUrl} />
+  
+  {noIndex && <meta name="robots" content="noindex, nofollow" />}
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content={type} />
+  <meta property="og:url" content={fullCanonicalUrl} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={fullImageUrl} />
+  <meta property="og:locale" content="fr_CA" />
+  <meta property="og:site_name" content="ExpliqueMoi.ca" />
+  
+  {type === 'article' && publishedDate && (
+    <meta property="article:published_time" content={publishedDate} />
+  )}
+  {type === 'article' && modifiedDate && (
+    <meta property="article:modified_time" content={modifiedDate} />
+  )}
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content={fullCanonicalUrl} />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={fullImageUrl} />
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  
+  <!-- Preconnect pour performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": type === 'article' ? "Article" : "WebSite",
+    "name": title,
+    "description": description,
+    "url": fullCanonicalUrl,
+    "image": fullImageUrl,
+    ...(type === 'article' ? {
+      "author": { "@type": "Organization", "name": author },
+      "publisher": { "@type": "Organization", "name": "ExpliqueMoi.ca" },
+      "datePublished": publishedDate,
+      "dateModified": modifiedDate || publishedDate
+    } : {})
+  })} />
+  
+  <slot name="head" />
+</head>
+
+<body class="min-h-screen flex flex-col">
+  <!-- ========================================
+       NAVBAR STICKY - Mobile First
+       ======================================== -->
+  <header class="navbar-sticky">
+    <div class="max-w-7xl mx-auto px-4">
+      <!-- Mobile Header -->
+      <div class="flex items-center justify-between h-16 lg:hidden">
+        <a href="/" class="flex items-center gap-2">
+          <div class="w-10 h-10 bg-gradient-to-br from-gov-600 to-gov-700 rounded-xl flex items-center justify-center">
+            <span class="text-white text-xl">🍁</span>
+          </div>
+          <div>
+            <span class="font-bold text-gov-800">ExpliqueMoi</span>
+            <span class="text-gov-600">.ca</span>
+          </div>
+        </a>
+        
+        <button 
+          id="mobile-menu-btn"
+          class="p-2 rounded-lg hover:bg-gov-50 transition-colors"
+          aria-label="Menu"
+          aria-expanded="false"
+        >
+          <svg class="w-6 h-6 text-gov-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+      
+      <!-- Desktop Header -->
+      <div class="hidden lg:flex items-center justify-between h-16">
+        <!-- Logo -->
+        <a href="/" class="flex items-center gap-3 group">
+          <div class="w-11 h-11 bg-gradient-to-br from-gov-600 to-gov-700 rounded-xl flex items-center justify-center transform group-hover:scale-105 transition-transform">
+            <span class="text-white text-2xl">🍁</span>
+          </div>
+          <div>
+            <div class="font-bold text-xl text-gov-800 group-hover:text-gov-600 transition-colors">
+              ExpliqueMoi<span class="text-gov-600">.ca</span>
+            </div>
+            <div class="text-xs text-trust-text">Guide immigration Québec</div>
+          </div>
+        </a>
+        
+        <!-- Navigation principale par Phases -->
+        <nav class="flex items-center gap-1">
+          {phases.map((phase) => (
+            <div class="relative group">
+              <button class="flex items-center gap-2 px-4 py-2 rounded-lg text-trust-text hover:bg-gov-50 hover:text-gov-700 transition-all font-medium">
+                <span>{phase.icon}</span>
+                <span>{phase.name}</span>
+                <svg class="w-4 h-4 transform group-hover:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              
+              <!-- Dropdown -->
+              <div class="absolute top-full left-0 mt-1 w-64 bg-white rounded-xl shadow-lg border border-trust-border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                <div class="p-2">
+                  {phase.items.map((item) => (
+                    <a 
+                      href={item.href}
+                      class="block px-4 py-2.5 rounded-lg text-trust-text hover:bg-gov-50 hover:text-gov-700 transition-colors"
+                    >
+                      {item.name}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+          
+          <!-- Outils -->
+          <div class="relative group">
+            <button class="flex items-center gap-2 px-4 py-2 rounded-lg text-trust-text hover:bg-gov-50 hover:text-gov-700 transition-all font-medium">
+              <span>🛠️</span>
+              <span>Outils</span>
+              <svg class="w-4 h-4 transform group-hover:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            
+            <div class="absolute top-full right-0 mt-1 w-56 bg-white rounded-xl shadow-lg border border-trust-border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+              <div class="p-2">
+                {quickTools.map((tool) => (
+                  <a 
+                    href={tool.href}
+                    class="block px-4 py-2.5 rounded-lg text-trust-text hover:bg-gov-50 hover:text-gov-700 transition-colors"
+                  >
+                    {tool.name}
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+        </nav>
+        
+        <!-- CTA Principal -->
+        <a 
+          href="https://salairenet.ca" 
+          target="_blank" 
+          rel="noopener"
+          class="btn-primary text-sm"
+        >
+          💰 Calculer mon salaire
+          <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          </svg>
+        </a>
+      </div>
+    </div>
+    
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="lg:hidden hidden bg-white border-t border-trust-border">
+      <div class="max-w-7xl mx-auto px-4 py-4 space-y-4">
+        <!-- Phases de vie -->
+        {phases.map((phase) => (
+          <div class="border-b border-trust-border pb-4">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="phase-number">{phase.id}</div>
+              <span class="font-semibold text-gov-800">{phase.icon} {phase.name}</span>
+            </div>
+            <div class="grid grid-cols-2 gap-2 pl-11">
+              {phase.items.map((item) => (
+                <a 
+                  href={item.href}
+                  class="text-sm text-trust-text hover:text-gov-600 py-1"
+                >
+                  {item.name}
+                </a>
+              ))}
+            </div>
+          </div>
+        ))}
+        
+        <!-- Outils rapides -->
+        <div class="grid grid-cols-2 gap-2">
+          {quickTools.map((tool) => (
+            <a 
+              href={tool.href}
+              class="flex items-center justify-center gap-2 p-3 bg-gov-50 rounded-lg text-gov-700 font-medium hover:bg-gov-100 transition-colors"
+            >
+              {tool.name}
+            </a>
+          ))}
+        </div>
+        
+        <!-- CTA Mobile -->
+        <a 
+          href="https://salairenet.ca" 
+          target="_blank" 
+          rel="noopener"
+          class="block w-full btn-primary text-center"
+        >
+          💰 Calculer mon salaire net
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Spacer pour navbar sticky -->
+  <div class="h-16"></div>
+
+  <!-- ========================================
+       CONTENU PRINCIPAL
+       ======================================== -->
+  <main class="flex-1">
+    <slot />
+  </main>
+
+  <!-- ========================================
+       FOOTER OFFICIEL
+       ======================================== -->
+  <footer class="footer-official mt-auto">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <!-- À propos -->
+        <div class="lg:col-span-2">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center">
+              <span class="text-2xl">🍁</span>
+            </div>
+            <div>
+              <div class="font-bold text-xl">ExpliqueMoi.ca</div>
+              <div class="text-gov-300 text-sm">Guide immigration Québec</div>
+            </div>
+          </div>
+          <p class="text-gov-200 max-w-md leading-relaxed">
+            Le guide complet et gratuit pour réussir votre immigration au Québec. 
+            Créé par des immigrants, pour des immigrants.
+          </p>
+        </div>
+        
+        <!-- Phases de vie -->
+        <div>
+          <h3 class="font-semibold text-lg mb-4 text-white">Par phase de vie</h3>
+          <ul class="space-y-2 text-gov-200">
+            {phases.map((phase) => (
+              <li>
+                <a href={phase.slug} class="hover:text-white transition-colors flex items-center gap-2">
+                  <span>{phase.icon}</span>
+                  <span>{phase.name}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+        
+        <!-- Outils & Ressources -->
+        <div>
+          <h3 class="font-semibold text-lg mb-4 text-white">Outils pratiques</h3>
+          <ul class="space-y-2 text-gov-200">
+            {quickTools.map((tool) => (
+              <li>
+                <a href={tool.href} class="hover:text-white transition-colors">
+                  {tool.name}
+                </a>
+              </li>
+            ))}
+            <li>
+              <a 
+                href="https://salairenet.ca" 
+                target="_blank" 
+                rel="noopener"
+                class="hover:text-white transition-colors flex items-center gap-1"
+              >
+                💰 SalaireNet.ca
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <!-- Barre légale -->
+      <div class="border-t border-gov-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="text-gov-400 text-sm text-center md:text-left">
+          © {new Date().getFullYear()} ExpliqueMoi.ca — Fait avec ❤️ au Québec
+        </p>
+        <div class="flex items-center gap-6 text-sm text-gov-400">
+          <a href="/mentions-legales" class="hover:text-white transition-colors">Mentions légales</a>
+          <a href="/confidentialite" class="hover:text-white transition-colors">Confidentialité</a>
+          <a href="/contact" class="hover:text-white transition-colors">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script pour menu mobile -->
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', function() {
+      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const menuIcon = document.getElementById('menu-icon');
+      
+      if (mobileMenuBtn && mobileMenu) {
+        mobileMenuBtn.addEventListener('click', function() {
+          const isOpen = !mobileMenu.classList.contains('hidden');
+          
+          mobileMenu.classList.toggle('hidden');
+          mobileMenuBtn.setAttribute('aria-expanded', !isOpen);
+          
+          // Changer l'icône
+          if (isOpen) {
+            menuIcon.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
+          } else {
+            menuIcon.setAttribute('d', 'M6 18L18 6M6 6l12 12');
+          }
+        });
+      }
+      
+      // Fermer le menu au clic sur un lien
+      mobileMenu?.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.add('hidden');
+          mobileMenuBtn.setAttribute('aria-expanded', 'false');
+          menuIcon.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
+        });
+      });
+    });
+  </script>
+</body>
+</html>
