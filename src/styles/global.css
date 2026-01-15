@@ -12,23 +12,25 @@
   }
   
   body {
-    @apply bg-trust-light text-trust-text font-sans antialiased;
+    @apply bg-slate-50 text-slate-700 antialiased;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-heading font-bold text-trust-dark;
+    @apply font-bold text-slate-800;
+    font-family: 'Inter', system-ui, sans-serif;
   }
   
   a {
-    @apply text-gov-600 hover:text-gov-700 transition-colors duration-200;
+    @apply text-blue-600 hover:text-blue-700 transition-colors duration-200;
   }
 }
 
 @layer components {
   /* ---- Cards de base ---- */
   .card {
-    @apply bg-white rounded-xl border border-trust-border shadow-card 
-           transition-all duration-300 hover:shadow-card-hover;
+    @apply bg-white rounded-xl border border-slate-200 shadow-sm 
+           transition-all duration-300 hover:shadow-md;
   }
   
   .card-interactive {
@@ -43,36 +45,37 @@
   }
   
   .btn-primary {
-    @apply btn bg-gov-600 text-white hover:bg-gov-700 
-           focus:ring-gov-500 shadow-md hover:shadow-lg;
+    @apply btn bg-blue-600 text-white hover:bg-blue-700 
+           focus:ring-blue-500 shadow-md hover:shadow-lg;
   }
   
   .btn-secondary {
-    @apply btn bg-white text-gov-600 border-2 border-gov-600 
-           hover:bg-gov-50 focus:ring-gov-500;
+    @apply btn bg-white text-blue-600 border-2 border-blue-600 
+           hover:bg-blue-50 focus:ring-blue-500;
   }
   
   .btn-maple {
-    @apply btn bg-maple-600 text-white hover:bg-maple-700 
-           focus:ring-maple-500 shadow-md hover:shadow-lg;
+    @apply btn bg-red-600 text-white hover:bg-red-700 
+           focus:ring-red-500 shadow-md hover:shadow-lg;
   }
   
   .btn-success {
-    @apply btn bg-accent-success text-white hover:opacity-90 
-           focus:ring-accent-success shadow-md;
+    @apply btn bg-emerald-600 text-white hover:bg-emerald-700 
+           focus:ring-emerald-500 shadow-md;
   }
 
   /* ---- CTA Animé (pour SalaireNet) ---- */
   .cta-massive {
-    @apply relative overflow-hidden bg-gradient-to-r from-gov-600 to-gov-700 
+    @apply relative overflow-hidden bg-gradient-to-r from-blue-600 to-blue-700 
            text-white px-8 py-5 rounded-xl font-bold text-lg
            shadow-lg hover:shadow-xl transition-all duration-300
-           hover:from-gov-700 hover:to-gov-800 transform hover:scale-[1.02];
+           hover:from-blue-700 hover:to-blue-800 transform hover:scale-[1.02];
   }
   
   .cta-massive::before {
     content: '';
-    @apply absolute inset-0 bg-white/10 transform -skew-x-12 -translate-x-full;
+    @apply absolute inset-0 transform -skew-x-12 -translate-x-full;
+    background: rgba(255, 255, 255, 0.1);
     animation: shimmer 3s infinite;
   }
   
@@ -87,65 +90,55 @@
   }
   
   .badge-recommended {
-    @apply badge bg-accent-success/10 text-accent-success border border-accent-success/20;
+    @apply badge bg-emerald-100 text-emerald-700 border border-emerald-200;
   }
   
   .badge-official {
-    @apply badge bg-gov-100 text-gov-700 border border-gov-200;
+    @apply badge bg-blue-100 text-blue-700 border border-blue-200;
   }
   
   .badge-new {
-    @apply badge bg-maple-100 text-maple-600 border border-maple-200;
+    @apply badge bg-red-100 text-red-600 border border-red-200;
   }
 
   /* ---- Navigation par Phase ---- */
   .phase-nav-item {
     @apply flex items-center gap-3 px-4 py-3 rounded-lg 
-           text-trust-text hover:bg-gov-50 hover:text-gov-700
+           text-slate-600 hover:bg-blue-50 hover:text-blue-700
            transition-all duration-200 border border-transparent
-           hover:border-gov-200;
+           hover:border-blue-200;
   }
   
   .phase-nav-item.active {
-    @apply bg-gov-50 text-gov-700 border-gov-200 font-semibold;
+    @apply bg-blue-50 text-blue-700 border-blue-200 font-semibold;
   }
   
   .phase-number {
     @apply flex items-center justify-center w-8 h-8 rounded-full 
-           bg-gov-100 text-gov-700 font-bold text-sm;
+           bg-blue-100 text-blue-700 font-bold text-sm;
   }
   
   .phase-nav-item.active .phase-number {
-    @apply bg-gov-600 text-white;
+    @apply bg-blue-600 text-white;
   }
 
   /* ---- Recommendation Card (Affiliation) ---- */
   .recommendation-card {
-    @apply relative card p-6 border-l-4 border-l-accent-success 
-           bg-gradient-to-r from-accent-success/5 to-transparent;
-  }
-  
-  .recommendation-card::before {
-    content: '✓ Recommandé';
-    @apply absolute -top-3 left-4 px-3 py-1 bg-accent-success 
-           text-white text-xs font-semibold rounded-full;
+    @apply relative card p-6 border-l-4 border-l-emerald-500 
+           bg-gradient-to-r from-emerald-50 to-transparent;
   }
 
   /* ---- Section d'article ---- */
-  .article-content {
-    @apply prose prose-lg max-w-none;
-  }
-  
   .article-content h2 {
-    @apply text-2xl text-gov-800 mt-12 mb-4 pb-2 border-b border-trust-border;
+    @apply text-2xl text-blue-800 mt-12 mb-4 pb-2 border-b border-slate-200;
   }
   
   .article-content h3 {
-    @apply text-xl text-gov-700 mt-8 mb-3;
+    @apply text-xl text-blue-700 mt-8 mb-3;
   }
   
   .article-content p {
-    @apply text-trust-text leading-relaxed mb-4;
+    @apply text-slate-600 leading-relaxed mb-4;
   }
   
   .article-content ul, .article-content ol {
@@ -157,8 +150,8 @@
   }
   
   .article-content a {
-    @apply text-gov-600 underline decoration-gov-300 
-           hover:decoration-gov-600 transition-all;
+    @apply text-blue-600 underline decoration-blue-300 
+           hover:decoration-blue-600 transition-all;
   }
 
   /* ---- Info Box (Officielle) ---- */
@@ -167,30 +160,30 @@
   }
   
   .info-box-info {
-    @apply info-box bg-gov-50 border-l-gov-600;
+    @apply info-box bg-blue-50 border-l-blue-600;
   }
   
   .info-box-warning {
-    @apply info-box bg-amber-50 border-l-accent-warning;
+    @apply info-box bg-amber-50 border-l-amber-500;
   }
   
   .info-box-success {
-    @apply info-box bg-emerald-50 border-l-accent-success;
+    @apply info-box bg-emerald-50 border-l-emerald-500;
   }
   
   .info-box-danger {
-    @apply info-box bg-red-50 border-l-accent-danger;
+    @apply info-box bg-red-50 border-l-red-500;
   }
 
   /* ---- Sticky NavBar ---- */
   .navbar-sticky {
     @apply fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md 
-           border-b border-trust-border shadow-sticky;
+           border-b border-slate-200 shadow-sm;
   }
 
   /* ---- Footer officiel ---- */
   .footer-official {
-    @apply bg-gov-900 text-white py-12;
+    @apply bg-slate-900 text-white py-12;
   }
 }
 
@@ -201,21 +194,21 @@
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-trust-muted;
+  @apply bg-slate-100;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-gov-300 rounded-full hover:bg-gov-400;
+  @apply bg-blue-300 rounded-full hover:bg-blue-400;
 }
 
 /* ---- Selection ---- */
 ::selection {
-  @apply bg-gov-200 text-gov-900;
+  @apply bg-blue-200 text-blue-900;
 }
 
 /* ---- Focus visible pour accessibilité ---- */
 :focus-visible {
-  @apply outline-none ring-2 ring-gov-500 ring-offset-2;
+  @apply outline-none ring-2 ring-blue-500 ring-offset-2;
 }
 
 /* ---- Print styles ---- */
